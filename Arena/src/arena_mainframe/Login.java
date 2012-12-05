@@ -10,6 +10,8 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -43,12 +45,10 @@ public class Login {
     JPanel panel = new JPanel();
     JButton loginButton = new JButton("Log in");
     JButton spectateButton = new JButton("Guest");
-    JLabel account = new JLabel(GET_ACCOUNT);
     JLabel name = new JLabel(NAME);
     JLabel password = new JLabel(PASSWORD);
     JLabel getAccount = new JLabel(GET_ACCOUNT);
     JTextField nameField = new JTextField("", 15);
-    //JTextField passField = new JTextField("",25);
     JPasswordField passField = new JPasswordField("", 15);
 
     public void show() {
@@ -87,7 +87,7 @@ public class Login {
         
         accountHolder.setOpaque(false);
         accountHolder.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        accountHolder.add(account);
+        accountHolder.add(getAccount);
         
         namePanel.setOpaque(false);
         namePanel.setLayout(new GridLayout(2, 1));
@@ -120,6 +120,33 @@ public class Login {
             public void actionPerformed(ActionEvent ae) {
                 System.out.println("So, you're not playing, huh?!");
             }
+        });
+        
+        getAccount.addMouseListener(new MouseListener(){
+
+            @Override
+            public void mouseClicked(MouseEvent me) {
+                JOptionPane.showMessageDialog(null, "No account for you!");
+            }
+
+            @Override
+            public void mousePressed(MouseEvent me) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent me) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent me) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent me) {
+            }
+
+            
+            
         });
 
     }
