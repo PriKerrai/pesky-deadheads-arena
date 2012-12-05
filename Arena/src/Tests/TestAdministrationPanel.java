@@ -12,17 +12,26 @@ import javax.swing.*;
  */
 public class TestAdministrationPanel {
 
-    JFrame panelTest;
+    JFrame testFrame;
     AdministrationPanel adminPanel = new AdministrationPanel();
 
     public TestAdministrationPanel() {
-        panelTest = new JFrame("Administration Panel");
-        panelTest.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        panelTest.setVisible(true);
+        initialize();
+    }
+
+    public TestAdministrationPanel(int xPos, int yPos) {
+        initialize();
+        testFrame.setLocation(xPos+5, yPos);
+    }
+
+    public void initialize() {
+        testFrame = new JFrame("Administration Panel");
+        testFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        testFrame.setVisible(true);
     }
 
     public void addAdministrationPanel() {
-        panelTest.add(adminPanel);
-        panelTest.pack();
+        testFrame.add(adminPanel);
+        testFrame.pack();
     }
 }
