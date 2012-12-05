@@ -6,6 +6,7 @@ package arena_mainframe;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -38,9 +39,11 @@ public class Login {
     JPanel passPanel = new JPanel();
     JPanel buttonPanel = new JPanel();
     JPanel panelHolder = new JPanel();
+    JPanel accountHolder = new JPanel();
     JPanel panel = new JPanel();
     JButton loginButton = new JButton("Log in");
     JButton spectateButton = new JButton("Guest");
+    JLabel account = new JLabel(GET_ACCOUNT);
     JLabel name = new JLabel(NAME);
     JLabel password = new JLabel(PASSWORD);
     JLabel getAccount = new JLabel(GET_ACCOUNT);
@@ -67,7 +70,7 @@ public class Login {
 
         frame.setLocationRelativeTo(frame);
         frame.setVisible(true);
-        frame.setSize(800, 455);
+        frame.setSize(800, 497);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(panel, BorderLayout.SOUTH);
@@ -75,13 +78,17 @@ public class Login {
         panel.add(panelHolder);
         panel.setBackground(Color.white);
 
-        panelHolder.setLayout(new GridLayout(3, 1));
+        panelHolder.setLayout(new GridLayout(4, 1));
         panelHolder.setBackground(Color.white);
 
         panelHolder.add(namePanel);
         panelHolder.add(passPanel);
         panelHolder.add(buttonPanel);
-
+        
+        accountHolder.setOpaque(false);
+        accountHolder.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        accountHolder.add(account);
+        
         namePanel.setOpaque(false);
         namePanel.setLayout(new GridLayout(2, 1));
         namePanel.add(name);
@@ -95,6 +102,7 @@ public class Login {
         buttonPanel.setOpaque(false);
         buttonPanel.add(loginButton);
         buttonPanel.add(spectateButton);
+        buttonPanel.add(accountHolder);
 
         loginButton.addActionListener(new ActionListener() {
             @Override
