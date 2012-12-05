@@ -48,21 +48,6 @@ public class Login {
     //JTextField passField = new JTextField("",25);
     JPasswordField passField = new JPasswordField("", 15);
 
-    /* 
-     public void show(){   
-     JFrame jf = new JFrame();
-     jf.setSize(600, 400);
-     jf.setVisible(true);
-     jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-     try {
-     BufferedImage m = ImageIO.read(new File("pictures\\arena_bg.png"));
-     JLabel jl = new JLabel(new ImageIcon(m));
-     jf.add(jl);
-     } catch (IOException ex) {
-     System.out.println("fel");
-     }
-     }
-     */
     public void show() {
         try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
