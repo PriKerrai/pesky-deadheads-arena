@@ -21,7 +21,8 @@ public class Games extends JPanel
     JPanel  pnl_Games = new JPanel(),
             pnl_1 = new JPanel(), 
             pnl_Advertisements = new JPanel();
-    JTable  tbl_1 = new JTable(25, 5);
+    JTable  tbl_1 = new JTable(50, 5);
+    JScrollPane tablePane = new JScrollPane();
     
     ArrayList<JButton> btns_games = new ArrayList();
     ArrayList<JPanel> pnls_ads = new ArrayList();
@@ -44,16 +45,11 @@ public class Games extends JPanel
     
     private void initPanel_Games(){
         
-        //pnl_Games.setBackground(Color.LIGHT_GRAY);
-        //pnl_Games.setBorder(new LineBorder(Color.DARK_GRAY, borderThickness));
-        //pnl_Games.setLayout(new BoxLayout(pnl_Games, BoxLayout.Y_AXIS));
-        
         pnl_Games.setLayout(new GridLayout(16, 1, 5, 5));
         
         for (int i = 0; i < 12; i++){
             btns_games.add(new JButton("Game" + (i+1)));
             pnl_Games.add(btns_games.get(i));
-            //btns_games.get(i).setPreferredSize(GAMES_BUTTON_SIZE1);
         }
         
         add(pnl_Games, BorderLayout.WEST);
@@ -61,18 +57,14 @@ public class Games extends JPanel
     
     private void initPanel_1(){
         
-        //pnl_1.setBackground(Color.LIGHT_GRAY);
-        //pnl_1.setBorder(new LineBorder(Color.DARK_GRAY, borderThickness));
-        
-        
-        
+        pnl_1.setBorder(new LineBorder(Color.DARK_GRAY, 1));
+        JScrollPane tablePane = new JScrollPane(tbl_1);
+        tbl_1.setFillsViewportHeight(true);
+        pnl_1.add(tablePane);
         add(pnl_1, BorderLayout.CENTER);
     }
     
     private void initPanel_Advertisements(){
-        
-        //pnl_Advertisements.setBackground(Color.LIGHT_GRAY);
-        //pnl_Advertisements.setBorder(new LineBorder(Color.DARK_GRAY, borderThickness));
         
         pnl_Advertisements.setLayout(new FlowLayout(FlowLayout.CENTER, 25, 5));
         
@@ -87,6 +79,10 @@ public class Games extends JPanel
             pnls_ads.get(i).setPreferredSize(BANNERSIZE_300_250);
             pnl_Advertisements.add(pnls_ads.get(i));
         }
-        
+    }
+    
+    public void setAd(int adIndex){
+        pnls_ads.get(adIndex);
+        //do stuff to ad panel
     }
 }
