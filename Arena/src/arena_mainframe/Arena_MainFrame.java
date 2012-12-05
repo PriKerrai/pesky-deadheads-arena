@@ -4,6 +4,7 @@
  */
 package arena_mainframe;
 
+import Tests.TestAdministrationPanel;
 import java.awt.*;
 import java.util.*;
 import javax.swing.*;
@@ -44,6 +45,8 @@ public class Arena_MainFrame extends JFrame
         pnl_1.add(games);
         
         //setPage(games);
+        TestAdministrationPanel testAdminPanel = new TestAdministrationPanel(this.getWidth(), this.getY());
+        testAdminPanel.addAdministrationPanel();
     }
     
     public void setPage(JPanel pnl){
