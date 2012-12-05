@@ -19,6 +19,10 @@ public class TestAdministrationPanel {
         initialize();
     }
 
+    /**
+     * @param xPos The horizontal position of the administration frame
+     * @param yPos The vertical position ...
+     */
     public TestAdministrationPanel(int xPos, int yPos) {
         initialize();
         testFrame.setLocation(xPos+5, yPos);
