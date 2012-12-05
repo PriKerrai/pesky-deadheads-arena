@@ -42,9 +42,8 @@ public class Arena_MainFrame extends JFrame
         pnl_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
         getContentPane().add(pnl_1, BorderLayout.CENTER);
         
-        pnl_1.add(games);
+        setPage(games);
         
-        //setPage(games);
         TestAdministrationPanel testAdminPanel = new TestAdministrationPanel(this.getWidth(), this.getY());
         testAdminPanel.addAdministrationPanel();
     }
