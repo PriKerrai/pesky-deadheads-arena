@@ -14,7 +14,7 @@ import javax.swing.*;
  */
 public class Arena_MainFrame extends JFrame
 {
-    private Dimension frameSize = new Dimension(1280, 720);
+    private Dimension frameSize = new Dimension(1020, 800);
     private String title = "Arena";
     
     // Do a list containing all "pages"(jpanels - games, tournament etc)?
@@ -33,13 +33,17 @@ public class Arena_MainFrame extends JFrame
     private void init(){
         
         setTitle(title);
-        setSize(frameSize);
+        setMinimumSize(frameSize);
+        setResizable(false);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         pnl_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
         getContentPane().add(pnl_1, BorderLayout.CENTER);
-        setPage(games);
+        
+        pnl_1.add(games);
+        
+        //setPage(games);
     }
     
     public void setPage(JPanel pnl){
