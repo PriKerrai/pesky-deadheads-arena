@@ -11,7 +11,7 @@ public class Audio implements Runnable
     public void run()
     {           
         try{
-            String musicFile = "music/what.au";
+            String musicFile = "music/arena.wav";
             InputStream in = new FileInputStream(musicFile);
             audioStream = new AudioStream(in);
         }catch (IOException e){
