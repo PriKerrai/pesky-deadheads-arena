@@ -12,8 +12,8 @@ import javax.swing.border.*;
  */
 public class Games extends JPanel
 {
-    final static Dimension  BANNERSIZE_300_250 = new Dimension(300, 250),
-                            GAMES_BUTTON_SIZE1 = new Dimension(200, 40);
+    final static Dimension  BANNER_SIZE_300_250 = new Dimension(300, 250),
+                            GAMES_BUTTON_SIZE_200_40 = new Dimension(200, 40);
     
     private int borderThickness = 1,
                 numberOfAds = 3;
@@ -76,7 +76,7 @@ public class Games extends JPanel
         for (int i = 0; i < numberOfAds; i++){
             pnls_ads.add(new JPanel());
             pnls_ads.get(i).setBorder(new DashedBorder(Color.DARK_GRAY, borderThickness));
-            pnls_ads.get(i).setPreferredSize(BANNERSIZE_300_250);
+            pnls_ads.get(i).setPreferredSize(BANNER_SIZE_300_250);
             pnl_Advertisements.add(pnls_ads.get(i));
         }
     }
