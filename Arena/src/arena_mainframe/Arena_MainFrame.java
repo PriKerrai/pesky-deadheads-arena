@@ -25,8 +25,7 @@ public class Arena_MainFrame extends JFrame
     
     Games games = new Games();
     
-    JPanel pnl_1 = new JPanel();
-    
+    JPanel mainPanel = new JPanel();
     
     public Arena_MainFrame()
     {
@@ -41,21 +40,19 @@ public class Arena_MainFrame extends JFrame
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
-        pnl_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-        getContentPane().add(pnl_1, BorderLayout.CENTER);
+        mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        getContentPane().add(mainPanel, BorderLayout.CENTER);
         
         setPage(games);
 
         TestAdministrationPanel testAdministrationPanel = new TestAdministrationPanel(this.getWidth()+2, this.getY());
-        testAdministrationPanel.addAdministrationPanel();
         TestAdvertisementPanel testAdvertisementPanel =
                 new TestAdvertisementPanel(this.getWidth()+2, testAdministrationPanel.getFrame().getHeight()+5);
-        testAdvertisementPanel.addAdvertisementPanel();
     }
     
     public void setPage(JPanel pnl){
-        pnl_1.removeAll();
-        pnl_1.add(pnl);
-        pnl_1.revalidate();
+        mainPanel.removeAll();
+        mainPanel.add(pnl);
+        mainPanel.revalidate();
     }
 }
