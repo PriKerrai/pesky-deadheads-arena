@@ -28,12 +28,12 @@ import javax.swing.UIManager;
 
 /**
  *
- * @author Karl
+ * @author Johan
  */
 public class Login {
     
     final String GET_ACCOUNT = "U no have account? Click Here";
-    final String NAME = "Name: ";
+    final String NICK = "Nick: ";
     final String PASSWORD = "Password: ";
     final String TITLE = "ARENA";
     JFrame frame = new JFrame(TITLE);
@@ -45,7 +45,7 @@ public class Login {
     JPanel panel = new JPanel();
     JButton loginButton = new JButton("Log in");
     JButton spectateButton = new JButton("Guest");
-    JLabel name = new JLabel(NAME);
+    JLabel name = new JLabel(NICK);
     JLabel password = new JLabel(PASSWORD);
     JLabel getAccount = new JLabel(GET_ACCOUNT);
     JTextField nameField = new JTextField("", 15);
@@ -126,7 +126,8 @@ public class Login {
 
             @Override
             public void mouseClicked(MouseEvent me) {
-                JOptionPane.showMessageDialog(null, "No account for you!");
+                CreateAccount c = new CreateAccount();
+                c.show();
             }
 
             @Override
