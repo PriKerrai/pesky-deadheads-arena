@@ -16,8 +16,8 @@ public class DatabaseManager {
     private static final String DRIVER_PATH = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
     private static final String DATABASE_PATH = "jdbc:sqlserver://idasql-db.hb.se:56077;"
             + "databaseName=dbtht1202;selectMethod=cursor";
-    private static final String USERNAME = "dbtht1202";
-    private static final String PASSWORD = "plash9";
+    private static final String USERNAME = "";
+    private static final String PASSWORD = "";
     
     private static final String INSERT_USER = "INSERT INTO ArenaUsers VALUES(";
     private static final String CREATE_TABLE = "CREATE TABLE ArenaUsers(Nick VARCHAR(30),"
@@ -49,7 +49,7 @@ public class DatabaseManager {
         }
     }
 
-    public void createUser(String nick, String name, String email, char[] password, String usertype) throws SQLException {
+    public void createUser(String nick, String name, String email, String password, String usertype) throws SQLException {
         try {
             statement = connection.createStatement();
             statement.executeUpdate(INSERT_USER + "'" + nick + "','" + name
