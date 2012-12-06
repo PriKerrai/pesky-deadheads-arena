@@ -6,6 +6,7 @@ package arena_mainframe;
 
 import GUI.AdministrationPanel;
 import GUI.AdvertisementPanel;
+import GUI.NewsPanel;
 import Tests.TestAdministrationPanel;
 import Tests.TestAdvertisementPanel;
 
@@ -17,8 +18,8 @@ import javax.swing.*;
  *
  * @author Karl
  */
-public class Arena_MainFrame extends JFrame
-{
+public class Arena_MainFrame extends JFrame {
+
     private Dimension frameSize = new Dimension(1020, 800);
     private String title = "Arena";
     
@@ -26,26 +27,27 @@ public class Arena_MainFrame extends JFrame
     ArrayList<JPanel> pages = new ArrayList();
     
     Games games = new Games();
+    NewsPanel newsPanel = new NewsPanel();
     
     JPanel mainPanel = new JPanel();
     
-    public Arena_MainFrame()
-    {
+    public Arena_MainFrame() {
         init();
     }
     
-    private void init(){
+    private void init() {
         
         setTitle(title);
         setMinimumSize(frameSize);
         setResizable(false);
         setVisible(true);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
         mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-        getContentPane().add(mainPanel, BorderLayout.CENTER);
+        add(mainPanel, BorderLayout.CENTER);
         
         setPage(games);
+        //setPage(newsPanel);
 
         AdministrationPanel testAdministrationPanel = new AdministrationPanel(this.getWidth()+2, this.getY());
         AdvertisementPanel testAdvertisementPanel =
