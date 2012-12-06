@@ -11,6 +11,8 @@ import Tests.TestAdministrationPanel;
 import Tests.TestAdvertisementPanel;
 
 import java.awt.*;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.*;
 import javax.swing.*;
 
