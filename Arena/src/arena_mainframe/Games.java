@@ -94,7 +94,7 @@ public class Games extends JPanel
     
     public void setAd(int adIndex){
         pnls_ads.get(adIndex);
-        pnls_ads.get(adIndex).add(new Banner_Panel("C:\\Users\\Karl\\Dropbox\\Studier\\OOAD\\SVN\\Arena\\src\\components\\orange.png"));
+        pnls_ads.get(adIndex).add(new Banner_Panel("pictures\\ad_orange.png"));
         // stuff happens
     }
 }
