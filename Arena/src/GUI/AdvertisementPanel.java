@@ -25,10 +25,12 @@ public class AdvertisementPanel extends JFrame {
     JButton depositButton = new JButton("Deposit");
 
     public AdvertisementPanel() {
+        super("Advertisement Control Panel");
         initialize();
     }
 
     public AdvertisementPanel(int xPos, int yPos) {
+        super("Advertisement Control Panel");
         initialize();
         setLocation(xPos, yPos);
     }

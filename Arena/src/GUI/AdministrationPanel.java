@@ -18,10 +18,12 @@ public class AdministrationPanel extends JFrame {
     private JButton banButton = new JButton("Perform Ban");
 
     public AdministrationPanel() {
+        super("Administration Panel");
         initialize();
     }
 
     public AdministrationPanel(int xPos, int yPos) {
+        super("Administration Panel");
         initialize();
         setLocation(xPos, yPos);
     }
