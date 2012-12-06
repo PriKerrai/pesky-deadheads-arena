@@ -1,6 +1,8 @@
 package GUI;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -41,6 +43,8 @@ public class NewsPanel extends JPanel {
     public void initialize() {
         add(HTMLPanel);
         HTMLPanel.setEditable(false);
+        HTMLPanel.setBorder(new EmptyBorder(10, 10, 10, 10));  // 10px Padding
+        HTMLPanel.setBackground(new Color(238, 238, 238));
     }
 
     public void setPage(String HTMLurl) {
