@@ -25,7 +25,7 @@ public class AdministrationPanel extends JPanel {
 
     public void initializeBanArea() {
         add(banPlayerPanel);
-        banPlayerPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLACK, 1), "Ban Player"));
+        banPlayerPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1), "Ban Player"));
         banPlayerPanel.add(playerNameTextField);
         banPlayerPanel.add(banButton);
         banPlayerPanel.setVisible(true);

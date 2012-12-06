@@ -12,30 +12,49 @@ import java.awt.*;
  */
 public class AdvertisementPanel extends JPanel {
 
+    JPanel optionsPanel = new JPanel();
+
     JPanel balancePanel = new JPanel();
     JLabel balanceLabel = new JLabel("Current Balance: ");
     JLabel currentBalanceLabel = new JLabel("$0");
 
-    public AdvertisementPanel() {
-        initialize();
-    }
+    JPanel depositPanel = new JPanel();
+    JTextField depositAmountTextField = new JTextField(4);
+    JButton depositButton = new JButton("Deposit");
 
-    public AdvertisementPanel(int xPos, int yPos) {
+    public AdvertisementPanel() {
         initialize();
     }
 
     public void initialize() {
         setBorder(new EmptyBorder(10, 10, 10, 10));  // 10px Padding
         setLayout(new GridLayout(1,1));
-        initializeBalanceArea();
+        initializeOptionsArea();
         setVisible(true);
     }
 
-    public void initializeBalanceArea()  {
-        add(balancePanel);
-        balancePanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLACK, 1), "Balance"));
+    public void initializeOptionsArea()  {
+        optionsPanel.setLayout(new GridLayout(2,1));
+        add(optionsPanel);
+
+        balancePanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1), "Balance"));
         balancePanel.add(balanceLabel);
         balancePanel.add(currentBalanceLabel);
-        balancePanel.setVisible(true);
+        add(balancePanel);
+
+        depositPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1), "Fill up balance"));
+        depositPanel.add(depositAmountTextField);
+        depositPanel.add(depositButton);
+        add(depositPanel);
+
+        optionsPanel.setVisible(true);
+    }
+
+    public void updateBalance(int newBalance) {
+        currentBalanceLabel.setText("$"+newBalance);
+    }
+
+    public void updateBalance(String newBalance) {
+        currentBalanceLabel.setText("$"+newBalance);
     }
 }
