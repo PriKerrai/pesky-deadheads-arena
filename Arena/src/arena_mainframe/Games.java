@@ -38,7 +38,6 @@ public class Games extends JPanel
     {
         setLayout(new BorderLayout(5, 5));
         
-        
         initPanel_Games();
         initPanel_1();
         initPanel_Advertisements();
@@ -64,10 +63,9 @@ public class Games extends JPanel
     
     private void initPanel_1(){
         
-        pnl_1.setBorder(new LineBorder(Color.DARK_GRAY, 1));
-        JScrollPane tablePane = new JScrollPane(tbl_1);
-        tbl_1.setFillsViewportHeight(true);
-        pnl_1.add(tablePane);
+        pnl_1.setLayout(new GridLayout(1, 1));
+        JScrollPane tableScrollPane1 = new JScrollPane(tbl_1);
+        pnl_1.add(tableScrollPane1);
         add(pnl_1, BorderLayout.CENTER);
     }
     
