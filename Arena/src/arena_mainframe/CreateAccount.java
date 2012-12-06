@@ -120,7 +120,11 @@ public class CreateAccount {
                     String email = emailField.getText();
                     char[] password = passField.getPassword();
                     char[] cPassword = cPassField.getPassword();
-
+                    
+                    //testkod
+                    System.out.println("p: " + password.toString());
+                    System.out.println("cp: " + cPassword.toString());
+                    
                     if (dbm.isNickUsed(nickName)) {
                         JOptionPane.showMessageDialog(null, "Nick is already in use");
                     } else {
@@ -128,7 +132,7 @@ public class CreateAccount {
                             JOptionPane.showMessageDialog(null, "Email is already in use");
                         } else {
                             if (Arrays.equals(password, cPassword)) {
-                                dbm.createUser(nickName, name, email, password, "User");
+                                dbm.createUser(nickName, name, email, password.toString(), "User");
                             } else {
                                 JOptionPane.showMessageDialog(null, "Passwords don't match, try again");
                             }

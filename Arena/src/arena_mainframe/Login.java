@@ -15,6 +15,10 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -48,7 +52,7 @@ public class Login {
     JLabel name = new JLabel(NICK);
     JLabel password = new JLabel(PASSWORD);
     JLabel getAccount = new JLabel(GET_ACCOUNT);
-    JTextField nameField = new JTextField("", 15);
+    JTextField nickField = new JTextField("", 15);
     JPasswordField passField = new JPasswordField("", 15);
 
     public void show() {
@@ -92,7 +96,7 @@ public class Login {
         namePanel.setOpaque(false);
         namePanel.setLayout(new GridLayout(2, 1));
         namePanel.add(name);
-        namePanel.add(nameField);
+        namePanel.add(nickField);
 
         passPanel.setOpaque(false);
         passPanel.setLayout(new GridLayout(2, 1));
@@ -107,11 +111,24 @@ public class Login {
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-
-                //TODO: Anrop mot databas
-                passField.getPassword();
-                nameField.getText();
-                JOptionPane.showMessageDialog(null, "Do you feel lucky, punk?");
+                try {
+                    String email;
+                    char[] dbPassword;
+                    
+                    DatabaseManager dbm = new DatabaseManager();
+                    
+                    email = dbm.getEmail( nickField.getText());
+                    dbPassword = dbm.getPassword(email);
+                    System.out.println(dbPassword);
+                    if(Arrays.equals(passField.getPassword(), dbPassword)){
+                        JOptionPane.showMessageDialog(null, "Replace with call to mainscreen");
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Invalid username or password");
+                    }
+  
+                } catch (SQLException ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
 
@@ -146,8 +163,6 @@ public class Login {
             public void mouseExited(MouseEvent me) {
             }
 
-            
-            
         });
 
     }
