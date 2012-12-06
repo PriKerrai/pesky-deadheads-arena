@@ -23,8 +23,10 @@ public class Games extends JPanel
     JPanel  pnl_Games = new JPanel(),
             pnl_1 = new JPanel(), 
             pnl_Advertisements = new JPanel();
-    JTable  tbl_1 = new JTable(50, 5);
     JScrollPane tablePane = new JScrollPane();
+    String[] columnNames_tbl_1 = {"Tournament", "Ad1", "Ad2", "Ad3"};
+    Object[][] data_tbl_1 = {};
+    JTable  tbl_1 = new JTable(data_tbl_1, columnNames_tbl_1);
     
     ArrayList<JButton> btns_games = new ArrayList();
     ArrayList<JPanel> pnls_ads = new ArrayList();
@@ -62,6 +64,8 @@ public class Games extends JPanel
     }
     
     private void initPanel_1(){
+        
+        
         
         pnl_1.setLayout(new GridLayout(1, 1));
         JScrollPane tableScrollPane1 = new JScrollPane(tbl_1);
