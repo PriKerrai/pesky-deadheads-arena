@@ -10,17 +10,34 @@ import java.awt.*;
  * Date: 2012-12-05
  * Time: 21:22
  */
-public class AdministrationPanel extends JPanel {
+public class AdministrationPanel extends JFrame {
 
+    private JPanel mainPanel = new JPanel();
     private JPanel banPlayerPanel = new JPanel();
     private JTextField playerNameTextField = new JTextField(20);
     private JButton banButton = new JButton("Perform Ban");
 
     public AdministrationPanel() {
-        setBorder(new EmptyBorder(10, 10, 10, 10));  // 10px Padding
-        setLayout(new GridLayout(1,1));
+        initialize();
+    }
+
+    public AdministrationPanel(int xPos, int yPos) {
+        initialize();
+        setLocation(xPos, yPos);
+    }
+
+    public void initialize() {
+        initializeMainPanel();
         initializeBanArea();
+        setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+        pack();
         setVisible(true);
+    }
+
+    public void initializeMainPanel() {
+        add(mainPanel);
+        mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));  // 10px Padding
+        mainPanel.setLayout(new GridLayout(1,1));
     }
 
     public void initializeBanArea() {

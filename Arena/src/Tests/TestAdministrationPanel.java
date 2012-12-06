@@ -12,34 +12,7 @@ import javax.swing.*;
  */
 public class TestAdministrationPanel {
 
-    JFrame testFrame;
-    AdministrationPanel adminPanel = new AdministrationPanel();
-
-    public TestAdministrationPanel() {
-        initialize();
-    }
-
-    /**
-     * @param xPos The horizontal position of the administration frame
-     * @param yPos The vertical position ...
-     */
-    public TestAdministrationPanel(int xPos, int yPos) {
-        initialize();
-        testFrame.setLocation(xPos, yPos);
-    }
-
-    public void initialize() {
-        testFrame = new JFrame("Administration Panel");
-        testFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-        testFrame.setVisible(true);
-    }
-
-    public void addAdministrationPanel() {
-        testFrame.add(adminPanel);
-        testFrame.pack();
-    }
-
-    public JFrame getFrame() {
-        return testFrame;
+    public static void main(String[] args){
+        AdministrationPanel testAdministrationPanel = new AdministrationPanel();
     }
 }

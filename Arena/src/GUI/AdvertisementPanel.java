@@ -10,7 +10,9 @@ import java.awt.*;
  * Date: 2012-12-05
  * Time: 21:23
  */
-public class AdvertisementPanel extends JPanel {
+public class AdvertisementPanel extends JFrame {
+
+    JPanel mainPanel = new JPanel();
 
     JPanel optionsPanel = new JPanel();
 
@@ -26,11 +28,23 @@ public class AdvertisementPanel extends JPanel {
         initialize();
     }
 
+    public AdvertisementPanel(int xPos, int yPos) {
+        initialize();
+        setLocation(xPos, yPos);
+    }
+
     public void initialize() {
-        setBorder(new EmptyBorder(10, 10, 10, 10));  // 10px Padding
-        setLayout(new BorderLayout());
+        initializeMainPanel();
         initializeOptionsArea();
+        setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+        pack();
         setVisible(true);
+    }
+
+    public void initializeMainPanel() {
+        add(mainPanel);
+        mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));  // 10px Padding
+        mainPanel.setLayout(new BorderLayout());
     }
 
     public void initializeOptionsArea()  {
