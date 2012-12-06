@@ -25,17 +25,21 @@ public class TestAdvertisementPanel {
      */
     public TestAdvertisementPanel(int xPos, int yPos) {
         initialize();
-        testFrame.setLocation(xPos+5, yPos);
+        testFrame.setLocation(xPos, yPos);
     }
 
     public void initialize() {
         testFrame = new JFrame("Advertisement Control Panel");
-        testFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        testFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         testFrame.setVisible(true);
     }
 
-    public void addAdministrationPanel() {
+    public void addAdvertisementPanel() {
         testFrame.add(advertisementPanel);
         testFrame.pack();
+    }
+
+    public JFrame getFrame() {
+        return testFrame;
     }
 }

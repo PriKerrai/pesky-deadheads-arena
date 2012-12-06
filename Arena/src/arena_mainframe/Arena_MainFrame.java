@@ -5,6 +5,8 @@
 package arena_mainframe;
 
 import Tests.TestAdministrationPanel;
+import Tests.TestAdvertisementPanel;
+
 import java.awt.*;
 import java.util.*;
 import javax.swing.*;
@@ -43,9 +45,12 @@ public class Arena_MainFrame extends JFrame
         getContentPane().add(pnl_1, BorderLayout.CENTER);
         
         setPage(games);
-        
-        TestAdministrationPanel testAdminPanel = new TestAdministrationPanel(this.getWidth(), this.getY());
-        testAdminPanel.addAdministrationPanel();
+
+        TestAdministrationPanel testAdministrationPanel = new TestAdministrationPanel(this.getWidth()+2, this.getY());
+        testAdministrationPanel.addAdministrationPanel();
+        TestAdvertisementPanel testAdvertisementPanel =
+                new TestAdvertisementPanel(this.getWidth()+2, testAdministrationPanel.getFrame().getHeight()+5);
+        testAdvertisementPanel.addAdvertisementPanel();
     }
     
     public void setPage(JPanel pnl){

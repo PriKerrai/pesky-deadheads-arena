@@ -25,17 +25,21 @@ public class TestAdministrationPanel {
      */
     public TestAdministrationPanel(int xPos, int yPos) {
         initialize();
-        testFrame.setLocation(xPos+5, yPos);
+        testFrame.setLocation(xPos, yPos);
     }
 
     public void initialize() {
         testFrame = new JFrame("Administration Panel");
-        testFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        testFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         testFrame.setVisible(true);
     }
 
     public void addAdministrationPanel() {
         testFrame.add(adminPanel);
         testFrame.pack();
+    }
+
+    public JFrame getFrame() {
+        return testFrame;
     }
 }
