@@ -4,6 +4,7 @@
  */
 package arena_mainframe;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -25,6 +26,7 @@ public class Banner_Panel extends JPanel{
        } catch (IOException ex) {
             // image could not be read from given path
        }
+       setPreferredSize(new Dimension(300, 250));
     }
 
     @Override
