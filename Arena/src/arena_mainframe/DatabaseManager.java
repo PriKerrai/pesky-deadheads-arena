@@ -35,7 +35,7 @@ public class DatabaseManager {
         private static final String GET_EMAIL = "SELECT Email FROM ArenaUsers";
         private static final String GET_PASSWORD = "SELECT Password FROM ArenaUsers";
         private static final String GET_USERTYPE = "SELECT UserType FROM ArenaUsers";
-        
+        private static final String GET_NAME = "SELECT Name FROM ArenaUsers";
 
 	private Connection connection;
 	private Statement statement;
@@ -128,5 +128,37 @@ public class DatabaseManager {
                     count = resultSet.getInt(1);
                 return count+1;
 	}
+        public String getNick() throws SQLException{
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(GET_NICK);
+            String nick = resultSet.getString(1); //eller 0
+            return nick;
+        }
+         public String getEmail() throws SQLException{
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(GET_EMAIL);
+            String email = resultSet.getString(1); //eller 0
+            return email;
+        }
+         
+          public String getPassword() throws SQLException{
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(GET_PASSWORD);
+            String password = resultSet.getString(1); //eller 0
+            return password;
+        }
 
+           public String getUserType() throws SQLException{
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(GET_USERTYPE);
+            String userType = resultSet.getString(1); //eller 0
+            return userType;
+        }
+           
+           public String getName() throws SQLException{
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(GET_NAME);
+            String name = resultSet.getString(1); //eller 0
+            return name;
+        }
 }
