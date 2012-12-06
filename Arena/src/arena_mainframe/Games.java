@@ -3,6 +3,8 @@ package arena_mainframe;
 import com.sun.java.swing.plaf.windows.WindowsBorders.DashedBorder;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.*;
 import javax.swing.border.*;
 
@@ -50,6 +52,11 @@ public class Games extends JPanel
         for (int i = 0; i < 12; i++){
             btns_games.add(new JButton("Game" + (i+1)));
             pnl_Games.add(btns_games.get(i));
+            btns_games.get(i).addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent ae){
+                // stuff happens
+            }});
         }
         
         add(pnl_Games, BorderLayout.WEST);
