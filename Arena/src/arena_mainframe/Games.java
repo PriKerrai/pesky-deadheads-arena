@@ -65,8 +65,6 @@ public class Games extends JPanel
     
     private void initPanel_1(){
         
-        
-        
         pnl_1.setLayout(new GridLayout(1, 1));
         JScrollPane tableScrollPane1 = new JScrollPane(tbl_1);
         pnl_1.add(tableScrollPane1);
@@ -94,7 +92,7 @@ public class Games extends JPanel
     
     public void setAd(int adIndex){
         pnls_ads.get(adIndex);
-        pnls_ads.get(adIndex).add(new Banner_Panel("pictures\\ad_orange.png"));
+        pnls_ads.get(adIndex).add(new Banner_Panel("pictures/ad_orange.png"));
         // stuff happens
     }
 }
