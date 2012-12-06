@@ -88,10 +88,13 @@ public class Games extends JPanel
             pnls_ads.get(i).setPreferredSize(BANNER_SIZE_300_250);
             pnl_Advertisements.add(pnls_ads.get(i));
         }
+        
+        setAd(1);
     }
     
     public void setAd(int adIndex){
         pnls_ads.get(adIndex);
+        pnls_ads.get(adIndex).add(new Banner_Panel("C:\\Users\\Karl\\Dropbox\\Studier\\OOAD\\SVN\\Arena\\src\\components\\orange.png"));
         // stuff happens
     }
 }
