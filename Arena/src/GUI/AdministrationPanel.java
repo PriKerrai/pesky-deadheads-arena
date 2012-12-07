@@ -31,7 +31,7 @@ public class AdministrationPanel extends JFrame {
     private void initialize() {
         initializeMainPanel();
         initializeBanArea();
-        setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         pack();
         setVisible(true);
     }
@@ -43,7 +43,7 @@ public class AdministrationPanel extends JFrame {
     }
 
     private void initializeBanArea() {
-        add(banPlayerPanel);
+        mainPanel.add(banPlayerPanel);
         banPlayerPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1), "Ban Player"));
         banPlayerPanel.add(playerNameTextField);
         banPlayerPanel.add(banButton);
