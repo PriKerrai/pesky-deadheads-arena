@@ -35,7 +35,7 @@ public class AdvertisementPanel extends JFrame {
         setLocation(xPos, yPos);
     }
 
-    public void initialize() {
+    private void initialize() {
         initializeMainPanel();
         initializeOptionsArea();
         setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
@@ -43,13 +43,13 @@ public class AdvertisementPanel extends JFrame {
         setVisible(true);
     }
 
-    public void initializeMainPanel() {
+    private void initializeMainPanel() {
         add(mainPanel);
         mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));  // 10px Padding
         mainPanel.setLayout(new BorderLayout());
     }
 
-    public void initializeOptionsArea()  {
+    private void initializeOptionsArea()  {
         add(optionsPanel);
         optionsPanel.setLayout(new GridLayout(2,1));
 

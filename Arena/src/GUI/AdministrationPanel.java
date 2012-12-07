@@ -28,7 +28,7 @@ public class AdministrationPanel extends JFrame {
         setLocation(xPos, yPos);
     }
 
-    public void initialize() {
+    private void initialize() {
         initializeMainPanel();
         initializeBanArea();
         setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
@@ -36,13 +36,13 @@ public class AdministrationPanel extends JFrame {
         setVisible(true);
     }
 
-    public void initializeMainPanel() {
+    private void initializeMainPanel() {
         add(mainPanel);
         mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));  // 10px Padding
         mainPanel.setLayout(new GridLayout(1,1));
     }
 
-    public void initializeBanArea() {
+    private void initializeBanArea() {
         add(banPlayerPanel);
         banPlayerPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1), "Ban Player"));
         banPlayerPanel.add(playerNameTextField);

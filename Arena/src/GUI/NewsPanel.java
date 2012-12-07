@@ -40,7 +40,7 @@ public class NewsPanel extends JPanel {
             }
     }
 
-    public void initialize() {
+    private void initialize() {
         add(HTMLPanel);
         HTMLPanel.setEditable(false);
         HTMLPanel.setBorder(new EmptyBorder(10, 10, 10, 10));  // 10px Padding
