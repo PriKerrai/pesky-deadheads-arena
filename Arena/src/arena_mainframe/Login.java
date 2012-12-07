@@ -24,7 +24,7 @@ import javax.swing.*;
  * @author Johan
  */
 public class Login {
-    
+
     final String GET_ACCOUNT = "U no have account? Click Here";
     final String NICK = "Nick: ";
     final String PASSWORD = "Password: ";
@@ -77,11 +77,11 @@ public class Login {
         panelHolder.add(namePanel);
         panelHolder.add(passPanel);
         panelHolder.add(buttonPanel);
-        
+
         accountHolder.setOpaque(false);
         accountHolder.setLayout(new FlowLayout(FlowLayout.RIGHT));
         accountHolder.add(getAccount);
-        
+
         namePanel.setOpaque(false);
         namePanel.setLayout(new GridLayout(2, 1));
         namePanel.add(name);
@@ -103,20 +103,23 @@ public class Login {
                 try {
                     String email;
                     char[] dbPassword;
-                    
-                    DatabaseManager dbm = new DatabaseManager();
-                    
-                    email = dbm.getEmail( nickField.getText());
-                    dbPassword = dbm.getPassword(email);
 
-                    if(Arrays.equals(passField.getPassword(), dbPassword)){
-                        JOptionPane.showMessageDialog(null, "Replace with call to mainscreen");
-                    }else{
-                        JOptionPane.showMessageDialog(null, "Invalid username or password");
+                    DatabaseManager dbm = new DatabaseManager();
+
+                    email = dbm.getEmail(nickField.getText());
+                    dbPassword = dbm.getPassword(email);
+                    if (nickField.getText().length() == 0) {
+                        JOptionPane.showMessageDialog(null, "Please input nick");
+                    } else {
+                        if (Arrays.equals(passField.getPassword(), dbPassword)) {
+                            JOptionPane.showMessageDialog(null, "Replace with call to mainscreen");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Invalid username or password");
+                        }
                     }
-  
                 } catch (SQLException ex) {
                     System.out.println(ex);
+
                 }
             }
         });
@@ -127,9 +130,8 @@ public class Login {
                 System.out.println("So, you're not playing, huh?!");
             }
         });
-        
-        getAccount.addMouseListener(new MouseListener(){
 
+        getAccount.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent me) {
                 CreateAccount c = new CreateAccount();
@@ -151,7 +153,6 @@ public class Login {
             @Override
             public void mouseExited(MouseEvent me) {
             }
-
         });
 
     }
