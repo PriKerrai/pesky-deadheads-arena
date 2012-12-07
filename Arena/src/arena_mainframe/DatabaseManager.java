@@ -16,8 +16,8 @@ public class DatabaseManager{// implements iDatabaseManager {
     private static final String DRIVER_PATH = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
     private static final String DATABASE_PATH = "jdbc:sqlserver://idasql-db.hb.se:56077;"
                                                 + "databaseName=dbtht1202;selectMethod=cursor";
-    private static final String USERNAME = "dbtht1202";
-    private static final String PASSWORD = "plash9";
+    private static final String USERNAME = "";
+    private static final String PASSWORD = "";
     
     private static final String UPDATE_ACTIVE = "UPDATE ArenaUsers SET Active ='"; 
     
