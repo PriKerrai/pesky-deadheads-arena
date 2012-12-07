@@ -1,0 +1,24 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Tests;
+
+import arena_mainframe.DatabaseManager;
+import java.sql.SQLException;
+
+/**
+ *
+ * @author Johan
+ */
+public class TestDatabase {
+    
+    public static void main(String[] args) throws SQLException{
+        DatabaseManager dbm = new DatabaseManager();
+        
+        dbm.createTable();
+        
+        dbm.deleteTable();
+    }
+    
+}
