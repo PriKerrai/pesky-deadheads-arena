@@ -16,13 +16,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import arena_mainframe.iDatabaseManager;
 
 /**
  *
  * @author Johan
  */
 public class CreateAccount {
-
+    
     final String TITLE = "Apply for an ARENA-Account";
     final String NICK = "Nick:";
     final String NAME = "Name:";
@@ -113,7 +114,7 @@ public class CreateAccount {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 try {
-                    DatabaseManager dbm = new DatabaseManager();
+                    iDatabaseManager dbm = new DatabaseManager();
 
                     String nickName = nickField.getText();
                     String name = nameField.getText();
@@ -132,7 +133,8 @@ public class CreateAccount {
                             JOptionPane.showMessageDialog(null, "Email is already in use");
                         } else {
                             if (Arrays.equals(password, cPassword)) {
-                                dbm.createUser(nickName, name, email, password.toString(), "User");
+                                dbm.createUser(nickName, name, email, password.toString(), "User",
+                                        true, "");
                             } else {
                                 JOptionPane.showMessageDialog(null, "Passwords don't match, try again");
                             }
