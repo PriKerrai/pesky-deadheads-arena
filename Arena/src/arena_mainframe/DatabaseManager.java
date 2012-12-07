@@ -19,6 +19,8 @@ public class DatabaseManager {// implements iDatabaseManager {
             + "databaseName=dbtht1202;selectMethod=cursor";
     private static final String USERNAME = "";
     private static final String PASSWORD = "";
+    private static final String MAKE_ADMIN = "UPDATE ArenaUsers SET UserType ='Admin'";
+    private static final String MAKE_ADVERTISER = "UPDATE ArenaUsers SET UserType ='Advertiser'";
     private static final String UPDATE_ACTIVE = "UPDATE ArenaUsers SET Active ='";
     private static final String INSERT_USER = "INSERT INTO ArenaUsers VALUES(";
     private static final String ADD_COMMENT = "UPDATE ArenaUsers SET Comment ='";
@@ -85,7 +87,18 @@ public class DatabaseManager {// implements iDatabaseManager {
         statement = connection.createStatement();
         statement.executeUpdate(DROP_TABLE);
     }
-
+    
+    public void makeAdmin(String nick) throws SQLException {
+        statement = connection.createStatement();
+        statement.executeUpdate(MAKE_ADMIN + "WHERE Nick = '" + nick + "'");
+    }
+    
+    public void makeAdvertiser(String nick) throws SQLException {
+        statement = connection.createStatement();
+        statement.executeUpdate(MAKE_ADVERTISER + "WHERE Nick = '" + nick + "'");
+    }
+    
+    
     public void createUser(String nick, String name, String email, String password,
             String usertype, boolean active, String comment) throws SQLException {
         try {
