@@ -16,11 +16,11 @@ import javax.swing.*;
  *
  * @author Karl
  */
-public class Banner_Panel extends JPanel{
+public class BannerPanel extends JPanel{
     
     private BufferedImage image;
 
-    public Banner_Panel(String imagePath) {
+    public BannerPanel(String imagePath) {
        try {
           image = ImageIO.read(new File(imagePath));
        } catch (IOException ex) {
