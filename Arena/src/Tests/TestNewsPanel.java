@@ -28,5 +28,7 @@ public class TestNewsPanel {
         newsPanelTestFrame = new JFrame("News Panel");
         newsPanelTestFrame.setPreferredSize(new Dimension(800, 600));
         newsPanelTestFrame.add(new NewsPanel());
+        newsPanelTestFrame.pack();
+        newsPanelTestFrame.setVisible(true);
     }
 }
