@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JOptionPane;
 
 /**
  * A class for handling the communication between the game and a given database.
@@ -53,8 +54,20 @@ public class DatabaseManager{// implements iDatabaseManager {
     public Connection connectDB() {
         try {
             Class.forName(DRIVER_PATH);
+            //Connection connection = DriverManager.getConnection(DATABASE_PATH,
+             //       USERNAME, PASSWORD);
+            
+            
+            //under utveckling
+            String usr;
+            String pass;
+            
+            usr = JOptionPane.showInputDialog("Användarnamn");
+            pass = JOptionPane.showInputDialog("Lösenord");
+            
             Connection connection = DriverManager.getConnection(DATABASE_PATH,
-                    USERNAME, PASSWORD);
+                    usr, pass);
+            
             return connection;
         } catch (Exception e) {
             System.out.println(e);
