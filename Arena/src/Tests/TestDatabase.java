@@ -16,6 +16,9 @@ public class TestDatabase {
     public static void main(String[] args) throws SQLException{
         DatabaseManager dbm = new DatabaseManager();
         
+        //För bästa resultat bör någon av nedanstående rader kommenteras bort
+        
+        
         dbm.createTable();
         
         dbm.deleteTable();
