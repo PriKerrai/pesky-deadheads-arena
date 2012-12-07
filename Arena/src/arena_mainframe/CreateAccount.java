@@ -114,31 +114,36 @@ public class CreateAccount {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 try {
-                    iDatabaseManager dbm = new DatabaseManager();
-
+                    DatabaseManager dbm = new DatabaseManager();
+                    String passwordString = "";
                     String nickName = nickField.getText();
                     String name = nameField.getText();
                     String email = emailField.getText();
                     char[] password = passField.getPassword();
                     char[] cPassword = cPassField.getPassword();
                     
-                    //testkod
-                    System.out.println("p: " + password.toString());
-                    System.out.println("cp: " + cPassword.toString());
-                    
+
                     if (dbm.isNickUsed(nickName)) {
                         JOptionPane.showMessageDialog(null, "Nick is already in use");
                     } else {
                         if (dbm.isEmailUsed(email)) {
                             JOptionPane.showMessageDialog(null, "Email is already in use");
                         } else {
+                            if(password.length < 5){
+                                JOptionPane.showMessageDialog(null,"Lösenordet måste vara minst"
+                                        + " 27 tecken långt, varav minst 8 versaler, 7 specialtecken"
+                                        + " och 6 siffror");
+                            }else{                            
                             if (Arrays.equals(password, cPassword)) {
-                                dbm.createUser(nickName, name, email, password.toString(), "User",
+                                for(int i = 0; i<password.length; i++){
+                                    passwordString += password[i];     
+                                }
+                                dbm.createUser(nickName, name, email, passwordString, "User",
                                         true, "");
                             } else {
                                 JOptionPane.showMessageDialog(null, "Passwords don't match, try again");
                             }
-
+                            }
                         }
                     }
 

@@ -119,7 +119,7 @@ public class Login {
                     
                     email = dbm.getEmail( nickField.getText());
                     dbPassword = dbm.getPassword(email);
-                    System.out.println(dbPassword);
+
                     if(Arrays.equals(passField.getPassword(), dbPassword)){
                         JOptionPane.showMessageDialog(null, "Replace with call to mainscreen");
                     }else{

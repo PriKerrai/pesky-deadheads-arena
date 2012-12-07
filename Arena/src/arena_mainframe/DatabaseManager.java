@@ -11,13 +11,13 @@ import java.sql.Statement;
  * It uses SQL to add new scores as well as retrieving the top 25 scores.
  *
  */
-public class DatabaseManager implements iDatabaseManager {
+public class DatabaseManager{// implements iDatabaseManager {
 
     private static final String DRIVER_PATH = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
     private static final String DATABASE_PATH = "jdbc:sqlserver://idasql-db.hb.se:56077;"
                                                 + "databaseName=dbtht1202;selectMethod=cursor";
-    private static final String USERNAME = "";
-    private static final String PASSWORD = "";
+    private static final String USERNAME = "dbtht1202";
+    private static final String PASSWORD = "plash9";
     
     private static final String UPDATE_ACTIVE = "UPDATE ArenaUsers SET Active ='"; 
     
@@ -25,7 +25,7 @@ public class DatabaseManager implements iDatabaseManager {
     
     private static final String CREATE_TABLE = "CREATE TABLE ArenaUsers(Nick VARCHAR(30),"
                                                 + "Name VARCHAR(30), Email VARCHAR(30),"
-                                                + "Password VARCHAR(30), CPassword VARCHAR(30),"
+                                                + "Password VARCHAR(30),"
                                                 + "UserType VARCHAR(30), Active VARCHAR(10),"
                                                 + "Comment VARCHAR(50), PRIMARY KEY(Nick))";
 
