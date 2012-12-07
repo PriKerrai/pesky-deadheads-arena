@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
  * database.
  *
  */
-public class DatabaseManager {// implements iDatabaseManager {
+public class DatabaseManager implements iDatabaseManager {
 
     private static final String DRIVER_PATH = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
     private static final String DATABASE_PATH = "jdbc:sqlserver://idasql-db.hb.se:56077;"
@@ -174,7 +174,7 @@ public class DatabaseManager {// implements iDatabaseManager {
         return name;
     }
 
-    public boolean istActive(String nick) throws SQLException { //TODO:Inte färdig än
+    public boolean isActive(String nick) throws SQLException { //TODO:Inte färdig än
         String activeString = "";
         String TRUE = "true";
         statement = connection.createStatement();

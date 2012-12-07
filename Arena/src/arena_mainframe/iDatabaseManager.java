@@ -27,10 +27,16 @@ public interface iDatabaseManager {
     
     public String getName(String nick)throws SQLException;
     
-    public boolean istActive(String nick)throws SQLException;
+    public boolean isActive(String nick)throws SQLException;
     
     public boolean isNickUsed(String nick)throws SQLException;
     
     public boolean isEmailUsed(String email)throws SQLException;
+    
+    public void addComment(String nick, String comment) throws SQLException;
+    
+    public void makeAdvertiser(String nick) throws SQLException;
+    
+    public void makeAdmin(String nick) throws SQLException;
     
 }

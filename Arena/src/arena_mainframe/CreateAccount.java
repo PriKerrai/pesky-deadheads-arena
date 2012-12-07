@@ -115,7 +115,7 @@ public class CreateAccount {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 try {
-                    DatabaseManager dbm = new DatabaseManager();
+                    iDatabaseManager dbm = new DatabaseManager();
                     String passwordString = "";
                     String nickName = nickField.getText();
                     String name = nameField.getText();
