@@ -39,4 +39,6 @@ public interface iDatabaseManager {
     
     public void makeAdmin(String nick) throws SQLException;
     
+    public String getComment(String nick) throws SQLException;
+    
 }

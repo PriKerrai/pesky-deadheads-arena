@@ -102,17 +102,23 @@ public class Login {
             public void actionPerformed(ActionEvent ae) {
                 try {
                     String email;
+                    String nick;
                     char[] dbPassword;
 
-                    DatabaseManager dbm = new DatabaseManager();
-
-                    email = dbm.getEmail(nickField.getText());
+                    iDatabaseManager dbm = new DatabaseManager();
+                    nick = nickField.getText();
+                    email = dbm.getEmail(nick);
                     dbPassword = dbm.getPassword(email);
                     if (nickField.getText().length() == 0) {
                         JOptionPane.showMessageDialog(null, "Please input nick");
                     } else {
                         if (Arrays.equals(passField.getPassword(), dbPassword)) {
+                            if(dbm.isActive(nick)){
                             JOptionPane.showMessageDialog(null, "Replace with call to mainscreen");
+                            }else{
+                                JOptionPane.showMessageDialog(null, "Banned with reason:"
+                                        + dbm.getComment(nick));
+                            }
                         } else {
                             JOptionPane.showMessageDialog(null, "Invalid username or password");
                         }

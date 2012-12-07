@@ -36,6 +36,7 @@ public class DatabaseManager implements iDatabaseManager {
     private static final String GET_PASSWORD = "SELECT * FROM ArenaUsers WHERE Email = '";
     private static final String GET_USERTYPE = "SELECT * FROM ArenaUsers WHERE Nick = '";
     private static final String GET_NAME = "SELECT * FROM ArenaUsers WHERE Nick = '";
+    private static final String GET_COMMENT = "SELECT * FROM ArenaUsers WHERE Nick = '";
     private Connection connection;
     private Statement statement;
 
@@ -111,15 +112,14 @@ public class DatabaseManager implements iDatabaseManager {
         }
     }
 
-    //Denna metod har ännu inte testats
     public void setActive(String nick, boolean active) throws SQLException {
         statement = connection.createStatement();
-        statement.executeUpdate(UPDATE_ACTIVE + active + "' WHERE Nick = '" + nick + "')");
+        statement.executeUpdate(UPDATE_ACTIVE + active + "' WHERE Nick = '" + nick + "'");
     }
 
     public void addComment(String nick, String comment) throws SQLException {
         statement = connection.createStatement();
-        statement.executeUpdate(ADD_COMMENT + comment + "' WHERE Nick = '" + nick + "')");
+        statement.executeUpdate(ADD_COMMENT + comment + "' WHERE Nick = '" + nick + "'");
     }
 
     public String getNick(String email) throws SQLException {
@@ -174,6 +174,17 @@ public class DatabaseManager implements iDatabaseManager {
         return name;
     }
 
+    public String getComment(String nick) throws SQLException {
+        String comment = "";
+        statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(GET_NAME + nick + "'");
+
+        while (resultSet.next()) {
+            comment = resultSet.getString(7);
+        }
+        return comment;
+    }
+    
     public boolean isActive(String nick) throws SQLException { //TODO:Inte färdig än
         String activeString = "";
         String TRUE = "true";

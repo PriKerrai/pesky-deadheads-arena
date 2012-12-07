@@ -19,7 +19,9 @@ public class TestDatabase {
         //För bästa resultat bör någon av nedanstående rader kommenteras bort
         
         //dbm.makeAdmin("Pimpslayer");
-        System.out.println(dbm.getUserType("Pimpslayer"));
+        //System.out.println(dbm.getUserType("Pimpslayer"));
+        //dbm.setActive("viktor", false);
+        dbm.addComment("viktor", "För dålig för att kasta sten");
         //dbm.createTable();
         
         //dbm.deleteTable();
