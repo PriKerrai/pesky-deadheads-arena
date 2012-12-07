@@ -8,8 +8,7 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 /**
- * A class for handling the communication between the game and a given database.
- * It uses SQL to add new scores as well as retrieving the top 25 scores.
+ * A class for handling the communication between the ARENA and a given database.
  *
  */
 public class DatabaseManager{// implements iDatabaseManager {
@@ -23,6 +22,8 @@ public class DatabaseManager{// implements iDatabaseManager {
     private static final String UPDATE_ACTIVE = "UPDATE ArenaUsers SET Active ='"; 
     
     private static final String INSERT_USER = "INSERT INTO ArenaUsers VALUES(";    
+    
+    private static final String DROP_TABLE = "DROP TABLE ArenaUsers";
     
     private static final String CREATE_TABLE = "CREATE TABLE ArenaUsers(Nick VARCHAR(30),"
                                                 + "Name VARCHAR(30), Email VARCHAR(30),"
@@ -67,6 +68,7 @@ public class DatabaseManager{// implements iDatabaseManager {
             
             Connection connection = DriverManager.getConnection(DATABASE_PATH,
                     usr, pass);
+            //utvecklinskoden slutar här
             
             return connection;
         } catch (Exception e) {
@@ -83,7 +85,10 @@ public class DatabaseManager{// implements iDatabaseManager {
             System.out.println(e);
         }
     }
-
+    public void deleteDB() throws SQLException{
+        statement = connection.createStatement();
+        statement.executeUpdate(DROP_TABLE);
+    }
     public void createUser(String nick, String name, String email, String password,
                             String usertype, boolean active, String comment) throws SQLException {
         try {

@@ -15,15 +15,16 @@ import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
 import javax.swing.*;
-import arena_mainframe.iDatabaseManager;
 
 /**
  *
  * @author Johan
  */
 public class CreateAccount {
-    
+
     final String TITLE = "Apply for an ARENA-Account";
     final String NICK = "Nick:";
     final String NAME = "Name:";
@@ -121,37 +122,51 @@ public class CreateAccount {
                     String email = emailField.getText();
                     char[] password = passField.getPassword();
                     char[] cPassword = cPassField.getPassword();
-                    
+
 
                     if (dbm.isNickUsed(nickName)) {
                         JOptionPane.showMessageDialog(null, "Nick is already in use");
                     } else {
-                        if (dbm.isEmailUsed(email)) {
-                            JOptionPane.showMessageDialog(null, "Email is already in use");
+                        if (!isValidEmailAddress(email)) {
+                            JOptionPane.showMessageDialog(null, "Incorrect email");
                         } else {
-                            if(password.length < 5){
-                                JOptionPane.showMessageDialog(null,"Lösenordet måste vara minst"
-                                        + " 27 tecken långt, varav minst 8 versaler, 7 specialtecken"
-                                        + " och 6 siffror");
-                            }else{                            
-                            if (Arrays.equals(password, cPassword)) {
-                                for(int i = 0; i<password.length; i++){
-                                    passwordString += password[i];     
-                                }
-                                dbm.createUser(nickName, name, email, passwordString, "User",
-                                        true, "");
-                                frame.dispose();
+                            if (dbm.isEmailUsed(email)) {
+                                JOptionPane.showMessageDialog(null, "Email is already in use");
                             } else {
-                                JOptionPane.showMessageDialog(null, "Passwords don't match, try again");
-                            }
+                                if (password.length < 5) {
+                                    JOptionPane.showMessageDialog(null, "Lösenordet måste vara minst"
+                                            + " 27 tecken långt, varav minst 8 versaler, 7 specialtecken"
+                                            + " och 6 siffror");
+                                } else {
+                                    if (Arrays.equals(password, cPassword)) {
+                                        for (int i = 0; i < password.length; i++) {
+                                            passwordString += password[i];
+                                        }
+                                        dbm.createUser(nickName, name, email, passwordString, "User",
+                                                true, "");
+                                        frame.dispose();
+                                    } else {
+                                        JOptionPane.showMessageDialog(null, "Passwords don't match, try again");
+                                    }
+                                }
                             }
                         }
                     }
-
                 } catch (SQLException ex) {
                     Logger.getLogger(CreateAccount.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
+    }
+
+    public static boolean isValidEmailAddress(String email) {
+        boolean result = true;
+        try {
+            InternetAddress emailAddr = new InternetAddress(email);
+            emailAddr.validate();
+        } catch (AddressException ex) {
+            result = false;
+        }
+        return result;
     }
 }
