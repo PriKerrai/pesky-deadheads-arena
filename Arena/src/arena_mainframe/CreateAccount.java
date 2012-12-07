@@ -109,7 +109,7 @@ public class CreateAccount {
 
         buttonPanel.add(applyButton);
         buttonPanel.setOpaque(false);
-
+        applyButton.requestFocusInWindow();
         applyButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -140,6 +140,7 @@ public class CreateAccount {
                                 }
                                 dbm.createUser(nickName, name, email, passwordString, "User",
                                         true, "");
+                                frame.dispose();
                             } else {
                                 JOptionPane.showMessageDialog(null, "Passwords don't match, try again");
                             }
