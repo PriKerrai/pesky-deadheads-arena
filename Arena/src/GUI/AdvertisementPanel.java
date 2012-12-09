@@ -109,7 +109,7 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
         int choice = fileChooser.showOpenDialog(this);
         if (choice == JFileChooser.APPROVE_OPTION) {
             filepathTextField.setText(fileChooser.getCurrentDirectory().toString() + "\\" +
-                    fileChooser.getSelectedFile().getName());
+                                      fileChooser.getSelectedFile().getName());
         }
         if (choice == JFileChooser.CANCEL_OPTION) {
             filepathTextField.setText("");
@@ -131,6 +131,9 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
             JButton tmp = (JButton)ob;
             if (tmp == openButton) {
                 showOpenDialog();
+            }
+            else if (tmp == uploadButton) {
+                System.out.println("U no can has upload at dis tiem.");
             }
         }
     }
