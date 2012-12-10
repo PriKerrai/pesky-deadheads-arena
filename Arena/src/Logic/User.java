@@ -13,6 +13,7 @@ public abstract class User  {
     public static final String USER_TYPE_OPERATOR = "Operator";
     public static final String USER_TYPE_ADVERTISER = "Advertiser";
     public static final String USER_TYPE_PLAYER = "Player";
+    public static final String USER_TYPE_LEAGUEOWNER = "LeagueOwner";
 
     String nickName;
     String name;
