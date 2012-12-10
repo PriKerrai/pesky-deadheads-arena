@@ -16,7 +16,7 @@ import javax.swing.*;
  *
  * @author Karl
  */
-public class BannerPanel extends JPanel{
+public class BannerPanel extends JPanel {
     
     private BufferedImage image;
 
@@ -27,6 +27,15 @@ public class BannerPanel extends JPanel{
             // image could not be read from given path
        }
        setPreferredSize(new Dimension(300, 250));
+    }
+
+    public BannerPanel(String imagePath, int width, int height) {
+        try {
+            image = ImageIO.read(new File(imagePath));
+        } catch (IOException ex) {
+            // image could not be read from given path
+        }
+        setPreferredSize(new Dimension(width, height));
     }
 
     @Override
