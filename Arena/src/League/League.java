@@ -21,15 +21,16 @@ public class League {
     private ArrayList players = new ArrayList();
     private Game game;
     private LeagueOwner leagueOwner;
+    private GameType gameType;
+
     private ArrayList<Tournaments> tournamentList = new ArrayList<Tournaments>();
+    private Object tournaments;
 
-    
-    public League(String leagueName, int leagueId, Game game) {
-        this.game = game;
-        this.leagueName = leagueName;
-        this.leagueId = leagueId;
+    public League(Game game, GameType gameType) {
+                this.game = game;
+                this.gameType = gameType;
+        }
 
-    }
     
     public int getLeagueId() {
         return leagueId;
@@ -56,6 +57,19 @@ public class League {
     public Iterator<Tournaments> getTournaments() {
         return this.tournamentList.listIterator();
     }
+    
+    public void addTournament(Tournaments tournament) {
+                this.tournamentList.add(tournament);
+        }
+    
+    public GameType getGameMode() {
+                return gameType;
+        }
 
 
 }
+
+
+
+
+
