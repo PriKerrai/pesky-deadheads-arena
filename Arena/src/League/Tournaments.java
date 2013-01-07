@@ -8,7 +8,7 @@ import java.util.Iterator;
 public class Tournaments {
     private String tournamentName = "";
     private Game game;
-    private ArrayList<Match> matchList = new ArrayList<>();
+    private ArrayList<Match> matchList = new ArrayList<Match>();
    
     public Tournaments(String name, Game game) {
         this.tournamentName = name;
