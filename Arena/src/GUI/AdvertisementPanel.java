@@ -1,5 +1,7 @@
 package GUI;
 
+import arena_mainframe.DatabaseManager;
+import arena_mainframe.iDatabaseManager;
 import sun.awt.HorizBagLayout;
 import sun.awt.OrientableFlowLayout;
 
@@ -18,6 +20,9 @@ import java.awt.event.ActionListener;
  */
 public class AdvertisementPanel extends JFrame implements ActionListener {
 
+    iDatabaseManager dbm = new DatabaseManager();
+
+    // West area
     JPanel mainPanel = new JPanel(),
            centerPanel = new JPanel(),
            westPanel = new JPanel(),
@@ -31,8 +36,11 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
     JTextField depositAmountTextField = new JTextField(4);
     JButton depositButton = new JButton("Deposit");
 
+    // Center area
     JPanel advertisementSchemePanel = new JPanel();
+    JTable advertisementTable = new JTable();
 
+    // South area
     JPanel uploadPanel = new JPanel();
     JButton openButton = new JButton("Open"),
             uploadButton = new JButton("Upload");
@@ -87,6 +95,11 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
         mainPanel.add(centerPanel, BorderLayout.CENTER);
         centerPanel.setLayout(new GridLayout(4,1));
         centerPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1), "Advertisement Scheme"));
+        centerPanel.add(advertisementSchemePanel);
+        advertisementSchemePanel.add(advertisementTable);
+
+        // Load currently active advertisements into the advertisementTable
+        // --
     }
 
     private void initializeSouthArea() {
