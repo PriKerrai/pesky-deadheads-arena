@@ -24,40 +24,40 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
 
     //iDatabaseManager dbm = new DatabaseManager();
 
-    JPanel mainPanel = new JPanel();
+    private JPanel mainPanel = new JPanel();
 
     // North area
-    JPanel balancePanel = new JPanel();
-    JLabel balanceLabel = new JLabel("Current Balance: "),
+    private JPanel balancePanel = new JPanel();
+    private JLabel balanceLabel = new JLabel("Current Balance: "),
            currentBalanceLabel = new JLabel("$0");
 
-    JPanel depositPanel = new JPanel();
-    JTextField depositAmountTextField = new JTextField(4);
-    JButton depositButton = new JButton("Deposit");
+    private JPanel depositPanel = new JPanel();
+    private JTextField depositAmountTextField = new JTextField(4);
+    private JButton depositButton = new JButton("Deposit");
 
     // Center area
-    DefaultTableModel activeAdsTableModel = new DefaultTableModel(new String[] {"Banner", "Description", "Time Left"}, 50);
-    JTable advertisementTable = new JTable(activeAdsTableModel);
-    JScrollPane advertisementTableScrollPane = new JScrollPane(advertisementTable);
+    private DefaultTableModel activeAdsTableModel = new DefaultTableModel(new String[] {"Banner", "Description", "Time Left"}, 50);
+    private JTable advertisementTable = new JTable(activeAdsTableModel);
+    private JScrollPane advertisementTableScrollPane = new JScrollPane(advertisementTable);
 
-    JLabel showOnArenaLabel = new JLabel("Also show randomly on the ARENA mainframe?");
-    JCheckBox showOnArenaCheckBox = new JCheckBox();
+    private JLabel showOnArenaLabel = new JLabel("Also show randomly on the ARENA mainframe?");
+    private JCheckBox showOnArenaCheckBox = new JCheckBox();
 
-    JLabel durationLabel = new JLabel("Duration (days): ");
-    JTextField durationTextField = new JTextField(2);
+    private JLabel durationLabel = new JLabel("Duration (days): ");
+    private JTextField durationTextField = new JTextField(2);
 
     // East area
-    JPanel advertisementSchemePanel = new JPanel();
+    private JPanel advertisementSchemePanel = new JPanel();
 
-    DefaultTableModel activeTournamentsTableModel = new DefaultTableModel(new String[] {"League/Tourn. Name", "Description", "Free Ad Spots"}, 50);
-    JTable activeTournamentsTable = new JTable(activeTournamentsTableModel);
-    JScrollPane activeTournamentsScrollPane = new JScrollPane(activeTournamentsTable);
+    private DefaultTableModel activeTournamentsTableModel = new DefaultTableModel(new String[] {"League/Tourn. Name", "Description", "Free Ad Spots"}, 50);
+    private JTable activeTournamentsTable = new JTable(activeTournamentsTableModel);
+    private JScrollPane activeTournamentsScrollPane = new JScrollPane(activeTournamentsTable);
 
     //JPanel uploadPanel = new JPanel();
-    JButton openButton = new JButton("Open"),
+    private JButton openButton = new JButton("Open"),
             uploadButton = new JButton("Upload");
-    JTextField filePathTextField = new JTextField(15);
-    JFileChooser fileChooser = new JFileChooser();
+    private JTextField filePathTextField = new JTextField(15);
+    private JFileChooser fileChooser = new JFileChooser();
 
     public AdvertisementPanel() {
         super("Advertisement Control Panel");
