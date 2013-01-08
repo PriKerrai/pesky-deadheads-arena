@@ -181,7 +181,7 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
                 showOpenDialog();
             }
             else if (tmp == uploadButton) {
-                System.out.println("U no can has upload at dis tiem.");
+                System.out.println("Functionality not yet implemented.");
             }
         }
     }
