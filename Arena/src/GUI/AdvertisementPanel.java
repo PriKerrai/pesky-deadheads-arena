@@ -8,6 +8,8 @@ import sun.awt.OrientableFlowLayout;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,7 +22,7 @@ import java.awt.event.ActionListener;
  */
 public class AdvertisementPanel extends JFrame implements ActionListener {
 
-    iDatabaseManager dbm = new DatabaseManager();
+    //iDatabaseManager dbm = new DatabaseManager();
 
     // West area
     JPanel mainPanel = new JPanel(),
@@ -37,14 +39,15 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
     JButton depositButton = new JButton("Deposit");
 
     // Center area
-    JPanel advertisementSchemePanel = new JPanel();
-    JTable advertisementTable = new JTable();
+    DefaultTableModel tableModel = new DefaultTableModel(new String[] {"Banner", "Description", "Time Left"}, 10);
+    JTable advertisementTable = new JTable(tableModel);
+    JScrollPane advertisementTableScrollPane = new JScrollPane(advertisementTable);
 
     // South area
     JPanel uploadPanel = new JPanel();
     JButton openButton = new JButton("Open"),
             uploadButton = new JButton("Upload");
-    JTextField filepathTextField = new JTextField(15);
+    JTextField filePathTextField = new JTextField(15);
     JFileChooser fileChooser = new JFileChooser();
 
     public AdvertisementPanel() {
@@ -93,10 +96,9 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
 
     private void initializeCenterArea() {
         mainPanel.add(centerPanel, BorderLayout.CENTER);
-        centerPanel.setLayout(new GridLayout(4,1));
-        centerPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1), "Advertisement Scheme"));
-        centerPanel.add(advertisementSchemePanel);
-        advertisementSchemePanel.add(advertisementTable);
+        centerPanel.setLayout(new GridLayout(4, 1));
+        centerPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1), "Active Advertisements"));
+        centerPanel.add(advertisementTableScrollPane);
 
         // Load currently active advertisements into the advertisementTable
         // --
@@ -107,13 +109,13 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
         southPanel.setLayout(new FlowLayout());
         southPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1), "Banner File"));
 
-        filepathTextField.setEditable(false);
-        filepathTextField.setBorder(new LineBorder(Color.DARK_GRAY, 1));
-        filepathTextField.setForeground(Color.DARK_GRAY);
+        filePathTextField.setEditable(false);
+        filePathTextField.setBorder(new LineBorder(Color.DARK_GRAY, 1));
+        filePathTextField.setForeground(Color.DARK_GRAY);
         openButton.addActionListener(this);
         uploadButton.addActionListener(this);
 
-        southPanel.add(filepathTextField);
+        southPanel.add(filePathTextField);
         southPanel.add(openButton);
         southPanel.add(uploadButton);
     }
@@ -121,11 +123,11 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
     private void showOpenDialog() {
         int choice = fileChooser.showOpenDialog(this);
         if (choice == JFileChooser.APPROVE_OPTION) {
-            filepathTextField.setText(fileChooser.getCurrentDirectory().toString() + "\\" +
+            filePathTextField.setText(fileChooser.getCurrentDirectory().toString() + "\\" +
                                       fileChooser.getSelectedFile().getName());
         }
         if (choice == JFileChooser.CANCEL_OPTION) {
-            filepathTextField.setText("");
+            filePathTextField.setText("");
         }
     }
 
