@@ -19,17 +19,15 @@ public class DatabaseManager implements iDatabaseManager {
             + "databaseName=dbtht1202;selectMethod=cursor";
     private static final String USERNAME = "";
     private static final String PASSWORD = "";
+
+    // ArenaUser
     private static final String MAKE_ADMIN = "UPDATE ArenaUsers SET UserType ='Admin'";
     private static final String MAKE_ADVERTISER = "UPDATE ArenaUsers SET UserType ='Advertiser'";
     private static final String UPDATE_ACTIVE = "UPDATE ArenaUsers SET Active ='";
     private static final String INSERT_USER = "INSERT INTO ArenaUsers VALUES(";
     private static final String ADD_COMMENT = "UPDATE ArenaUsers SET Comment ='";
     private static final String DROP_TABLE = "DROP TABLE ArenaUsers";
-    private static final String CREATE_TABLE = "CREATE TABLE ArenaUsers(Nick VARCHAR(30),"
-            + "Name VARCHAR(30), Email VARCHAR(30),"
-            + "Password VARCHAR(30),"
-            + "UserType VARCHAR(30), Active VARCHAR(10),"
-            + "Comment VARCHAR(50), PRIMARY KEY(Nick))";
+
     private static final String GET_ACTIVE = "SELECT * FROM ArenaUsers WHERE Nick = '";
     private static final String GET_NICK = "SELECT * FROM ArenaUsers WHERE Email = '";
     private static final String GET_EMAIL = "SELECT * FROM ArenaUsers WHERE Nick = '";
@@ -37,8 +35,36 @@ public class DatabaseManager implements iDatabaseManager {
     private static final String GET_USERTYPE = "SELECT * FROM ArenaUsers WHERE Nick = '";
     private static final String GET_NAME = "SELECT * FROM ArenaUsers WHERE Nick = '";
     private static final String GET_COMMENT = "SELECT * FROM ArenaUsers WHERE Nick = '";
+
+    //Advertisement
+    private static final String INSERT_ADVERTISEMENT = "INSERT INTO Advertisement VALUES(";
+    private static final String UPDATE_ADVERTISEMENT = "UPDATE Advertisement SET ";
+
+    private static final String GET_ADVERTISEMENT = "SELECT * FROM Advertisement WHERE ";
+
     private Connection connection;
     private Statement statement;
+
+    // ArenaUsers Table
+    private static final String CREATE_TABLE =
+            "CREATE TABLE ArenaUsers("
+                    + "Nick VARCHAR(30),"
+                    + "Name VARCHAR(30),"
+                    + "Email VARCHAR(30),"
+                    + "Password VARCHAR(30),"
+                    + "UserType VARCHAR(30),"
+                    + "Active VARCHAR(10),"
+                    + "Comment VARCHAR(50),"
+                    + "PRIMARY KEY(Nick))";
+
+    // Advertisement Table
+    /*private static final String CREATE_TABLE =
+            "CREATE TABLE Advertisement("
+            + "AdvertID INT(9) NOT NULL PRIMARY KEY,"
+            + "BannerPath VARCHAR(50) NOT NULL,"
+            + "TimeLeft INT(9) NOT NULL,"
+            + "TournamentID INT(9) NOT NULL)";*/
+            //+ "FOREIGN KEY(TournamentID) references Tournament(TournamentID)";
 
     /**
      * Creates a new DatabaseManager and connects to it.
@@ -184,7 +210,12 @@ public class DatabaseManager implements iDatabaseManager {
         }
         return comment;
     }
-    
+
+    @Override
+    public void insertAdvertisement(String bannerURL, int tournamentID, boolean displayOnArena, int duration) throws SQLException {
+
+    }
+
     public boolean isActive(String nick) throws SQLException { //TODO:Inte färdig än
         String activeString = "";
         String TRUE = "true";

@@ -11,7 +11,8 @@ import java.sql.SQLException;
  * @author Johan
  */
 public interface iDatabaseManager {
-    
+
+    // ArenaUser Functions
     public void createUser(String nick, String name, String email, String password,
                             String usertype, boolean active, String comment)throws SQLException;
     
@@ -40,5 +41,9 @@ public interface iDatabaseManager {
     public void makeAdmin(String nick) throws SQLException;
     
     public String getComment(String nick) throws SQLException;
+
+
+    // Advertisement Functions
+    public void insertAdvertisement(String bannerURL, int tournamentID, boolean displayOnArena, int duration) throws SQLException;
     
 }
