@@ -87,7 +87,7 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
         mainPanel.setLayout(new BorderLayout());
     }
 
-    private void initializeNorthArea()  {
+    private void initializeNorthArea() {
         JPanel northPanel = new JPanel();
         mainPanel.add(northPanel, BorderLayout.NORTH);
         //westPanel.setLayout(new GridLayout(2,1));
@@ -107,9 +107,9 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
     private void initializeCenterArea() {
         JPanel centerPanel = new JPanel();
         mainPanel.add(centerPanel, BorderLayout.CENTER);
-        //centerPanel.setLayout(new GridLayout(1, 1));
+        centerPanel.setLayout(new BorderLayout());
         centerPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1), "Active Advertisements"));
-        centerPanel.add(advertisementTableScrollPane);
+        centerPanel.add(advertisementTableScrollPane, BorderLayout.CENTER);
 
         // Load currently active advertisements into the advertisementTable
         // --
