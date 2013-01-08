@@ -24,12 +24,9 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
 
     //iDatabaseManager dbm = new DatabaseManager();
 
-    // North area
-    JPanel mainPanel = new JPanel(),
-           centerPanel = new JPanel(),
-           westPanel = new JPanel(),
-           southPanel = new JPanel();
+    JPanel mainPanel = new JPanel();
 
+    // North area
     JPanel balancePanel = new JPanel();
     JLabel balanceLabel = new JLabel("Current Balance: "),
            currentBalanceLabel = new JLabel("$0");
@@ -91,22 +88,24 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
     }
 
     private void initializeNorthArea()  {
-        mainPanel.add(westPanel, BorderLayout.NORTH);
+        JPanel northPanel = new JPanel();
+        mainPanel.add(northPanel, BorderLayout.NORTH);
         //westPanel.setLayout(new GridLayout(2,1));
-        westPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1), "Fill up balance"));
+        northPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1), "Fill up balance"));
 
         balancePanel.add(balanceLabel);
         balancePanel.add(currentBalanceLabel);
-        westPanel.add(balancePanel);
+        northPanel.add(balancePanel);
 
         depositPanel.add(depositAmountTextField);
         depositPanel.add(depositButton);
-        westPanel.add(depositPanel);
+        northPanel.add(depositPanel);
 
-        westPanel.setVisible(true);
+        northPanel.setVisible(true);
     }
 
     private void initializeCenterArea() {
+        JPanel centerPanel = new JPanel();
         mainPanel.add(centerPanel, BorderLayout.CENTER);
         //centerPanel.setLayout(new GridLayout(1, 1));
         centerPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1), "Active Advertisements"));
@@ -138,6 +137,7 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
         centerPanel.add(durationLabel);
         centerPanel.add(durationTextField);
 
+        JPanel southPanel = new JPanel();
         advertisementSchemePanel.add(southPanel, BorderLayout.SOUTH);
         southPanel.setLayout(new FlowLayout());
         southPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1), "Banner File"));
