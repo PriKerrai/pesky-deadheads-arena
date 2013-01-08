@@ -14,7 +14,7 @@ import java.util.Iterator;
  */
 public class ListOfTournaments {
     private static ListOfTournaments instance = null;
-    private ArrayList<Tournament> tournaments = new ArrayList<>();
+    private ArrayList<Tournament> tournaments = new ArrayList<Tournament>();
     
     private ListOfTournaments() {        
     }
