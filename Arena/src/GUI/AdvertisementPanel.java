@@ -36,7 +36,7 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
     private JButton depositButton = new JButton("Deposit");
 
     // Center area
-    private DefaultTableModel activeAdsTableModel = new DefaultTableModel(new String[] {"Banner", "Description", "Time Left"}, 50);
+    private DefaultTableModel activeAdsTableModel = new DefaultTableModel(new String[] {"Banner", "League/Tourn.", "Time Left"}, 50);
     private JTable advertisementTable = new JTable(activeAdsTableModel);
     private JScrollPane advertisementTableScrollPane = new JScrollPane(advertisementTable);
 
@@ -49,7 +49,7 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
     // East area
     private JPanel advertisementSchemePanel = new JPanel();
 
-    private DefaultTableModel activeTournamentsTableModel = new DefaultTableModel(new String[] {"League/Tourn. Name", "Description", "Free Ad Spots"}, 50);
+    private DefaultTableModel activeTournamentsTableModel = new DefaultTableModel(new String[] {"League/Tourn.", "Description", "Free Ad Spots"}, 50);
     private JTable activeTournamentsTable = new JTable(activeTournamentsTableModel);
     private JScrollPane activeTournamentsScrollPane = new JScrollPane(activeTournamentsTable);
 
