@@ -24,7 +24,7 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
 
     //iDatabaseManager dbm = new DatabaseManager();
 
-    // West area
+    // North area
     JPanel mainPanel = new JPanel(),
            centerPanel = new JPanel(),
            westPanel = new JPanel(),
@@ -39,12 +39,24 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
     JButton depositButton = new JButton("Deposit");
 
     // Center area
-    DefaultTableModel tableModel = new DefaultTableModel(new String[] {"Banner", "Description", "Time Left"}, 10);
-    JTable advertisementTable = new JTable(tableModel);
+    DefaultTableModel activeAdsTableModel = new DefaultTableModel(new String[] {"Banner", "Description", "Time Left"}, 50);
+    JTable advertisementTable = new JTable(activeAdsTableModel);
     JScrollPane advertisementTableScrollPane = new JScrollPane(advertisementTable);
 
-    // South area
-    JPanel uploadPanel = new JPanel();
+    JLabel showOnArenaLabel = new JLabel("Also show randomly on the ARENA mainframe?");
+    JCheckBox showOnArenaCheckBox = new JCheckBox();
+
+    JLabel durationLabel = new JLabel("Duration (days): ");
+    JTextField durationTextField = new JTextField(2);
+
+    // East area
+    JPanel advertisementSchemePanel = new JPanel();
+
+    DefaultTableModel activeTournamentsTableModel = new DefaultTableModel(new String[] {"League/Tourn. Name", "Description", "Free Ad Spots"}, 50);
+    JTable activeTournamentsTable = new JTable(activeTournamentsTableModel);
+    JScrollPane activeTournamentsScrollPane = new JScrollPane(activeTournamentsTable);
+
+    //JPanel uploadPanel = new JPanel();
     JButton openButton = new JButton("Open"),
             uploadButton = new JButton("Upload");
     JTextField filePathTextField = new JTextField(15);
@@ -64,9 +76,9 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
     private void initialize() {
         setLayout(new BorderLayout());
         initializeMainPanel();
-        initializeWestArea();
+        initializeNorthArea();
         initializeCenterArea();
-        initializeSouthArea();
+        initializeEastArea();
         pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
@@ -78,9 +90,9 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
         mainPanel.setLayout(new BorderLayout());
     }
 
-    private void initializeWestArea()  {
-        mainPanel.add(westPanel, BorderLayout.WEST);
-        westPanel.setLayout(new GridLayout(2,1));
+    private void initializeNorthArea()  {
+        mainPanel.add(westPanel, BorderLayout.NORTH);
+        //westPanel.setLayout(new GridLayout(2,1));
         westPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1), "Fill up balance"));
 
         balancePanel.add(balanceLabel);
@@ -96,7 +108,7 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
 
     private void initializeCenterArea() {
         mainPanel.add(centerPanel, BorderLayout.CENTER);
-        centerPanel.setLayout(new GridLayout(4, 1));
+        //centerPanel.setLayout(new GridLayout(1, 1));
         centerPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1), "Active Advertisements"));
         centerPanel.add(advertisementTableScrollPane);
 
@@ -104,8 +116,29 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
         // --
     }
 
-    private void initializeSouthArea() {
-        mainPanel.add(southPanel, BorderLayout.SOUTH);
+    private void initializeEastArea() {
+        mainPanel.add(advertisementSchemePanel, BorderLayout.EAST);
+        advertisementSchemePanel.setLayout(new BorderLayout());
+        advertisementSchemePanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1), "Define Advertisement Scheme"));
+
+        JPanel northPanel = new JPanel();
+        northPanel.setLayout(new BorderLayout());
+        northPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1), "Placement"));
+        advertisementSchemePanel.add(northPanel, BorderLayout.NORTH);
+        northPanel.add(activeTournamentsScrollPane, BorderLayout.NORTH);
+
+        JPanel checkBoxPanel = new JPanel();
+        northPanel.add(checkBoxPanel, BorderLayout.SOUTH);
+        checkBoxPanel.add(showOnArenaLabel);
+        checkBoxPanel.add(showOnArenaCheckBox);
+
+        JPanel centerPanel = new JPanel();
+        centerPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1), "Duration"));
+        advertisementSchemePanel.add(centerPanel, BorderLayout.CENTER);
+        centerPanel.add(durationLabel);
+        centerPanel.add(durationTextField);
+
+        advertisementSchemePanel.add(southPanel, BorderLayout.SOUTH);
         southPanel.setLayout(new FlowLayout());
         southPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1), "Banner File"));
 
