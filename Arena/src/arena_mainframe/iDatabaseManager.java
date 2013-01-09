@@ -44,6 +44,18 @@ public interface iDatabaseManager {
 
 
     // Advertisement Functions
-    public void insertAdvertisement(String bannerURL, int tournamentID, boolean displayOnArena, int duration) throws SQLException;
+    /**
+     *
+     * @param banner Make sure bannerURL [u]only[/u] includes the image name + file extension
+     */
+    public void createAdvertisement(String banner, int duration, int tournamentID, boolean displayOnArena) throws SQLException;
+
+    //public int getBanner(int ID) throws SQLException;
+
+    //public int getDuration(int ID) throws SQLException;
+
+    //public int getTournamentID(int ID) throws SQLException;
+
+    //public boolean displaysOnArena(int ID) throws SQLException;
     
 }

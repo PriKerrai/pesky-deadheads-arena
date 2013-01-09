@@ -14,6 +14,9 @@ import javax.swing.JOptionPane;
  */
 public class DatabaseManager implements iDatabaseManager {
 
+    // Usefull datatype list:
+    // http://publib.boulder.ibm.com/infocenter/idshelp/v111/index.jsp?topic=/com.ibm.jccids.doc/com.ibm.db2.luw.apdv.java.doc/doc/rjvjdata.htm
+
     private static final String DRIVER_PATH = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
     private static final String DATABASE_PATH = "jdbc:sqlserver://idasql-db.hb.se:56077;"
             + "databaseName=dbtht1202;selectMethod=cursor";
@@ -60,11 +63,13 @@ public class DatabaseManager implements iDatabaseManager {
     // Advertisement Table
     /*private static final String CREATE_TABLE =
             "CREATE TABLE Advertisement("
-            + "AdvertID INT(9) NOT NULL PRIMARY KEY,"
+            + "AdID INTEGER NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),"
+            + "AdvertiserID INTEGER NOT NULL,"
             + "BannerPath VARCHAR(50) NOT NULL,"
-            + "TimeLeft INT(9) NOT NULL,"
-            + "TournamentID INT(9) NOT NULL)";*/
-            //+ "FOREIGN KEY(TournamentID) references Tournament(TournamentID)";
+            + "TimeLeft INTEGER NOT NULL,"
+            + "TournamentID INTEGER NOT NULL,"
+            + "DisplayOnArena BOOLEAN NOT NULL)";
+            //+ "FOREIGN KEY(TournamentID) references Tournament(TournamentID))"
 
     /**
      * Creates a new DatabaseManager and connects to it.
@@ -74,7 +79,7 @@ public class DatabaseManager implements iDatabaseManager {
     }
 
     /**
-     * Connects to the databae.
+     * Connects to the database.
      */
     public Connection connectDB() {
         try {
@@ -212,8 +217,13 @@ public class DatabaseManager implements iDatabaseManager {
     }
 
     @Override
-    public void insertAdvertisement(String bannerURL, int tournamentID, boolean displayOnArena, int duration) throws SQLException {
-
+    public void createAdvertisement(String banner, int duration, int tournamentID, boolean displayOnArena) throws SQLException {
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate(INSERT_ADVERTISEMENT + "'/pictures/" + banner + "," + duration + "," + tournamentID + "," + displayOnArena + "');");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public boolean isActive(String nick) throws SQLException { //TODO:Inte färdig än
