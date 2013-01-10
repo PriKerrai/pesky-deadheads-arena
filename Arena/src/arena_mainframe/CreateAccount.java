@@ -134,16 +134,17 @@ public class CreateAccount {
                                 JOptionPane.showMessageDialog(null, "Email is already in use");
                             } else {
                                 if (password.length < 5) {
-                                    JOptionPane.showMessageDialog(null, "Lösenordet måste vara minst"
-                                            + " 27 tecken långt, varav minst 8 versaler, 7 specialtecken"
-                                            + " och 6 siffror");
+                                    JOptionPane.showMessageDialog(null, "Lösenordet måste vara minst 6 tecken långt");
                                 } else {
                                     if (Arrays.equals(password, cPassword)) {
                                         for (int i = 0; i < password.length; i++) {
                                             passwordString += password[i];
                                         }
-                                        dbm.createUser(nickName, name, email, passwordString, "User",
-                                                true, "");
+                                        
+                                        //false,false,false,false,true =
+                                        //isAdmin, isOperator, isLeaguowner, isAdvertiser, isActive
+                                        dbm.createUser(nickName, name, email, passwordString,
+                                                false,false,false,false,true, "");
                                         frame.dispose();
                                     } else {
                                         JOptionPane.showMessageDialog(null, "Passwords don't match, try again");
