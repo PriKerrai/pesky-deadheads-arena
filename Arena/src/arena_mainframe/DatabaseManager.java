@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -39,6 +41,11 @@ public class DatabaseManager implements iDatabaseManager {
     private static final String GET_NAME = "SELECT * FROM ArenaUsers WHERE Nick = '";
     private static final String GET_COMMENT = "SELECT * FROM ArenaUsers WHERE Nick = '";
 
+    private static final String GET_HIGHEST_ID = "SELECT TOP(1) UserID " +
+			"FROM ArenaUsers " +
+			"ORDER BY UserID DESC";
+    
+    
     //Advertisement
     private static final String INSERT_ADVERTISEMENT = "INSERT INTO Advertisement VALUES(";
     private static final String UPDATE_ADVERTISEMENT = "UPDATE Advertisement SET ";
@@ -51,15 +58,27 @@ public class DatabaseManager implements iDatabaseManager {
     // ArenaUsers Table
     private static final String CREATE_TABLE =
             "CREATE TABLE ArenaUsers("
-                    + "Nick VARCHAR(30),"
-                    + "Name VARCHAR(30),"
-                    + "Email VARCHAR(30),"
-                    + "Password VARCHAR(30),"
-                    + "UserType VARCHAR(30),"
-                    + "Active VARCHAR(10),"
+                    + "UserID SMALLINT NOT NULL,"
+                    + "Nick VARCHAR(30) NOT NULL,"
+                    + "Name VARCHAR(30)NOT NULL,"
+                    + "Email VARCHAR(30)NOT NULL,"
+                    + "Password VARCHAR(30)NOT NULL,"
+                    + "isAdmin VARCHAR(10),"
+                    + "isOperator VARCHAR(10),"
+                    + "isLeagueowner VARCHAR(10),"
+                    + "isAdvertiser VARCHAR(10),"
+                    + "isActive VARCHAR(10),"
                     + "Comment VARCHAR(50),"
-                    + "PRIMARY KEY(Nick))";
-
+                    + "PRIMARY KEY(UserID ))";
+                    
+    private static final String CREATE_TABLE_ADV =
+                    "CREATE TABLE Advertisement("
+                    + "AdID SMALLINT NOT NULL,"
+                    + "TournamentID SMALLINT NOT NULL,"
+                    + "AdvertiserID INTEGER NOT NULL";
+            
+            
+            
     // Advertisement Table
     /*private static final String CREATE_TABLE =
             "CREATE TABLE Advertisement("
@@ -132,12 +151,14 @@ public class DatabaseManager implements iDatabaseManager {
     
     
     public void createUser(String nick, String name, String email, String password,
-            String usertype, boolean active, String comment) throws SQLException {
+            boolean isAdmin, boolean isOperator, boolean isLeagueowner, boolean isAdvertiser,
+            boolean isActive, String comment) throws SQLException {
         try {
             statement = connection.createStatement();
-            statement.executeUpdate(INSERT_USER + "'" + nick + "','" + name
+            statement.executeUpdate(INSERT_USER +"'" +getNewUserID()+ "','" + nick + "','" + name
                     + "','" + email + "','" + password + "','"
-                    + usertype + "','" + active + "','" + comment + "');");
+                    + isAdmin + "','" + isOperator + "','" + isLeagueowner + "','" + isAdvertiser + "','"
+                    + isActive + "','" + comment + "');");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -262,4 +283,18 @@ public class DatabaseManager implements iDatabaseManager {
         }
         return false;
     }
+    
+    private int getNewUserID() {
+        int count=0;
+        try {
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(GET_HIGHEST_ID);
+            while(resultSet.next())          
+                count = resultSet.getInt(1);
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count +1;
+	}
+    
 }
