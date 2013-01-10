@@ -6,7 +6,7 @@ package Game;
 
 /**
  *
- * @author Kerrai
+ * @author Martin
  */
 public class Game {
     
