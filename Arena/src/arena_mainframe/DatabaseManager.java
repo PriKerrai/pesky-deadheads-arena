@@ -57,38 +57,48 @@ public class DatabaseManager implements iDatabaseManager {
 
     // ArenaUsers Table
     private static final String CREATE_TABLE =
-            "CREATE TABLE ArenaUsers("
+                    "CREATE TABLE ArenaUsers("
                     + "UserID SMALLINT NOT NULL,"
                     + "Nick VARCHAR(30) NOT NULL,"
                     + "Name VARCHAR(30)NOT NULL,"
                     + "Email VARCHAR(30)NOT NULL,"
                     + "Password VARCHAR(30)NOT NULL,"
-                    + "isAdmin VARCHAR(10),"
-                    + "isOperator VARCHAR(10),"
-                    + "isLeagueowner VARCHAR(10),"
-                    + "isAdvertiser VARCHAR(10),"
-                    + "isActive VARCHAR(10),"
+                    + "isAdmin VARCHAR(5),"
+                    + "isOperator VARCHAR(5),"
+                    + "isLeagueowner VARCHAR(5),"
+                    + "isAdvertiser VARCHAR(5),"
+                    + "isActive VARCHAR(5),"
                     + "Comment VARCHAR(50),"
-                    + "PRIMARY KEY(UserID ))";
+                    + "PRIMARY KEY(UserID))";
                     
     private static final String CREATE_TABLE_ADV =
                     "CREATE TABLE Advertisement("
                     + "AdID SMALLINT NOT NULL,"
                     + "TournamentID SMALLINT NOT NULL,"
-                    + "AdvertiserID INTEGER NOT NULL";
-            
-            
-            
-    // Advertisement Table
-    /*private static final String CREATE_TABLE =
-            "CREATE TABLE Advertisement("
-            + "AdID INTEGER NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),"
-            + "AdvertiserID INTEGER NOT NULL,"
-            + "BannerPath VARCHAR(50) NOT NULL,"
-            + "TimeLeft INTEGER NOT NULL,"
-            + "TournamentID INTEGER NOT NULL,"
-            + "DisplayOnArena BOOLEAN NOT NULL)";
-            //+ "FOREIGN KEY(TournamentID) references Tournament(TournamentID))"
+                    + "AdvertiserID SMALLINT NOT NULL,"
+                    + "BannerPath VARCHAR(50) NOT NULL,"
+                    + "TimeLeft SMALLINT NOT NULL,"
+                    + "DisplayOnArena VARCHAR(5),"
+                    + "PRIMARY KEY(AdID),"
+                    + "FOREIGN KEY(TournamentID) references Tournament(TournamentID))";
+
+    private static final String CREATE_TABLE_TOURN =
+                    "CREATE TABLE Tournament("
+                    + "TournamentID SMALLINT NOT NULL,"
+                    + "FreePlayerSpots SMALLINT NOT NULL,"
+                    + "FreeAdSpots SMALLINT NOT NULL,"
+                    + "GameID SMALLINT NOT NULL,"
+                    + "PRIMARY KEY(TournamentID),"
+                    + "FOREIGN KEY(GameID) references Game(GameID))";
+
+    private static final String CREATE_TABLE_GAME =
+                    "CREATE TABLE Game("
+                    + "GameID SMALLINT NOT NULL,"
+                    + "Name VARCHAR(30) NOT NULL,"
+                    + "Description VARCHAR(100),"
+                    + "Players SMALLINT NOT NULL,"
+                    + "JarPath VARCHAR(50) NOT NULL,"
+                    + "PRIMARY KEY(GameID))";
 
     /**
      * Creates a new DatabaseManager and connects to it.
@@ -128,7 +138,7 @@ public class DatabaseManager implements iDatabaseManager {
     public void createTable() {
         try {
             statement = connection.createStatement();
-            statement.executeUpdate(CREATE_TABLE);
+            statement.executeUpdate(CREATE_TABLE_ADV);
         } catch (Exception e) {
             System.out.println(e);
         }
