@@ -22,7 +22,7 @@ import java.awt.event.ActionListener;
  */
 public class AdvertisementPanel extends JFrame implements ActionListener {
 
-    //iDatabaseManager dbm = new DatabaseManager();
+    iDatabaseManager dbm = new DatabaseManager();
 
     private JPanel mainPanel = new JPanel();
 
@@ -182,6 +182,9 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
             }
             else if (tmp == uploadButton) {
                 System.out.println("Functionality not yet implemented.");
+            }
+            else if (tmp == depositButton) {
+
             }
         }
     }

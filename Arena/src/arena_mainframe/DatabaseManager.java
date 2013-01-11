@@ -69,6 +69,7 @@ public class DatabaseManager implements iDatabaseManager {
                     + "isAdvertiser VARCHAR(5),"
                     + "isActive VARCHAR(5),"
                     + "Comment VARCHAR(50),"
+                    + "AccountBalance SMALLINT,"
                     + "PRIMARY KEY(UserID))";
                     
     private static final String CREATE_TABLE_ADV =
@@ -245,6 +246,10 @@ public class DatabaseManager implements iDatabaseManager {
             comment = resultSet.getString(7);
         }
         return comment;
+    }
+
+    public void updateAccountBalance(int userID) throws SQLException {
+
     }
 
     @Override

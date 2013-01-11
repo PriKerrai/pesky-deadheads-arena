@@ -18,6 +18,8 @@ public interface iDatabaseManager {
             boolean isActive, String comment) throws SQLException;
     
     public void setActive(String nick, boolean active)throws SQLException;
+
+    public int getUserID(String nick) throws SQLException;
     
     public String getNick(String email)throws SQLException;
     
@@ -42,6 +44,8 @@ public interface iDatabaseManager {
     public void makeAdmin(String nick) throws SQLException;
     
     public String getComment(String nick) throws SQLException;
+
+    public void updateAccountBalance(String nick) throws SQLException;
 
 
     // Advertisement Functions

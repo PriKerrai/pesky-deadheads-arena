@@ -20,7 +20,7 @@ public class NewsPanel extends JPanel {
 
     public NewsPanel() {
         initialize();
-        File htmlFile = new File("News.html");
+        File htmlFile = new File("Arena/News.html");
         java.net.URL fileURL = null;
         try {
             fileURL = htmlFile.toURI().toURL();
