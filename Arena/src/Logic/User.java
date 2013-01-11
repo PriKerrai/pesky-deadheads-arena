@@ -15,11 +15,12 @@ public abstract class User  {
     public static final String USER_TYPE_PLAYER = "Player";
     public static final String USER_TYPE_LEAGUEOWNER = "LeagueOwner";
 
+    int userID;
     String nickName;
     String name;
     String email;
     String userType;
-    public User(String name, String email, String userType, String nickName){
+    public User(String name, String email, String userType, String nickName) {
         this.name = name;
         this.email = email;
         this.userType = userType;
