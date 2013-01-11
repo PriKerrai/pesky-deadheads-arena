@@ -25,7 +25,7 @@ public class DatabaseManager implements iDatabaseManager {
     private static final String USERNAME = "";
     private static final String PASSWORD = "";
 
-    // ArenaUser
+    // ARENAUSER
     private static final String MAKE_ADMIN = "UPDATE ArenaUsers SET UserType ='Admin'";
     private static final String MAKE_ADVERTISER = "UPDATE ArenaUsers SET UserType ='Advertiser'";
     private static final String UPDATE_ACTIVE = "UPDATE ArenaUsers SET Active ='";
@@ -46,8 +46,8 @@ public class DatabaseManager implements iDatabaseManager {
 			"ORDER BY UserID DESC";
     
     
-    //Advertisement
-    private static final String INSERT_ADVERTISEMENT = "INSERT INTO Advertisement VALUES(";
+    // ADVERTISEMENT
+    private static final String INSERT_ADVERTISEMENT = "INSERT INTO Advertisement VALUES('";
     private static final String UPDATE_ADVERTISEMENT = "UPDATE Advertisement SET ";
 
     private static final String GET_ADVERTISEMENT = "SELECT * FROM Advertisement WHERE ";
@@ -149,6 +149,9 @@ public class DatabaseManager implements iDatabaseManager {
         statement = connection.createStatement();
         statement.executeUpdate(DROP_TABLE);
     }
+
+
+    // ARENAUSER FUNCTIONS //
     
     public void makeAdmin(String nick) throws SQLException {
         statement = connection.createStatement();
@@ -248,20 +251,6 @@ public class DatabaseManager implements iDatabaseManager {
         return comment;
     }
 
-    public void updateAccountBalance(int userID) throws SQLException {
-
-    }
-
-    @Override
-    public void createAdvertisement(String banner, int duration, int tournamentID, boolean displayOnArena) throws SQLException {
-        try {
-            statement = connection.createStatement();
-            statement.executeUpdate(INSERT_ADVERTISEMENT + "'/pictures/" + banner + "," + duration + "," + tournamentID + "," + displayOnArena + "');");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
     public boolean isActive(String nick) throws SQLException { //TODO:Inte färdig än
         String activeString = "";
         String TRUE = "true";
@@ -311,5 +300,28 @@ public class DatabaseManager implements iDatabaseManager {
         }
         return count +1;
 	}
+
+
+    // ADVERTISEMENT FUNCTIONS //
+
+    @Override
+    public void createAdvertisement(int adID, int tournamentID, int userID, String bannerPath, int duration, String displayOnArena) throws SQLException {
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate(INSERT_ADVERTISEMENT + adID + "," + tournamentID + "," + userID + ", pictures/" + bannerPath + "," + duration + "," + displayOnArena + "');");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void updateAccountBalance(String nick) throws SQLException {
+
+    }
+
+    @Override
+    public int getUserID(String nick) throws SQLException {
+        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+    }
     
 }

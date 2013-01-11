@@ -12,7 +12,8 @@ import java.sql.SQLException;
  */
 public interface iDatabaseManager {
 
-    // ArenaUser Functions
+    // ARENAUSER FUNCTIONS //
+
     public void createUser(String nick, String name, String email, String password,
             boolean isAdmin, boolean isOperator, boolean isLeagueowner, boolean isAdvertiser,
             boolean isActive, String comment) throws SQLException;
@@ -48,12 +49,12 @@ public interface iDatabaseManager {
     public void updateAccountBalance(String nick) throws SQLException;
 
 
-    // Advertisement Functions
+    // ADVERTISEMENT FUNCTIONS //
+
     /**
-     *
-     * @param banner Make sure bannerURL [u]only[/u] includes the image name + file extension
+     * @param bannerPath Make sure that the path [u]only[/u] includes the image name + file extension
      */
-    public void createAdvertisement(String banner, int duration, int tournamentID, boolean displayOnArena) throws SQLException;
+    public void createAdvertisement(int adID, int tournamentID, int userID, String bannerPath, int duration, String displayOnArena) throws SQLException;
 
     //public int getBanner(int ID) throws SQLException;
 
