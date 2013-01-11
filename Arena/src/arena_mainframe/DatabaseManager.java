@@ -40,6 +40,7 @@ public class DatabaseManager implements iDatabaseManager {
     private static final String GET_USERTYPE = "SELECT * FROM ArenaUsers WHERE Nick = '";
     private static final String GET_NAME = "SELECT * FROM ArenaUsers WHERE Nick = '";
     private static final String GET_COMMENT = "SELECT * FROM ArenaUsers WHERE Nick = '";
+    private static final String GET_USER_ID = "SELECT UserID FROM ArenaUsers WHERE Nick = '";
 
     private static final String GET_HIGHEST_ID = "SELECT TOP(1) UserID " +
 			"FROM ArenaUsers " +
@@ -49,8 +50,10 @@ public class DatabaseManager implements iDatabaseManager {
     // ADVERTISEMENT
     private static final String INSERT_ADVERTISEMENT = "INSERT INTO Advertisement VALUES('";
     private static final String UPDATE_ADVERTISEMENT = "UPDATE Advertisement SET ";
+    private static final String UPDATE_BALANCE = "UPDATE ArenaUsers SET AccountBalance ='";
 
     private static final String GET_ADVERTISEMENT = "SELECT * FROM Advertisement WHERE ";
+    private static final String GET_BALANCE = "SELECT AccountBalance FROM ArenaUsers WHERE Nick ='";
 
     private Connection connection;
     private Statement statement;
@@ -188,6 +191,13 @@ public class DatabaseManager implements iDatabaseManager {
         statement.executeUpdate(ADD_COMMENT + comment + "' WHERE Nick = '" + nick + "'");
     }
 
+    @Override
+    public int getUserID(String nick) throws SQLException {
+        statement = connection.createStatement();
+        ResultSet result = statement.executeQuery(GET_USER_ID + nick + "'");
+        return result.getInt("UserID");
+    }
+
     public String getNick(String email) throws SQLException {
         String nick = "";
         statement = connection.createStatement();
@@ -315,13 +325,20 @@ public class DatabaseManager implements iDatabaseManager {
     }
 
     @Override
-    public void updateAccountBalance(String nick) throws SQLException {
-
+    public int getAccountBalance(String nick) throws SQLException {
+        statement = connection.createStatement();
+        ResultSet result = statement.executeQuery(GET_BALANCE + nick + "'");
+        return result.getInt("AccountBalance");
     }
 
     @Override
-    public int getUserID(String nick) throws SQLException {
-        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+    public void updateAccountBalance(String nick, int amount) throws SQLException {
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate(UPDATE_BALANCE + amount + "'");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
     
 }

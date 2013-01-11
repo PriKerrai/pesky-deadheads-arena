@@ -46,13 +46,15 @@ public interface iDatabaseManager {
     
     public String getComment(String nick) throws SQLException;
 
-    public void updateAccountBalance(String nick) throws SQLException;
+    public int getAccountBalance(String nick) throws SQLException;
+
+    public void updateAccountBalance(String nick, int amount) throws SQLException;
 
 
     // ADVERTISEMENT FUNCTIONS //
 
     /**
-     * @param bannerPath Make sure that the path [u]only[/u] includes the image name + file extension
+     * @param bannerPath Make sure that the path <u>only</u> includes the image name + file extension
      */
     public void createAdvertisement(int adID, int tournamentID, int userID, String bannerPath, int duration, String displayOnArena) throws SQLException;
 
