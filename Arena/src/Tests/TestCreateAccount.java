@@ -4,7 +4,7 @@
  */
 package Tests;
 
-import arena_mainframe.CreateAccount;
+import GUI.CreateAccount;
 
 /**
  *

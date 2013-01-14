@@ -1,4 +1,4 @@
-package arena_mainframe;
+package GUI;
 
 
 import java.io.*;

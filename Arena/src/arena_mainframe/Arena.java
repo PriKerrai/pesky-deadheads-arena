@@ -4,6 +4,8 @@
  */
 package arena_mainframe;
 
+import GUI.Arena_MainFrame;
+
 /**
  *
  * @author Karl

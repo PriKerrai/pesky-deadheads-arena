@@ -2,8 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package arena_mainframe;
+package GUI;
 
+import arena_mainframe.DatabaseManager;
+import arena_mainframe.iDatabaseManager;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

@@ -37,7 +37,7 @@ public class Game {
     }
     
     /* public String getPLACEHOLDER {
-    return PLACEHOLDER;
+    return PLACEHOLDER
     } */
     
     public String getId() {

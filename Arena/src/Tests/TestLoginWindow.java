@@ -4,6 +4,7 @@
  */
 package Tests;
 
+import GUI.Login;
 import arena_mainframe.*;
 
 /**

@@ -1,4 +1,4 @@
-package arena_mainframe;
+package GUI;
 
 import com.sun.java.swing.plaf.windows.WindowsBorders.DashedBorder;
 import javax.swing.*;
