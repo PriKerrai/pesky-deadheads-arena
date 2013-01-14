@@ -4,7 +4,8 @@
  */
 package Tests;
 
-import arena_mainframe.DatabaseManager;
+import Database.DatabaseManager;
+
 import java.sql.SQLException;
 
 /**
