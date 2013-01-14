@@ -5,6 +5,8 @@
 package Database;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -59,8 +61,9 @@ public interface iDatabaseManager {
 
     //public boolean displaysOnArena(int ID) throws SQLException;
     
+    public void removeGame(String gameName) throws SQLException;
     
     public void addGame(String gameName, String devName, String desc, int minPlayer,
             int maxPlayer, String jarPath) throws SQLException;
-    
+    public ArrayList getGameName() throws SQLException;
 }
