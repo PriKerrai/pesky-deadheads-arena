@@ -176,9 +176,9 @@ public class DatabaseManager implements iDatabaseManager {
                            String userType, boolean isActive, String comment) throws SQLException {
         try {
             statement = connection.createStatement();
-            statement.executeUpdate(INSERT_USER +"'" +getNewUserID()+ "','" + nick + "','" + name
+            statement.executeUpdate(INSERT_USER + "'" +getNewUserID()+ "','" + nick + "','" + name
                     + "','" + email + "','" + password + "','" + userType + "','"
-                    + isActive + "','" + comment + "," + 0 + "');");
+                    + isActive + "','" + comment + "','" + 0 + "');");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -338,7 +338,7 @@ public class DatabaseManager implements iDatabaseManager {
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return count +1;
+        return count+1;
     }
 
     private int getNewGameID() {
@@ -360,7 +360,7 @@ public class DatabaseManager implements iDatabaseManager {
     public void createAdvertisement(int adID, int tournamentID, int userID, String bannerPath, int duration, String displayOnArena) throws SQLException {
         try {
             statement = connection.createStatement();
-            statement.executeUpdate(INSERT_ADVERTISEMENT + adID + "," + tournamentID + "," + userID + ", pictures/" + bannerPath + "," + duration + "," + displayOnArena + "');");
+            statement.executeUpdate(INSERT_ADVERTISEMENT + adID + "','" + tournamentID + "','" + userID + "','pictures/" + bannerPath + "','" + duration + "','" + displayOnArena + "');");
         } catch (SQLException e) {
             e.printStackTrace();
         }
