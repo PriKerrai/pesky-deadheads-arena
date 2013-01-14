@@ -4,8 +4,9 @@
  */
 package GUI;
 
-import arena_mainframe.DatabaseManager;
-import arena_mainframe.iDatabaseManager;
+import Database.DatabaseManager;
+import Database.iDatabaseManager;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
