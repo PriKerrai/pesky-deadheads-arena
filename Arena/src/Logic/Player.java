@@ -14,8 +14,8 @@ import java.util.Iterator;
  */
 public class Player extends User {
 
-    public Player(String name, String email, String nickName){
-         super(name, email, USER_TYPE_PLAYER, nickName);
+    public Player(int userID, String name, String email, String nickName){
+         super(userID, name, email, USER_TYPE_PLAYER, nickName);
     }
  
 

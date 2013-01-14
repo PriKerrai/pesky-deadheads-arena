@@ -22,8 +22,8 @@ public class TestDatabase {
         //System.out.println(dbm.getUserType("Pimpslayer"));
         //dbm.setActive("viktor", false);
         //dbm.addComment("viktor", "För dålig för att kasta sten");
-        //dbm.createTable();
         //dbm.deleteTable();
+        //dbm.createTable();
     }
     
 }

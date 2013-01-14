@@ -1,4 +1,4 @@
-package league;
+package League;
 
 import Game.Game;
 import League.Match;

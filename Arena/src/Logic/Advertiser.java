@@ -16,16 +16,16 @@ public class Advertiser extends User {
 
     /**
      *
+     * @param userID
      * @param name
      * @param email
-     * @param userType
      * ***************************
      * Subclass to user, nickname and name are the same for an advertiser
      * An advertiser have a list of ads and an amount of "adPoints" that
      * works as credits for ad clicks.
      */
-    public Advertiser(String name, String email){
-        super(name, email, USER_TYPE_ADVERTISER, name);
+    public Advertiser(int userID, String name, String email){
+        super(userID, name, email, USER_TYPE_ADVERTISER, name);
         ads = new ArrayList<Advertisement>();
     }
 

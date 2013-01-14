@@ -7,8 +7,8 @@ package League;
 import java.util.ArrayList;
 import Game.Game;
 import java.util.Iterator;
-import league.Tournaments;
-import logic.LeagueOwner;
+
+import Logic.LeagueOwner;
 
 /**
  *

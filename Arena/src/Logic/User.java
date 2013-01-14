@@ -10,21 +10,24 @@ import java.security.PublicKey;
  * To change this template use File | Settings | File Templates.
  */
 public abstract class User  {
-    public static final String USER_TYPE_OPERATOR = "Operator";
-    public static final String USER_TYPE_ADVERTISER = "Advertiser";
-    public static final String USER_TYPE_PLAYER = "Player";
-    public static final String USER_TYPE_LEAGUEOWNER = "LeagueOwner";
+    public static final String USER_TYPE_ADMIN = "Admin",
+                            USER_TYPE_OPERATOR = "Operator",
+                            USER_TYPE_ADVERTISER = "Advertiser",
+                            USER_TYPE_LEAGUEOWNER = "LeagueOwner",
+                            USER_TYPE_PLAYER = "Player";
 
     int userID;
     String nickName;
     String name;
     String email;
     String userType;
-    public User(String name, String email, String userType, String nickName) {
+
+    public User(int userID, String name, String email, String userType, String nickName) {
+        this.userID = userID;
         this.name = name;
         this.email = email;
-        this.userType = userType;
         this.nickName = nickName;
+        this.userType = userType;
     }
     public String getNickName() {
         return nickName;
@@ -51,7 +54,7 @@ public abstract class User  {
     }
 
     public String getUserType() {
-        return userType;
+        return this.userType;
     }
 
     public void setUserType(String userType) {

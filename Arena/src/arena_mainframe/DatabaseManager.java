@@ -37,10 +37,10 @@ public class DatabaseManager implements iDatabaseManager {
     private static final String GET_NICK = "SELECT * FROM ArenaUsers WHERE Email = '";
     private static final String GET_EMAIL = "SELECT * FROM ArenaUsers WHERE Nick = '";
     private static final String GET_PASSWORD = "SELECT * FROM ArenaUsers WHERE Email = '";
-    private static final String GET_USERTYPE = "SELECT * FROM ArenaUsers WHERE Nick = '";
     private static final String GET_NAME = "SELECT * FROM ArenaUsers WHERE Nick = '";
     private static final String GET_COMMENT = "SELECT * FROM ArenaUsers WHERE Nick = '";
     private static final String GET_USER_ID = "SELECT UserID FROM ArenaUsers WHERE Nick = '";
+    private static final String GET_USER_TYPE = "SELECT UserType FROM ArenaUsers WHERE Nick = '";
 
     private static final String GET_HIGHEST_ID = "SELECT TOP(1) UserID " +
 			"FROM ArenaUsers " +
@@ -59,18 +59,15 @@ public class DatabaseManager implements iDatabaseManager {
     private Statement statement;
 
     // ArenaUsers Table
-    private static final String CREATE_TABLE =
+    private static final String CREATE_TABLE_AU =
                     "CREATE TABLE ArenaUsers("
                     + "UserID SMALLINT NOT NULL,"
                     + "Nick VARCHAR(30) NOT NULL,"
                     + "Name VARCHAR(30)NOT NULL,"
                     + "Email VARCHAR(30)NOT NULL,"
                     + "Password VARCHAR(30)NOT NULL,"
-                    + "isAdmin VARCHAR(5),"
-                    + "isOperator VARCHAR(5),"
-                    + "isLeagueowner VARCHAR(5),"
-                    + "isAdvertiser VARCHAR(5),"
-                    + "isActive VARCHAR(5),"
+                    + "UserType VARCHAR(30),"
+                    + "IsActive VARCHAR(5),"
                     + "Comment VARCHAR(50),"
                     + "AccountBalance SMALLINT,"
                     + "PRIMARY KEY(UserID))";
@@ -142,7 +139,7 @@ public class DatabaseManager implements iDatabaseManager {
     public void createTable() {
         try {
             statement = connection.createStatement();
-            statement.executeUpdate(CREATE_TABLE_ADV);
+            statement.executeUpdate(CREATE_TABLE_AU);
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -230,13 +227,9 @@ public class DatabaseManager implements iDatabaseManager {
     }
 
     public String getUserType(String nick) throws SQLException {
-        String userType = "";
         statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery(GET_USERTYPE + nick + "'");
-        while (resultSet.next()) {
-            userType = resultSet.getString(5); //Korrekt siffra? 
-        }
-        return userType;
+        ResultSet resultSet = statement.executeQuery(GET_USER_TYPE + nick + "'");
+        return resultSet.getString("UserType");
     }
 
     public String getName(String nick) throws SQLException {

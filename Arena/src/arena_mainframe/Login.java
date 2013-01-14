@@ -4,6 +4,8 @@
  */
 package arena_mainframe;
 
+import Logic.SingletonUser;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -14,8 +16,6 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Arrays;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -51,7 +51,7 @@ public class Login {
         }
 
         try {
-            BufferedImage m = ImageIO.read(new File("pictures\\arena.png"));
+            BufferedImage m = ImageIO.read(new File("pictures/arena.png"));
             JLabel jl = new JLabel(new ImageIcon(m));
             frame.add(jl);
         } catch (IOException ex) {
@@ -114,7 +114,8 @@ public class Login {
                     } else {
                         if (Arrays.equals(passField.getPassword(), dbPassword)) {
                             if(dbm.isActive(nick)){
-                            JOptionPane.showMessageDialog(null, "Replace with call to mainscreen");
+                                JOptionPane.showMessageDialog(null, "Replace with call to mainscreen");
+                                SingletonUser.getInstance(dbm.getUserID(nick), dbm.getName(nick), email, dbm.getUserType(nick), nick);
                             }else{
                                 JOptionPane.showMessageDialog(null, "Banned with reason:"
                                         + dbm.getComment(nick));
