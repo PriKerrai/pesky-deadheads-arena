@@ -7,8 +7,9 @@ package League;
 import java.util.ArrayList;
 import Game.Game;
 import java.util.Iterator;
-
 import Logic.LeagueOwner;
+import Logic.Player;
+import java.util.List;
 
 /**
  *
@@ -20,15 +21,15 @@ public class League {
     private String leagueName = "";
     private ArrayList players = new ArrayList();
     private Game game;
+    private Player player;
     private LeagueOwner leagueOwner;
-    private GameType gameType;
+    private List<Tournaments> tournamentList = new ArrayList<Tournaments>();
+    private List<Player> playerList = new ArrayList<Player>();
 
-    private ArrayList<Tournaments> tournamentList = new ArrayList<Tournaments>();
-    private Object tournaments;
-
-    public League(Game game, GameType gameType) {
+    public League(Game game, String leagueName, int leagueId) {
                 this.game = game;
-                this.gameType = gameType;
+                this.leagueName = leagueName;
+                this.leagueId = leagueId;
         }
 
     
@@ -44,9 +45,6 @@ public class League {
         return game;
     }
     
-    public void setLeagueName(String name) {
-        this.leagueName = name;
-    }
     public LeagueOwner getLeagueOwner() {
         return leagueOwner;
     }
@@ -61,10 +59,11 @@ public class League {
     public void addTournament(Tournaments tournament) {
                 this.tournamentList.add(tournament);
         }
-    
-    public GameType getGameMode() {
-                return gameType;
-        }
+
+    public void addPlayerToLeague(Player player) {
+                this.playerList.add(player);
+        
+    }
 
 
 }
