@@ -368,7 +368,6 @@ public class DatabaseManager implements iDatabaseManager {
         }
     }
 
-
     @Override
     public int getAccountBalance(String nick) throws SQLException {
         statement = connection.createStatement();
