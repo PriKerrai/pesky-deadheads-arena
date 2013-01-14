@@ -10,7 +10,7 @@ public class SingletonUser extends User {
 
     private static SingletonUser instance = null;
 
-    protected SingletonUser(int userID, String name, String email, String userType, String nick) {
+    private SingletonUser(int userID, String name, String email, String userType, String nick) {
         super(userID, name, email, userType, nick);
     }
 
