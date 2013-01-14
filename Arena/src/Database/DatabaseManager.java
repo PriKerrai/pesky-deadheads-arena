@@ -53,6 +53,8 @@ public class DatabaseManager implements iDatabaseManager {
     private static final String GET_HIGHEST_GAMEID = "SELECT TOP(1) GameID " +
             "FROM Game " +
             "ORDER BY GameID DESC";
+    private static final String GET_GAMENAME = "SELECT * FROM Game ORDER BY GameID ASC";
+    private static final String REMOVE_GAME = "DELETE  FROM Game WHERE Name ='";
 
     // ADVERTISEMENT
     private static final String INSERT_ADVERTISEMENT = "INSERT INTO Advertisement VALUES('";
@@ -195,10 +197,6 @@ public class DatabaseManager implements iDatabaseManager {
         }
     }
 
-    @Override
-    public ArrayList getGameName() throws SQLException {
-        return null;
-    }
 
     public void setActive(String nick, boolean active) throws SQLException {
         statement = connection.createStatement();
@@ -313,6 +311,25 @@ public class DatabaseManager implements iDatabaseManager {
         return false;
     }
 
+     public void removeGame(String gameName) throws SQLException {
+        statement = connection.createStatement();
+        statement.executeUpdate(REMOVE_GAME + gameName + "'"); 
+    }
+    
+    
+    public ArrayList getGameName() throws SQLException {
+        ArrayList <String> nameList = new ArrayList();
+        String name = "";
+        statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(GET_GAMENAME);
+
+        while (resultSet.next()) {
+            name = resultSet.getString(2);
+            nameList.add(name);
+        }
+        return nameList;
+    }
+    
     private int getNewUserID() {
         int count=0;
         try {
@@ -351,10 +368,6 @@ public class DatabaseManager implements iDatabaseManager {
         }
     }
 
-    @Override
-    public void removeGame(String gameName) throws SQLException {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
 
     @Override
     public int getAccountBalance(String nick) throws SQLException {
