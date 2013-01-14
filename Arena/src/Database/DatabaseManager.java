@@ -178,7 +178,7 @@ public class DatabaseManager implements iDatabaseManager {
             statement = connection.createStatement();
             statement.executeUpdate(INSERT_USER +"'" +getNewUserID()+ "','" + nick + "','" + name
                     + "','" + email + "','" + password + "','" + userType + "','"
-                    + isActive + "','" + comment + "');");
+                    + isActive + "','" + comment + "," + 0 + "');");
         } catch (SQLException e) {
             e.printStackTrace();
         }
