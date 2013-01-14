@@ -17,6 +17,5 @@ public class Player extends User {
     public Player(int userID, String name, String email, String nickName){
          super(userID, name, email, USER_TYPE_PLAYER, nickName);
     }
- 
 
 }
