@@ -1,15 +1,12 @@
 package GUI;
 
-import arena_mainframe.DatabaseManager;
-import arena_mainframe.iDatabaseManager;
-import sun.awt.HorizBagLayout;
-import sun.awt.OrientableFlowLayout;
+import Database.DatabaseManager;
+import Database.iDatabaseManager;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
