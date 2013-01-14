@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -32,7 +33,9 @@ public class DatabaseManager implements iDatabaseManager {
     private static final String INSERT_USER = "INSERT INTO ArenaUsers VALUES(";
     private static final String ADD_COMMENT = "UPDATE ArenaUsers SET Comment ='";
     //private static final String DROP_TABLE = "DROP TABLE ArenaUsers";
-    private static final String DROP_TABLE = "DROP TABLE Game";   
+    private static final String DROP_TABLE = "DROP TABLE Game";  
+    //private static final String DROP_TABLE = "DROP TABLE Tournament";   
+    //private static final String DROP_TABLE = "DROP TABLE Advertisement";   
     private static final String GET_ACTIVE = "SELECT * FROM ArenaUsers WHERE Nick = '";
     private static final String GET_NICK = "SELECT * FROM ArenaUsers WHERE Email = '";
     private static final String GET_EMAIL = "SELECT * FROM ArenaUsers WHERE Nick = '";
@@ -51,6 +54,9 @@ public class DatabaseManager implements iDatabaseManager {
     private static final String GET_HIGHEST_GAMEID = "SELECT TOP(1) GameID " +
 			"FROM Game " +
 			"ORDER BY GameID DESC";
+    private static final String GET_GAMENAME = "SELECT * FROM Game ORDER BY GameID ASC";
+    private static final String REMOVE_GAME = "DELETE  FROM Game WHERE Name ='";
+    
     
     //Advertisement
     private static final String INSERT_ADVERTISEMENT = "INSERT INTO Advertisement VALUES(";
@@ -104,7 +110,7 @@ public class DatabaseManager implements iDatabaseManager {
                     + "Description VARCHAR(100),"
                     + "MinPlayers SMALLINT NOT NULL,"
                     + "MaxPlayers SMALLINT NOT NULL,"
-                    + "Developer VARCHAR(30) NOT NULL"
+                    + "Developer VARCHAR(30) NOT NULL,"
                     + "JarPath VARCHAR(50) NOT NULL,"
                     + "PRIMARY KEY(GameID))";
 
@@ -146,7 +152,7 @@ public class DatabaseManager implements iDatabaseManager {
     public void createTable() {
         try {
             statement = connection.createStatement();
-            statement.executeUpdate(CREATE_TABLE_GAME);
+            statement.executeUpdate(CREATE_TABLE_ADV);
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -312,6 +318,26 @@ public class DatabaseManager implements iDatabaseManager {
         }
         return false;
     }
+    
+    public void removeGame(String gameName) throws SQLException {
+        statement = connection.createStatement();
+        statement.executeUpdate(REMOVE_GAME + gameName + "'"); 
+    }
+    
+    
+    public ArrayList getGameName() throws SQLException {
+        ArrayList <String> nameList = new ArrayList();
+        String name = "";
+        statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(GET_GAMENAME);
+
+        while (resultSet.next()) {
+            name = resultSet.getString(2);
+            nameList.add(name);
+        }
+        return nameList;
+    }
+    
     
     private int getNewUserID() {
         int count=0;
