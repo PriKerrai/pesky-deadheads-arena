@@ -6,6 +6,7 @@ package GUI;
 
 import Database.DatabaseManager;
 import Database.iDatabaseManager;
+import Logic.User;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -146,8 +147,7 @@ public class CreateAccount {
                                         
                                         //false,false,false,false,true =
                                         //isAdmin, isOperator, isLeaguowner, isAdvertiser, isActive
-                                        dbm.createUser(nickName, name, email, passwordString,
-                                                false,false,false,false,true, "");
+                                        dbm.createUser(nickName, name, email, passwordString, User.USER_TYPE_PLAYER, true, "");
                                         frame.dispose();
                                     } else {
                                         JOptionPane.showMessageDialog(null, "Passwords don't match, try again");

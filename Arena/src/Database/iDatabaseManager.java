@@ -15,8 +15,7 @@ public interface iDatabaseManager {
 
     // ArenaUser Functions
     public void createUser(String nick, String name, String email, String password,
-                           boolean isAdmin, boolean isOperator, boolean isLeagueowner, boolean isAdvertiser,
-                           boolean isActive, String comment) throws SQLException;
+                           String userType, boolean isActive, String comment) throws SQLException;
 
     public void setActive(String nick, boolean active)throws SQLException;
 

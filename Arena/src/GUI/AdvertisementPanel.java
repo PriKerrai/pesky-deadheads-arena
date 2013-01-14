@@ -2,6 +2,7 @@ package GUI;
 
 import Database.DatabaseManager;
 import Database.iDatabaseManager;
+import Logic.SingletonUser;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -10,6 +11,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 /**
  * Created with IntelliJ IDEA.
@@ -165,8 +167,13 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
         currentBalanceLabel.setText("$"+newBalance);
     }
 
-    public void updateBalance(String newBalance) {
-        currentBalanceLabel.setText("$"+newBalance);
+    private void updateBalance() {
+        try {
+            dbm.updateAccountBalance(SingletonUser.getInstance().getNickName(), Integer.parseInt(depositAmountTextField.getText()));
+            updateBalance(dbm.getAccountBalance(SingletonUser.getInstance().getNickName()));
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
@@ -181,7 +188,7 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
                 System.out.println("Functionality not yet implemented.");
             }
             else if (tmp == depositButton) {
-
+                updateBalance();
             }
         }
     }

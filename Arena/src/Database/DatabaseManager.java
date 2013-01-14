@@ -59,10 +59,10 @@ public class DatabaseManager implements iDatabaseManager {
     // ADVERTISEMENT
     private static final String INSERT_ADVERTISEMENT = "INSERT INTO Advertisement VALUES('";
     private static final String UPDATE_ADVERTISEMENT = "UPDATE Advertisement SET ";
-    private static final String UPDATE_BALANCE = "UPDATE ArenaUsers SET AccountBalance ='";
+    private static final String UPDATE_BALANCE = "UPDATE ArenaUsers SET AccountBalance = '";
 
     private static final String GET_ADVERTISEMENT = "SELECT * FROM Advertisement WHERE ";
-    private static final String GET_BALANCE = "SELECT AccountBalance FROM ArenaUsers WHERE Nick ='";
+    private static final String GET_BALANCE = "SELECT AccountBalance FROM ArenaUsers WHERE Nick = '";
 
     private Connection connection;
     private Statement statement;
@@ -173,13 +173,11 @@ public class DatabaseManager implements iDatabaseManager {
 
 
     public void createUser(String nick, String name, String email, String password,
-                           boolean isAdmin, boolean isOperator, boolean isLeagueowner, boolean isAdvertiser,
-                           boolean isActive, String comment) throws SQLException {
+                           String userType, boolean isActive, String comment) throws SQLException {
         try {
             statement = connection.createStatement();
             statement.executeUpdate(INSERT_USER +"'" +getNewUserID()+ "','" + nick + "','" + name
-                    + "','" + email + "','" + password + "','"
-                    + isAdmin + "','" + isOperator + "','" + isLeagueowner + "','" + isAdvertiser + "','"
+                    + "','" + email + "','" + password + "','" + userType + "','"
                     + isActive + "','" + comment + "');");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -378,6 +376,7 @@ public class DatabaseManager implements iDatabaseManager {
     @Override
     public void updateAccountBalance(String nick, int amount) throws SQLException {
         try {
+            amount = amount + getAccountBalance(nick);
             statement = connection.createStatement();
             statement.executeUpdate(UPDATE_BALANCE + amount + "'");
         } catch (SQLException e) {

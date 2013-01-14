@@ -21,7 +21,7 @@ import javax.swing.*;
  *
  * @author Karl
  */
-public class Arena_MainFrame extends JFrame {
+public class ArenaMainFrame extends JFrame {
 
     private Dimension frameSize = new Dimension(1020, 800);
     private String title = "Arena";
@@ -34,7 +34,7 @@ public class Arena_MainFrame extends JFrame {
     
     JPanel mainPanel = new JPanel();
     
-    public Arena_MainFrame() {
+    public ArenaMainFrame() {
         init();
     }
     
@@ -52,9 +52,9 @@ public class Arena_MainFrame extends JFrame {
         setPage(games);
         //setPage(newsPanel);
 
-        AdministrationPanel testAdministrationPanel = new AdministrationPanel(this.getWidth()+2, this.getY());
-        AdvertisementPanel testAdvertisementPanel =
-                new AdvertisementPanel(this.getWidth()+2, testAdministrationPanel.getHeight()+5);
+        //AdministrationPanel testAdministrationPanel = new AdministrationPanel(this.getWidth()+2, this.getY());
+        //AdvertisementPanel testAdvertisementPanel =
+        //        new AdvertisementPanel(this.getWidth()+2, testAdministrationPanel.getHeight()+5);
     }
     
     public void setPage(JPanel pnl){

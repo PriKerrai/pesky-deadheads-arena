@@ -4,7 +4,6 @@
  */
 package League;
 
-import arena_mainframe.Tournament;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -14,7 +13,7 @@ import java.util.Iterator;
  */
 public class ListOfTournaments {
     private static ListOfTournaments instance = null;
-    private ArrayList<Tournament> tournaments = new ArrayList<Tournament>();
+    private ArrayList<Tournaments> tournaments = new ArrayList<Tournaments>();
     
     private ListOfTournaments() {        
     }
@@ -26,7 +25,7 @@ public class ListOfTournaments {
         return instance;
     }
     
-    public Iterator<Tournament> getTournamentList() {
+    public Iterator<Tournaments> getTournamentList() {
         return this.tournaments.listIterator();
     }
     
