@@ -4,9 +4,9 @@
  */
 package GUI;
 
+import Database.DatabaseManager;
+import Database.iDatabaseManager;
 import Logic.SingletonUser;
-import arena_mainframe.DatabaseManager;
-import arena_mainframe.iDatabaseManager;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

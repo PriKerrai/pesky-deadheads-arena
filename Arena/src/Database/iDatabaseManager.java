@@ -20,6 +20,8 @@ public interface iDatabaseManager {
 
     public void setActive(String nick, boolean active)throws SQLException;
 
+    public int getUserID(String nick) throws SQLException;
+
     public String getNick(String email)throws SQLException;
 
     public String getEmail(String nick)throws SQLException;
