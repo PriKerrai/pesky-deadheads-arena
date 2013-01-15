@@ -44,7 +44,8 @@ public class NewsPanel extends JPanel {
         add(HTMLPanel);
         HTMLPanel.setEditable(false);
         HTMLPanel.setBorder(new EmptyBorder(10, 10, 10, 10));  // 10px Padding
-        HTMLPanel.setBackground(new Color(238, 238, 238));
+        HTMLPanel.setBackground(Color.WHITE);
+        setBackground(Color.WHITE);
     }
 
     public void setPage(String HTMLurl) {

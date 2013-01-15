@@ -33,6 +33,7 @@ public class ArenaMainFrame extends JFrame {
     JMenuItem exitItem = new JMenuItem("Exit");
 
     public ArenaMainFrame() {
+        setLayout(new BorderLayout());
         init();
     }
 
@@ -58,20 +59,18 @@ public class ArenaMainFrame extends JFrame {
         advItem.addActionListener(myListener);
         exitItem.addActionListener(myListener);
 
-        mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        //mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        mainPanel.setLayout(new BorderLayout());
         add(mainPanel, BorderLayout.CENTER);
 
-        setPage(games);
-        //setPage(newsPanel);
+        //setPage(games);
+        setPage(newsPanel);
 
-        AdministrationPanel testAdministrationPanel = new AdministrationPanel(this.getWidth() + 2, this.getY());
-        AdvertisementPanel testAdvertisementPanel =
-                new AdvertisementPanel(this.getWidth() + 2, testAdministrationPanel.getHeight() + 5);
     }
 
     public void setPage(JPanel pnl) {
         mainPanel.removeAll();
-        mainPanel.add(pnl);
+        mainPanel.add(pnl, BorderLayout.CENTER);
         mainPanel.revalidate();
     }
 
