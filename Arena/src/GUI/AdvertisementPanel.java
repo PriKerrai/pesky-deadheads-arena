@@ -33,6 +33,7 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
     private JPanel depositPanel = new JPanel();
     private JTextField depositAmountTextField = new JTextField(4);
     private JButton depositButton = new JButton("Deposit");
+    private JButton clearBalanceButton = new JButton("Clear Balance");
 
     // Center area
     private DefaultTableModel activeAdsTableModel = new DefaultTableModel(new String[] {"Banner", "League/Tourn.", "Time Left"}, 50);
@@ -96,15 +97,17 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
         balancePanel.add(currentBalanceLabel);
         northPanel.add(balancePanel);
         try {
-            currentBalanceLabel.setText(""+dbm.getAccountBalance(SingletonUser.getInstance().getNickName()));
+            currentBalanceLabel.setText("$"+dbm.getAccountBalance(SingletonUser.getInstance().getNickName()));
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
         depositPanel.add(depositAmountTextField);
         depositPanel.add(depositButton);
+        depositPanel.add(clearBalanceButton);
         northPanel.add(depositPanel);
         depositButton.addActionListener(this);
+        clearBalanceButton.addActionListener(this);
 
         northPanel.setVisible(true);
     }
@@ -175,8 +178,19 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
 
     private void updateBalance() {
         try {
-            dbm.updateAccountBalance(SingletonUser.getInstance().getNickName(), Integer.parseInt(depositAmountTextField.getText()));
+            dbm.updateAccountBalance(SingletonUser.getInstance().getNickName(),
+                                     dbm.getAccountBalance(SingletonUser.getInstance().getNickName()) +
+                                     Integer.parseInt(depositAmountTextField.getText()));
             updateBalance(dbm.getAccountBalance(SingletonUser.getInstance().getNickName()));
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private void clearBalance() {
+        try {
+            dbm.updateAccountBalance(SingletonUser.getInstance().getNickName(), 0);
+            updateBalance(0);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -195,6 +209,9 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
             }
             else if (tmp == depositButton) {
                 updateBalance();
+            }
+            else if (tmp == clearBalanceButton) {
+                clearBalance();
             }
         }
     }

@@ -387,7 +387,6 @@ public class DatabaseManager implements iDatabaseManager {
     @Override
     public void updateAccountBalance(String nick, int amount) throws SQLException {
         try {
-            amount = amount + getAccountBalance(nick);
             statement = connection.createStatement();
             statement.executeUpdate(UPDATE_BALANCE + amount + "'");
         } catch (SQLException e) {
