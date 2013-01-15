@@ -251,13 +251,13 @@ public class DatabaseManager implements iDatabaseManager {
     }
 
     public String getUserType(String nick) throws SQLException {
-        String userType;
+        String userType = "";
         statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(GET_USER_TYPE + nick + "'");
         while (resultSet.next()) {
                userType = resultSet.getString("UserType");
         }
-        return resultSet.getString("UserType");
+        return userType;
     }
 
     public String getName(String nick) throws SQLException {
@@ -267,7 +267,6 @@ public class DatabaseManager implements iDatabaseManager {
         while (resultSet.next()) {
             name = resultSet.getString("Name");
         }
-        System.out.println("GetName");
         return name;
     }
 
