@@ -4,6 +4,10 @@
  */
 package Game;
 
+import League.Match;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Martin
@@ -18,6 +22,11 @@ public class Game {
     private String name = "";
     //private String PLACEHOLDER = "";
     private String description = "";
+    private List<String> players = new ArrayList<String>();
+    private GameState gs;
+    private GameState gameState;
+
+
     
     
     
@@ -77,6 +86,35 @@ public class Game {
         this.minPlayer = minPlayer;
         this.maxPlayer = maxPlayer;
     }
+    
+    private void setPlayers(Match match) {
+        players = match.getPlayers();
+    }
+    
+     public void startGame(Match match) {
+        setPlayers(match);
+        System.out.println("Game started");
+        try {
+            Thread.sleep(1000);
+            sendGamestate(match);
+            System.out.println("Gamestate sent");
+            Thread.sleep(1000);
+            sendGamestate(match);
+            System.out.println("Gamestate sent");
+            Thread.sleep(1000);
+            System.out.println("Game is over");
+            //Save result of game TODO
+        } catch (InterruptedException e) {
+        }
+
+    }
+     
+     public void sendGamestate(Match match) {
+        gameState = new GameState(match);
+        //Store state TODO
+    }
+
+
 
     
 }

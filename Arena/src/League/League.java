@@ -19,12 +19,10 @@ public class League {
     
     private int leagueId;
     private String leagueName = "";
-    private ArrayList players = new ArrayList();
     private Game game;
     private Player player;
     private LeagueOwner leagueOwner;
-    private List<Tournaments> tournamentList = new ArrayList<Tournaments>();
-    private List<Player> playerList = new ArrayList<Player>();
+    private ArrayList playerList = new ArrayList();
 
     public League(Game game, String leagueName, int leagueId) {
                 this.game = game;
@@ -51,18 +49,13 @@ public class League {
     public void setLeagueOwner(LeagueOwner leagueOwner) {
         this.leagueOwner = leagueOwner;
     }
-    
-    public Iterator<Tournaments> getTournaments() {
-        return this.tournamentList.listIterator();
-    }
-    
-    public void addTournament(Tournaments tournament) {
-                this.tournamentList.add(tournament);
-        }
 
     public void addPlayerToLeague(Player player) {
-                this.playerList.add(player);
-        
+                playerList.add(player.getUserID());
+    }
+    
+    public void playMatch(Match match) {
+        game.startGame(match);
     }
 
 
