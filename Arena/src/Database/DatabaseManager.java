@@ -218,7 +218,7 @@ public class DatabaseManager implements iDatabaseManager {
         statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(GET_NICK + email + "'");
         while (resultSet.next()) {
-            nick = resultSet.getString(1);
+            nick = resultSet.getString("Nick");
         }
         return nick;
     }
@@ -228,7 +228,7 @@ public class DatabaseManager implements iDatabaseManager {
         statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(GET_EMAIL + nick + "'");
         while (resultSet.next()) {
-            email = resultSet.getString(3);
+            email = resultSet.getString("Email");
         }
         return email;
     }
@@ -238,7 +238,7 @@ public class DatabaseManager implements iDatabaseManager {
         statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(GET_PASSWORD + email + "'");
         while (resultSet.next()) {
-            password = resultSet.getString(4);//Korrekt siffra? 
+            password = resultSet.getString("Password");
         }
         char[] charPassword = password.toCharArray();
         return charPassword;
@@ -256,7 +256,7 @@ public class DatabaseManager implements iDatabaseManager {
         ResultSet resultSet = statement.executeQuery(GET_NAME + nick + "'");
 
         while (resultSet.next()) {
-            name = resultSet.getString(2);
+            name = resultSet.getString("Name");
         }
         return name;
     }
@@ -267,7 +267,7 @@ public class DatabaseManager implements iDatabaseManager {
         ResultSet resultSet = statement.executeQuery(GET_NAME + nick + "'");
 
         while (resultSet.next()) {
-            comment = resultSet.getString(7);
+            comment = resultSet.getString("Comment");
         }
         return comment;
     }
@@ -278,7 +278,7 @@ public class DatabaseManager implements iDatabaseManager {
         statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(GET_ACTIVE + nick + "'");
         while (resultSet.next()) {
-            activeString = resultSet.getString(6); //Korrekt siffra? 
+            activeString = resultSet.getString("IsActive"); 
         }
         return activeString.equals(TRUE);
     }
@@ -289,7 +289,7 @@ public class DatabaseManager implements iDatabaseManager {
         statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery("SELECT * FROM ArenaUsers");
         while (resultSet.next()) {
-            if (nick.equals(nick1 = resultSet.getString(1))) {
+            if (nick.equals(nick1 = resultSet.getString("Nick"))) {
                 return true;
             }
         }
@@ -302,7 +302,7 @@ public class DatabaseManager implements iDatabaseManager {
         statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery("SELECT * FROM ArenaUsers");
         while (resultSet.next()) {
-            if (email.equals(email1 = resultSet.getString(3))) {
+            if (email.equals(email1 = resultSet.getString("Email"))) {
                 return true;
             }
         }
@@ -322,7 +322,7 @@ public class DatabaseManager implements iDatabaseManager {
         ResultSet resultSet = statement.executeQuery(GET_GAMENAME);
 
         while (resultSet.next()) {
-            name = resultSet.getString(2);
+            name = resultSet.getString("Name");
             nameList.add(name);
         }
         return nameList;
@@ -334,7 +334,7 @@ public class DatabaseManager implements iDatabaseManager {
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(GET_HIGHEST_ID);
             while(resultSet.next())
-                count = resultSet.getInt(1);
+                count = resultSet.getInt("UserID");
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -347,7 +347,7 @@ public class DatabaseManager implements iDatabaseManager {
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(GET_HIGHEST_GAMEID);
             while(resultSet.next())
-                count = resultSet.getInt(1);
+                count = resultSet.getInt("GameID");
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
         }
