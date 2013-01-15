@@ -31,7 +31,7 @@ public class AdministrationPanel extends JFrame {
     private void initialize() {
         initializeMainPanel();
         initializeBanArea();
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         pack();
         setVisible(true);
     }
