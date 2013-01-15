@@ -118,6 +118,7 @@ public class Login {
                             if(dbm.isActive(nick)) {
                                 SingletonUser.getInstance(dbm.getUserID(nick), dbm.getName(nick), email, dbm.getUserType(nick), nick);
                                 ArenaMainFrame amf = new ArenaMainFrame();
+                                frame.setVisible(false);
                             }else{
                                 JOptionPane.showMessageDialog(null, "Banned with reason:"
                                         + dbm.getComment(nick));
