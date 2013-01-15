@@ -388,7 +388,7 @@ public class DatabaseManager implements iDatabaseManager {
     public void updateAccountBalance(String nick, int amount) throws SQLException {
         try {
             statement = connection.createStatement();
-            statement.executeUpdate(UPDATE_BALANCE + amount + "'");
+            statement.executeUpdate(UPDATE_BALANCE + amount + "' WHERE Nick = '" + nick + "'");
         } catch (SQLException e) {
             e.printStackTrace();
         }
