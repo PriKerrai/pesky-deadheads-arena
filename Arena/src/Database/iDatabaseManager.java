@@ -55,7 +55,7 @@ public interface iDatabaseManager {
     /**
      * @param bannerPath Make sure that the path <u>only</u> includes the image name + file extension
      */
-    public void createAdvertisement(int adID, int tournamentID, int userID, String bannerPath, int duration, String displayOnArena) throws SQLException;
+    public void createAdvertisement(int tournamentID, int userID, String bannerPath, int duration, String displayOnArena) throws SQLException;
 
     //public int getBanner(int ID) throws SQLException;
 
@@ -65,9 +65,17 @@ public interface iDatabaseManager {
 
     //public boolean displaysOnArena(int ID) throws SQLException;
 
+
+    // GAME FUNCTIONS //
+
     public void removeGame(String gameName) throws SQLException;
 
     public void addGame(String gameName, String devName, String desc, int minPlayer,
             int maxPlayer, String jarPath) throws SQLException;
     public ArrayList getGameName() throws SQLException;
+
+
+    // TOURNAMENT FUNCTIONS //
+
+    public void createTournament(int freePlayerSpots, int freeAdSpots, int gameID) throws SQLException;
 }

@@ -65,6 +65,11 @@ public class DatabaseManager implements iDatabaseManager {
 
     private static final String GET_ADVERTISEMENT = "SELECT * FROM Advertisement WHERE ";
     private static final String GET_BALANCE = "SELECT AccountBalance FROM ArenaUsers WHERE Nick = '";
+    private static final String GET_HIGHEST_ADID = "SELECT TOP(1) AdID FROM Advertisement ORDER BY AdID DESC";
+
+    // TOURNAMENT
+    private static final String INSERT_TOURNAMENT = "INSERT INTO Tournament VALUES('";
+    private static final String GET_HIGHEST_TOURNID = "SELECT TOP(1) TournamentID FROM Tournament ORDER BY TournamentID DESC";
 
     private Connection connection;
     private Statement statement;
@@ -361,13 +366,39 @@ public class DatabaseManager implements iDatabaseManager {
         return count+1;
     }
 
+    private int getNewAdID() {
+        int count=0;
+        try {
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(GET_HIGHEST_ADID);
+            while(resultSet.next())
+                count = resultSet.getInt("AdID");
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count+1;
+    }
+
+    private int getNewTournID() {
+        int count=0;
+        try {
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(GET_HIGHEST_TOURNID);
+            while(resultSet.next())
+                count = resultSet.getInt("TournamentID");
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count+1;
+    }
+
     // ADVERTISEMENT FUNCTIONS //
 
     @Override
-    public void createAdvertisement(int adID, int tournamentID, int userID, String bannerPath, int duration, String displayOnArena) throws SQLException {
+    public void createAdvertisement(int tournamentID, int userID, String bannerPath, int duration, String displayOnArena) throws SQLException {
         try {
             statement = connection.createStatement();
-            statement.executeUpdate(INSERT_ADVERTISEMENT + adID + "','" + tournamentID + "','" + userID + "','pictures/" + bannerPath + "','" + duration + "','" + displayOnArena + "');");
+            statement.executeUpdate(INSERT_ADVERTISEMENT + getNewAdID() + "','" + tournamentID + "','" + userID + "','pictures/" + bannerPath + "','" + duration + "','" + displayOnArena + "');");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -389,6 +420,19 @@ public class DatabaseManager implements iDatabaseManager {
         try {
             statement = connection.createStatement();
             statement.executeUpdate(UPDATE_BALANCE + amount + "' WHERE Nick = '" + nick + "'");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    // TOURNAMENT FUNCTIONS
+
+    @Override
+    public void createTournament(int freePlayerSpots, int freeAdSpots, int gameID) {
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate(INSERT_TOURNAMENT + getNewTournID() + "','" + freePlayerSpots + "','" + freeAdSpots + "','" + gameID + "');");
         } catch (SQLException e) {
             e.printStackTrace();
         }
