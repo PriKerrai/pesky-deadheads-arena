@@ -59,13 +59,10 @@ public class ArenaMainFrame extends JFrame {
         advItem.addActionListener(myListener);
         exitItem.addActionListener(myListener);
 
-        //mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
         mainPanel.setLayout(new BorderLayout());
         add(mainPanel, BorderLayout.CENTER);
 
-        //setPage(games);
         setPage(newsPanel);
-
     }
 
     public void setPage(JPanel pnl) {
