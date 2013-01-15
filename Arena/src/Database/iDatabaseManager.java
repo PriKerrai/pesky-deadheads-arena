@@ -6,6 +6,7 @@ package Database;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -77,7 +78,11 @@ public interface iDatabaseManager {
 
     // TOURNAMENT FUNCTIONS //
 
-    public void createTournament(int freePlayerSpots, int freeAdSpots, int gameID) throws SQLException;
+    public void createTournament(String description, int freePlayerSpots, int freeAdSpots, int gameID) throws SQLException;
 
     public void removeTournament(int tournamentID) throws SQLException;
+
+    public List getTournamentList() throws SQLException;
+
+    //public
 }

@@ -12,6 +12,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -131,6 +133,16 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
         JPanel northPanel = new JPanel();
         northPanel.setLayout(new BorderLayout());
         northPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1), "Placement"));
+        try {
+            List tournamentList = dbm.getTournamentList();
+            Iterator iterator = tournamentList.iterator();
+            while(iterator.hasNext()) {
+                int tmp = (Integer)iterator.next();
+                //dbm.get
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         advertisementSchemePanel.add(northPanel, BorderLayout.NORTH);
         northPanel.add(activeTournamentsScrollPane, BorderLayout.NORTH);
 

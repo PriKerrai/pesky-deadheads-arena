@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -34,7 +35,7 @@ public class DatabaseManager implements iDatabaseManager {
     private static final String UPDATE_ACTIVE = "UPDATE ArenaUsers SET Active ='";
     private static final String INSERT_USER = "INSERT INTO ArenaUsers VALUES(";
     private static final String ADD_COMMENT = "UPDATE ArenaUsers SET Comment ='";
-    private static final String DROP_TABLE = "DROP TABLE ArenaUsers";
+    private static final String DROP_TABLE = "DROP TABLE ";
 
     private static final String GET_ACTIVE = "SELECT * FROM ArenaUsers WHERE Nick = '";
     private static final String GET_NICK = "SELECT * FROM ArenaUsers WHERE Email = '";
@@ -98,11 +99,13 @@ public class DatabaseManager implements iDatabaseManager {
                     + "TimeLeft SMALLINT NOT NULL,"
                     + "DisplayOnArena VARCHAR(5),"
                     + "PRIMARY KEY(AdID),"
+                    + "FOREIGN KEY(AdvertiserID) references ArenaUsers(UserID),"
                     + "FOREIGN KEY(TournamentID) references Tournament(TournamentID))";
 
     private static final String CREATE_TABLE_TOURN =
             "CREATE TABLE Tournament("
                     + "TournamentID SMALLINT NOT NULL,"
+                    + "Description VARCHAR(50) NOT NULL,"
                     + "FreePlayerSpots SMALLINT NOT NULL,"
                     + "FreeAdSpots SMALLINT NOT NULL,"
                     + "GameID SMALLINT NOT NULL,"
@@ -158,7 +161,7 @@ public class DatabaseManager implements iDatabaseManager {
     public void createTable() {
         try {
             statement = connection.createStatement();
-            statement.executeUpdate(CREATE_TABLE_GAME);
+            statement.executeUpdate(CREATE_TABLE_ADV);
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -430,10 +433,10 @@ public class DatabaseManager implements iDatabaseManager {
     // TOURNAMENT FUNCTIONS
 
     @Override
-    public void createTournament(int freePlayerSpots, int freeAdSpots, int gameID) {
+    public void createTournament(String description, int freePlayerSpots, int freeAdSpots, int gameID) {
         try {
             statement = connection.createStatement();
-            statement.executeUpdate(INSERT_TOURNAMENT + getNewTournID() + "','" + freePlayerSpots + "','" + freeAdSpots + "','" + gameID + "');");
+            statement.executeUpdate(INSERT_TOURNAMENT + getNewTournID() + "','" + description + "','" + freePlayerSpots + "','" + freeAdSpots + "','" + gameID + "');");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -447,5 +450,21 @@ public class DatabaseManager implements iDatabaseManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public List getTournamentList() {
+        List<Integer> tournamentList = new ArrayList<Integer>();
+        try {
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT TournamentID FROM Tournament");
+            while (resultSet.next()) {
+                tournamentList.add(resultSet.getInt("TournamentID"));
+            }
+            return tournamentList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return tournamentList;
     }
 }
