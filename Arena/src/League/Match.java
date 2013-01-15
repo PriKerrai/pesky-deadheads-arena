@@ -11,10 +11,7 @@ public class Match {
     private int noOfPlayers;
     private int matchId;
 
-    public Match() {
-    }
-
-    public void addPlayer(int noOfPlayers, int id) {
+    public void Match(int noOfPlayers, int id) {
         this.noOfPlayers = noOfPlayers;
         this.matchId = matchId;
         players = new ArrayList<String>();

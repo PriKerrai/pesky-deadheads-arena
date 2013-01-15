@@ -10,6 +10,7 @@ import java.util.Iterator;
 import Logic.LeagueOwner;
 import Logic.Player;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -18,11 +19,13 @@ import java.util.List;
 public class League {
     
     private int leagueId;
-    private String leagueName = "";
+    private String leagueName;
     private Game game;
     private Player player;
     private LeagueOwner leagueOwner;
     private ArrayList playerList = new ArrayList();
+    private TournamentStyle tournamentStyle = new TournamentStyle(2);
+
 
     public League(Game game, String leagueName, int leagueId) {
                 this.game = game;
@@ -57,6 +60,20 @@ public class League {
     public void playMatch(Match match) {
         game.startGame(match);
     }
+    
+    public void setTournamentStyle(TournamentStyle tournamentStyle){
+        this.tournamentStyle = tournamentStyle;
+    }
+    
+    public int getNumberOfPlayers() {
+        return tournamentStyle.noOfPlayers();
+    }
+    
+    public Map getTournamentScheme(ArrayList players) {
+        return tournamentStyle.generateMatchScheme(players);
+    }
+
+
 
 
 }

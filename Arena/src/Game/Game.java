@@ -14,59 +14,35 @@ import java.util.List;
  */
 public class Game {
     
-    private static int gameId = 0;
-    private int idNumber = 0;
-    private int minPlayer = 0;
-    private int maxPlayer = 0;
-    private String id = "";
-    private String name = "";
-    //private String PLACEHOLDER = "";
+    private static int gameId;
+    private int idNumber;
+    private int minPlayer = 2;
+    private int maxPlayer = 2;
+    private String gameName;
     private String description = "";
     private List<String> players = new ArrayList<String>();
     private GameState gs;
     private GameState gameState;
 
+    public Game(String gameName, int gameId) {
+        this.gameName = gameName;
+        this.gameId = gameId;
+    }
+    
+    public String getGameName() {
+        return gameName;
+    }
 
-    
-    
-    
-    public Game(String name) {
-        this.name = name;
-        gameId++;
-        this.id = getNewId(name);
-        this.idNumber = gameId;
+    public int getGameId() {
+        return this.gameId;
     }
     
-    public Game(String name, String PLACEHOLDER) {
-        this.name = name;
-        //this.PLACEHOLDER = PLACEHOLDER;
-        gameId++;
-        this.id = getNewId(name);
-        this.idNumber = gameId;
+    public int getMinPlayers() {
+        return minPlayer;
     }
-    
-    /* public String getPLACEHOLDER {
-    return PLACEHOLDER
-    } */
-    
-    public String getId() {
-        return this.id;
+    public int getMaxPlayers() {
+        return maxPlayer;
     }
-    
-    private String getNewId(String name) {
-        String newId = name.toLowerCase();
-        newId.replace(' ', '_');
-        return newId + "_" + this.idNumber;
-    }
-    
-    public String getName() {
-        return this.name;
-    }
-    
-    public void setName(String name) {
-        this.name = name;
-        this.id = getNewId(name);
-     }
 
     public String getDescription() {
         return this.description;
@@ -76,12 +52,7 @@ public class Game {
         this.description = description;
     }
 
-    public int getMinPlayers() {
-        return minPlayer;
-    }
-    public int getMaxPlayers() {
-        return maxPlayer;
-    }
+    
     public void setNumberOfPlayers(int minPlayer, int maxPlayer) {
         this.minPlayer = minPlayer;
         this.maxPlayer = maxPlayer;
@@ -96,11 +67,13 @@ public class Game {
         System.out.println("Game started");
         try {
             Thread.sleep(1000);
+            System.out.println("Sending State to opponent");
             sendGamestate(match);
-            System.out.println("Gamestate sent");
+            System.out.println("Opponent revieved state");
             Thread.sleep(1000);
+            System.out.println("Sending State to opponent");
             sendGamestate(match);
-            System.out.println("Gamestate sent");
+            System.out.println("Opponent revieved state");
             Thread.sleep(1000);
             System.out.println("Game is over");
             //Save result of game TODO

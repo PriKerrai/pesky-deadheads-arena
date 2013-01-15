@@ -8,7 +8,7 @@ public class GameState {
 
     private int state;
 
-    public GameState(Match m) {
+    public GameState(Match match) {
       createGamestate();
     }
 
