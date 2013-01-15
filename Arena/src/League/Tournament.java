@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import Logic.Player;
 
-public class Tournaments {
+public class Tournament {
     private String tournamentName = "";
     private int tournamentId;
     private Game game;
@@ -15,7 +15,7 @@ public class Tournaments {
     private Match match;
 
    
-    public Tournaments(int tournamentId, String name, Game game) {
+    public Tournament(int tournamentId, String name, Game game) {
         this.tournamentId = tournamentId;
         this.tournamentName = name;
         this.game = game;
