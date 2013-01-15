@@ -27,10 +27,12 @@ public class ArenaMainFrame extends JFrame {
     JPanel mainPanel = new JPanel();
     JMenuBar menuBar = new JMenuBar();
     JMenu fileMenu = new JMenu("File");
+    JMenuItem newsItem = new JMenuItem("News");
     JMenuItem handleItem = new JMenuItem("Handle Game");
     JMenuItem adminItem = new JMenuItem("Admin panel");
     JMenuItem advItem = new JMenuItem("Adv. controlpanel");
     JMenuItem exitItem = new JMenuItem("Exit");
+    JMenuItem gameItem = new JMenuItem("Games");
 
     public ArenaMainFrame() {
         setLayout(new BorderLayout());
@@ -47,6 +49,8 @@ public class ArenaMainFrame extends JFrame {
         setJMenuBar(menuBar);
 
         menuBar.add(fileMenu);
+        fileMenu.add(newsItem);
+        fileMenu.add(gameItem);
         fileMenu.add(handleItem);
         fileMenu.add(adminItem);
         fileMenu.add(advItem);
@@ -54,6 +58,8 @@ public class ArenaMainFrame extends JFrame {
 
         MyListener myListener = new MyListener();
         
+        newsItem.addActionListener(myListener);
+        gameItem.addActionListener(myListener);
         handleItem.addActionListener(myListener);
         adminItem.addActionListener(myListener);
         advItem.addActionListener(myListener);
@@ -62,7 +68,12 @@ public class ArenaMainFrame extends JFrame {
         mainPanel.setLayout(new BorderLayout());
         add(mainPanel, BorderLayout.CENTER);
 
+        AdministrationPanel testAdministrationPanel = new AdministrationPanel(this.getWidth() + 2, this.getY());
+        AdvertisementPanel testAdvertisementPanel =
+                new AdvertisementPanel(this.getWidth() + 2, testAdministrationPanel.getHeight() + 5);
+
         setPage(newsPanel);
+
     }
 
     public void setPage(JPanel pnl) {
@@ -85,6 +96,10 @@ public class ArenaMainFrame extends JFrame {
                 AdministrationPanel ap = new AdministrationPanel();
             } else if (source.equals(advItem)) {
                 AdvertisementPanel ap = new AdvertisementPanel();
+            } else if(source.equals(games)){
+                setPage(games);
+            } else if(source.equals(newsItem)){
+                setPage(newsPanel);
             } else {
                 System.exit(0);
             }
