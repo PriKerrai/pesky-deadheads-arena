@@ -10,6 +10,9 @@ public class Tournament {
     private String tournamentName = "";
     private int tournamentId;
     private Game game;
+    private int freePlayerSpots;
+    private int freeAdSpots;
+
     private ArrayList<Match> matchList = new ArrayList<Match>();
     private ArrayList players = new ArrayList();
     private Match match;
