@@ -4,7 +4,7 @@
  */
 package GUI;
 
-import Game.HandleGame;
+import League.HandleGame;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;

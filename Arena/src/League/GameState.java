@@ -1,4 +1,4 @@
-package Game;
+package League;
 
 import League.Match;
 import java.util.Random;

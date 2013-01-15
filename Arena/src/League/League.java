@@ -5,7 +5,6 @@
 package League;
 
 import java.util.ArrayList;
-import Game.Game;
 import java.util.Iterator;
 import Logic.LeagueOwner;
 import Logic.Player;

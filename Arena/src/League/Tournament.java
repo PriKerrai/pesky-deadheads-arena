@@ -1,6 +1,5 @@
 package League;
 
-import Game.Game;
 import League.Match;
 import java.util.ArrayList;
 import java.util.Iterator;
