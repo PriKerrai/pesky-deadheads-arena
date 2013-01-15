@@ -69,6 +69,7 @@ public class DatabaseManager implements iDatabaseManager {
 
     // TOURNAMENT
     private static final String INSERT_TOURNAMENT = "INSERT INTO Tournament VALUES('";
+    private static final String REMOVE_TOURNAMENT = "DELETE FROM Tournament WHERE TournamentID = '";
     private static final String GET_HIGHEST_TOURNID = "SELECT TOP(1) TournamentID FROM Tournament ORDER BY TournamentID DESC";
 
     private Connection connection;
@@ -438,4 +439,13 @@ public class DatabaseManager implements iDatabaseManager {
         }
     }
 
+    @Override
+    public void removeTournament(int tournamentID) {
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate(REMOVE_TOURNAMENT + tournamentID + "'");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

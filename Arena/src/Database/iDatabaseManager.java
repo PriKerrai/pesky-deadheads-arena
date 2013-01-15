@@ -78,4 +78,6 @@ public interface iDatabaseManager {
     // TOURNAMENT FUNCTIONS //
 
     public void createTournament(int freePlayerSpots, int freeAdSpots, int gameID) throws SQLException;
+
+    public void removeTournament(int tournamentID) throws SQLException;
 }
