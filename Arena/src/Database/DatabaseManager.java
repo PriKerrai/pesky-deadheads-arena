@@ -1,5 +1,6 @@
 package Database;
 
+import League.Tournament;
 import com.sun.corba.se.impl.logging.ORBUtilSystemException;
 
 import java.sql.Connection;
@@ -70,6 +71,8 @@ public class DatabaseManager implements iDatabaseManager {
 
     // TOURNAMENT
     private static final String INSERT_TOURNAMENT = "INSERT INTO Tournament VALUES('";
+    private static final String GET_TOURNAMENT = "SELECT * FROM Tournament WHERE TournamentID = '";
+    private static final String GET_ALL_TOURNAMENTID = "SELECT TournamentID FROM Tournament";
     private static final String REMOVE_TOURNAMENT = "DELETE FROM Tournament WHERE TournamentID = '";
     private static final String GET_HIGHEST_TOURNID = "SELECT TOP(1) TournamentID FROM Tournament ORDER BY TournamentID DESC";
 
@@ -430,6 +433,10 @@ public class DatabaseManager implements iDatabaseManager {
     }
 
 
+    // GAME FUNCTIONS
+
+
+
     // TOURNAMENT FUNCTIONS
 
     @Override
@@ -457,14 +464,43 @@ public class DatabaseManager implements iDatabaseManager {
         List<Integer> tournamentList = new ArrayList<Integer>();
         try {
             statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT TournamentID FROM Tournament");
+            ResultSet resultSet = statement.executeQuery(GET_ALL_TOURNAMENTID);
             while (resultSet.next()) {
                 tournamentList.add(resultSet.getInt("TournamentID"));
             }
-            return tournamentList;
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return tournamentList;
+    }
+
+    @Override
+    public String getTournamentDescription(int tournamentID) {
+        String description = "";
+        try {
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(GET_TOURNAMENT + tournamentID + "'");
+            while (resultSet.next()) {
+                description = resultSet.getString("Description");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return description;
+    }
+
+    @Override
+    public int getTournamentAdSpots(int tournamentID) {
+        int adSpots = -1;
+        try {
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(GET_TOURNAMENT + tournamentID + "'");
+            while (resultSet.next()) {
+                adSpots = resultSet.getInt("FreeAdSpots");
+            }
+        } catch (SQLException e) {
+
+        }
+        return adSpots;
     }
 }

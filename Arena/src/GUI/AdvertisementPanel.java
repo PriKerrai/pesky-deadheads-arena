@@ -138,7 +138,7 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
             Iterator iterator = tournamentList.iterator();
             while(iterator.hasNext()) {
                 int tmp = (Integer)iterator.next();
-                //dbm.get
+
             }
         } catch (SQLException e) {
             e.printStackTrace();

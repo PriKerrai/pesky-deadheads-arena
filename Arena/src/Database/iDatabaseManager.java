@@ -4,6 +4,8 @@
  */
 package Database;
 
+import League.Tournament;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -73,6 +75,7 @@ public interface iDatabaseManager {
 
     public void addGame(String gameName, String devName, String desc, int minPlayer,
             int maxPlayer, String jarPath) throws SQLException;
+
     public ArrayList getGameName() throws SQLException;
 
 
@@ -84,5 +87,7 @@ public interface iDatabaseManager {
 
     public List getTournamentList() throws SQLException;
 
-    //public
+    public String getTournamentDescription(int tournamentID) throws SQLException;
+
+    public int getTournamentAdSpots(int tournamentID) throws SQLException;
 }
