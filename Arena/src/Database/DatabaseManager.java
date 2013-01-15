@@ -1,5 +1,7 @@
 package Database;
 
+import com.sun.corba.se.impl.logging.ORBUtilSystemException;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -203,9 +205,13 @@ public class DatabaseManager implements iDatabaseManager {
 
     @Override
     public int getUserID(String nick) throws SQLException {
+        int userID = -1;
         statement = connection.createStatement();
         ResultSet result = statement.executeQuery(GET_USER_ID + nick + "'");
-        return result.getInt("UserID");
+        while (result.next()) {
+            userID = result.getInt("UserID");
+        }
+        return userID;
     }
 
     public void addComment(String nick, String comment) throws SQLException {
@@ -245,8 +251,12 @@ public class DatabaseManager implements iDatabaseManager {
     }
 
     public String getUserType(String nick) throws SQLException {
+        String userType;
         statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(GET_USER_TYPE + nick + "'");
+        while (resultSet.next()) {
+               userType = resultSet.getString("UserType");
+        }
         return resultSet.getString("UserType");
     }
 
@@ -254,10 +264,10 @@ public class DatabaseManager implements iDatabaseManager {
         String name = "";
         statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(GET_NAME + nick + "'");
-
         while (resultSet.next()) {
             name = resultSet.getString("Name");
         }
+        System.out.println("GetName");
         return name;
     }
 
@@ -265,7 +275,6 @@ public class DatabaseManager implements iDatabaseManager {
         String comment = "";
         statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(GET_NAME + nick + "'");
-
         while (resultSet.next()) {
             comment = resultSet.getString("Comment");
         }
@@ -320,7 +329,6 @@ public class DatabaseManager implements iDatabaseManager {
         String name = "";
         statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(GET_GAMENAME);
-
         while (resultSet.next()) {
             name = resultSet.getString("Name");
             nameList.add(name);
@@ -351,7 +359,7 @@ public class DatabaseManager implements iDatabaseManager {
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return count +1;
+        return count+1;
     }
 
     // ADVERTISEMENT FUNCTIONS //
@@ -368,9 +376,13 @@ public class DatabaseManager implements iDatabaseManager {
 
     @Override
     public int getAccountBalance(String nick) throws SQLException {
+        int balance = -1;
         statement = connection.createStatement();
-        ResultSet result = statement.executeQuery(GET_BALANCE + nick + "'");
-        return result.getInt("AccountBalance");
+        ResultSet resultSet = statement.executeQuery(GET_BALANCE + nick + "'");
+        while (resultSet.next()) {
+            balance = resultSet.getInt("AccountBalance");
+        }
+        return balance;
     }
 
     @Override
