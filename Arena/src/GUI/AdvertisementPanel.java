@@ -38,7 +38,7 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
     private JButton clearBalanceButton = new JButton("Clear Balance");
 
     // Center area
-    private DefaultTableModel activeAdsTableModel = new DefaultTableModel(new String[] {"Banner", "League/Tourn.", "Time Left"}, 50);
+    private DefaultTableModel activeAdsTableModel = new DefaultTableModel(new String[] {"Banner", "League/Tourn.", "Time Left"}, 0);
     private JTable advertisementTable = new JTable(activeAdsTableModel);
     private JScrollPane advertisementTableScrollPane = new JScrollPane(advertisementTable);
 
@@ -51,7 +51,7 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
     // East area
     private JPanel advertisementSchemePanel = new JPanel();
 
-    private DefaultTableModel activeTournamentsTableModel = new DefaultTableModel(new String[] {"League/Tourn.", "Description", "Free Ad Spots"}, 50);
+    private DefaultTableModel activeTournamentsTableModel = new DefaultTableModel(new String[] {"League/Tourn.", "Description", "Free Ad Spots"}, 0);
     private JTable activeTournamentsTable = new JTable(activeTournamentsTableModel);
     private JScrollPane activeTournamentsScrollPane = new JScrollPane(activeTournamentsTable);
 
@@ -134,11 +134,11 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
         northPanel.setLayout(new BorderLayout());
         northPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1), "Placement"));
         try {
-            List tournamentList = dbm.getTournamentList();
+            List<Integer> tournamentList = dbm.getTournamentList();
             Iterator iterator = tournamentList.iterator();
             while(iterator.hasNext()) {
-                int tmp = (Integer)iterator.next();
-
+                int tournamentID = (Integer)iterator.next();
+                activeTournamentsTableModel.addRow(new Object[]{tournamentID, dbm.getTournamentDescription(tournamentID), dbm.getTournamentAdSpots(tournamentID)});
             }
         } catch (SQLException e) {
             e.printStackTrace();

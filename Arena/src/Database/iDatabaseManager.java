@@ -85,7 +85,7 @@ public interface iDatabaseManager {
 
     public void removeTournament(int tournamentID) throws SQLException;
 
-    public List getTournamentList() throws SQLException;
+    public List<Integer> getTournamentList() throws SQLException;
 
     public String getTournamentDescription(int tournamentID) throws SQLException;
 
