@@ -99,6 +99,7 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
         depositPanel.add(depositAmountTextField);
         depositPanel.add(depositButton);
         northPanel.add(depositPanel);
+        depositButton.addActionListener(this);
 
         northPanel.setVisible(true);
     }

@@ -67,7 +67,7 @@ public class Login {
         frame.setVisible(true);
         frame.setSize(800, 497);
         frame.setResizable(false);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         frame.add(panel, BorderLayout.SOUTH);
 
         panel.add(panelHolder);
@@ -115,9 +115,9 @@ public class Login {
                         JOptionPane.showMessageDialog(null, "Please input nick");
                     } else {
                         if (Arrays.equals(passField.getPassword(), dbPassword)) {
-                            if(dbm.isActive(nick)){
-                                JOptionPane.showMessageDialog(null, "Replace with call to mainscreen");
+                            if(dbm.isActive(nick)) {
                                 SingletonUser.getInstance(dbm.getUserID(nick), dbm.getName(nick), email, dbm.getUserType(nick), nick);
+                                ArenaMainFrame amf = new ArenaMainFrame();
                             }else{
                                 JOptionPane.showMessageDialog(null, "Banned with reason:"
                                         + dbm.getComment(nick));

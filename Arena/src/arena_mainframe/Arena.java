@@ -4,7 +4,6 @@
  */
 package arena_mainframe;
 
-import GUI.ArenaMainFrame;
 import GUI.Login;
 
 /**
@@ -16,6 +15,5 @@ public class Arena {
     public static void main(String[] args){
         Login login = new Login();
         login.show();
-        ArenaMainFrame amf = new ArenaMainFrame();
     }
 }

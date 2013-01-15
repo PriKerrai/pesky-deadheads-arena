@@ -52,9 +52,9 @@ public class ArenaMainFrame extends JFrame {
         setPage(games);
         //setPage(newsPanel);
 
-        //AdministrationPanel testAdministrationPanel = new AdministrationPanel(this.getWidth()+2, this.getY());
-        //AdvertisementPanel testAdvertisementPanel =
-        //        new AdvertisementPanel(this.getWidth()+2, testAdministrationPanel.getHeight()+5);
+        AdministrationPanel testAdministrationPanel = new AdministrationPanel(this.getWidth()+2, this.getY());
+        AdvertisementPanel testAdvertisementPanel =
+                new AdvertisementPanel(this.getWidth()+2, testAdministrationPanel.getHeight()+5);
     }
     
     public void setPage(JPanel pnl){
