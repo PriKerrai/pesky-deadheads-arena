@@ -29,6 +29,15 @@ public abstract class User  {
         this.nickName = nickName;
         this.userType = userType;
     }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+
     public String getNickName() {
         return nickName;
     }

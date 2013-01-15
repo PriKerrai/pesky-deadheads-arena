@@ -95,6 +95,11 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
         balancePanel.add(balanceLabel);
         balancePanel.add(currentBalanceLabel);
         northPanel.add(balancePanel);
+        try {
+            currentBalanceLabel.setText(""+dbm.getAccountBalance(SingletonUser.getInstance().getNickName()));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         depositPanel.add(depositAmountTextField);
         depositPanel.add(depositButton);
