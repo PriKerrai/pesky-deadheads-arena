@@ -38,7 +38,12 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
     private JButton clearBalanceButton = new JButton("Clear Balance");
 
     // Center area
-    private DefaultTableModel activeAdsTableModel = new DefaultTableModel(new String[] {"Banner", "League/Tourn.", "Time Left"}, 0);
+    private DefaultTableModel activeAdsTableModel = new DefaultTableModel(new String[] {"Banner", "League/Tourn.", "Time Left"}, 0) {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
+    };
     private JTable advertisementTable = new JTable(activeAdsTableModel);
     private JScrollPane advertisementTableScrollPane = new JScrollPane(advertisementTable);
 
@@ -51,7 +56,12 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
     // East area
     private JPanel advertisementSchemePanel = new JPanel();
 
-    private DefaultTableModel activeTournamentsTableModel = new DefaultTableModel(new String[] {"League/Tourn.", "Description", "Free Ad Spots"}, 0);
+    private DefaultTableModel activeTournamentsTableModel = new DefaultTableModel(new String[] {"League/Tourn.", "Description", "Free Ad Spots"}, 0) {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
+    };
     private JTable activeTournamentsTable = new JTable(activeTournamentsTableModel);
     private JScrollPane activeTournamentsScrollPane = new JScrollPane(activeTournamentsTable);
 
