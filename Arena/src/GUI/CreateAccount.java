@@ -27,8 +27,8 @@ import javax.swing.*;
  *
  * @author Johan
  */
-public class CreateAccount {
-
+public class CreateAccount 
+{
     final String TITLE = "Apply for an ARENA-Account";
     final String NICK = "Nick:";
     final String NAME = "Name:";
