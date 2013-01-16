@@ -14,9 +14,12 @@ public class AdministrationPanel extends JFrame {
 
     private JPanel mainPanel = new JPanel();
     private JPanel banPlayerPanel = new JPanel();
-    private JTextField playerNameTextField = new JTextField(20);
+    private JPanel unbanPlayerPanel = new JPanel();
+    private JTextField playerNameTextField = new JTextField("Name",20);
+    private JTextField commentTextField = new JTextField("Reason",20);
+    private JTextField playerNameUnbanTextField = new JTextField("Name",20);
     private JButton banButton = new JButton("Perform Ban");
-
+    private JButton unbanButton = new JButton("Remove ban");
     public AdministrationPanel() {
         super("Administration Panel");
         initialize();
@@ -32,7 +35,7 @@ public class AdministrationPanel extends JFrame {
         initializeMainPanel();
         initializeBanArea();
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        pack();
+        setSize(600, 200);
         setVisible(true);
     }
 
@@ -44,9 +47,14 @@ public class AdministrationPanel extends JFrame {
 
     private void initializeBanArea() {
         mainPanel.add(banPlayerPanel);
+        mainPanel.add(unbanPlayerPanel);
         banPlayerPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1), "Ban Player"));
         banPlayerPanel.add(playerNameTextField);
+        banPlayerPanel.add(commentTextField);
         banPlayerPanel.add(banButton);
+        unbanPlayerPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1), "Remove ban"));
+        unbanPlayerPanel.add(playerNameUnbanTextField);
+        unbanPlayerPanel.add(unbanButton);
         banPlayerPanel.setVisible(true);
     }
 
