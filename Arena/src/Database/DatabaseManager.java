@@ -65,10 +65,11 @@ public class DatabaseManager implements iDatabaseManager {
     private static final String UPDATE_ADVERTISEMENT = "UPDATE Advertisement SET ";
     private static final String UPDATE_BALANCE = "UPDATE ArenaUsers SET AccountBalance = '";
 
+    private static final String REMOVE_ADVERTISEMENT = "DELETE FROM Advertisement WHERE AdID = '";
     private static final String GET_ADVERTISEMENT = "SELECT * FROM Advertisement WHERE ";
     private static final String GET_AD_LIST = "SELECT AdID FROM Advertisement WHERE AdvertiserID = '";
     private static final String GET_AD_BANNER = "SELECT BannerPath FROM Advertisement WHERE AdID = '";
-    private static final String GET_AD_DURATION = "SELECT Duration FROM Advertisement WHERE AdID = '";
+    private static final String GET_AD_DURATION = "SELECT TimeLeft FROM Advertisement WHERE AdID = '";
     private static final String GET_AD_TOURNID = "SELECT TournamentID FROM Advertisement WHERE AdID = '";
     private static final String GET_BALANCE = "SELECT AccountBalance FROM ArenaUsers WHERE Nick = '";
     private static final String GET_HIGHEST_ADID = "SELECT TOP(1) AdID FROM Advertisement ORDER BY AdID DESC";
@@ -103,7 +104,7 @@ public class DatabaseManager implements iDatabaseManager {
                     + "TournamentID SMALLINT NOT NULL,"
                     + "AdvertiserID SMALLINT NOT NULL,"
                     + "BannerPath VARCHAR(50) NOT NULL,"
-                    + "BannerLink VARCHAR(250) NOT NULL"
+                    + "BannerLink VARCHAR(250) NOT NULL,"
                     + "TimeLeft SMALLINT NOT NULL,"
                     + "DisplayOnArena VARCHAR(5),"
                     + "PRIMARY KEY(AdID),"
@@ -422,10 +423,21 @@ public class DatabaseManager implements iDatabaseManager {
     }
 
     @Override
-    public void createAdvertisement(int tournamentID, int userID, String bannerPath, int duration, String displayOnArena) throws SQLException {
+    public void createAdvertisement(int tournamentID, int userID, String bannerPath, String bannerLink, int duration, String displayOnArena) throws SQLException {
         try {
             statement = connection.createStatement();
-            statement.executeUpdate(INSERT_ADVERTISEMENT + getNewAdID() + "','" + tournamentID + "','" + userID + "','pictures/" + bannerPath + "','" + duration + "','" + displayOnArena + "');");
+            statement.executeUpdate(INSERT_ADVERTISEMENT + getNewAdID() + "','" + tournamentID + "','" + userID + "','pictures/" +
+                                                           bannerPath + "','" + bannerLink + "','" + duration + "','" + displayOnArena + "');");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void removeAdvertisement(int adID) {
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate(REMOVE_ADVERTISEMENT + adID + "'");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -440,7 +452,9 @@ public class DatabaseManager implements iDatabaseManager {
             while (resultSet.next()) {
                 banner = resultSet.getString("BannerPath");
             }
-            banner = banner.substring(banner.length()-("pictures/".length()), banner.length());
+            System.out.println(banner);
+            banner = banner.substring("pictures/".length(), banner.length());
+            System.out.println(banner);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -454,7 +468,7 @@ public class DatabaseManager implements iDatabaseManager {
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(GET_AD_DURATION + adID + "'");
             while (resultSet.next()) {
-                duration = resultSet.getInt("Duration");
+                duration = resultSet.getInt("TimeLeft");
             }
         } catch (SQLException e) {
             e.printStackTrace();

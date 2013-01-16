@@ -58,7 +58,9 @@ public interface iDatabaseManager {
     /**
      * @param bannerPath Make sure that the path <u>only</u> includes the image name + file extension
      */
-    public void createAdvertisement(int tournamentID, int userID, String bannerPath, int duration, String displayOnArena) throws SQLException;
+    public void createAdvertisement(int tournamentID, int userID, String bannerPath, String bannerLink, int duration, String displayOnArena) throws SQLException;
+
+    public void removeAdvertisement(int adID) throws SQLException;
 
     public List<Integer> getAdList(int userID) throws SQLException;
 

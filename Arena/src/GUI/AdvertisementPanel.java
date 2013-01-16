@@ -44,8 +44,8 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
             return false;
         }
     };
-    private JTable advertisementTable = new JTable(activeAdsTableModel);
-    private JScrollPane advertisementTableScrollPane = new JScrollPane(advertisementTable);
+    private JTable activeAdsTable = new JTable(activeAdsTableModel);
+    private JScrollPane advertisementTableScrollPane = new JScrollPane(activeAdsTable);
 
     private JLabel showOnArenaLabel = new JLabel("Also show randomly on the ARENA mainframe?");
     private JCheckBox showOnArenaCheckBox = new JCheckBox();
@@ -142,8 +142,7 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
         removeAdvertisementButton.addActionListener(this);
         centerPanel.add(removeAdvertisementButton, BorderLayout.SOUTH);
 
-        // Load currently active advertisements into the advertisementTable
-        // --
+        updateActiveAdsList();
     }
 
     private void initializeEastArea() {
@@ -227,6 +226,7 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
         try {
             List<Integer> tournamentList = dbm.getTournamentList();
             Iterator iterator = tournamentList.iterator();
+            clearJTable(activeTournamentsTableModel);
             while(iterator.hasNext()) {
                 int tournamentID = (Integer)iterator.next();
                 activeTournamentsTableModel.addRow(new Object[]{tournamentID, dbm.getTournamentDescription(tournamentID), dbm.getTournamentAdSpots(tournamentID)});
@@ -265,31 +265,45 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
         if (showOnArenaCheckBox.isSelected())
             showOnArena = "true";
         try {
-            dbm.createAdvertisement(Integer.parseInt((String)activeTournamentsTableModel.getValueAt(activeTournamentsTable.getSelectedRow(), 0)),
+            fileChooser.getSelectedFile().getName();
+            dbm.createAdvertisement((Integer)activeTournamentsTableModel.getValueAt(activeTournamentsTable.getSelectedRow(), 0),
                     SingletonUser.getInstance().getUserID(),
-                    "pictures/"+fileChooser.getSelectedFile().getName(),
+                    fileChooser.getSelectedFile().getName(),
+                    bannerLinkTextField.getText(),
                     Integer.parseInt(durationTextField.getText()),
                     showOnArena);
-        } catch (SQLException e1) {
-            e1.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         updateActiveAdsList();
     }
 
     private void removeAdvertisement() {
-
+        try {
+            dbm.removeAdvertisement((Integer)activeAdsTableModel.getValueAt(activeAdsTable.getSelectedRow(), 0));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        updateActiveAdsList();
     }
 
     private void updateActiveAdsList() {
         try {
             List<Integer> adList = dbm.getAdList(SingletonUser.getInstance().getUserID());
             Iterator iterator = adList.iterator();
+            clearJTable(activeAdsTableModel);
             while(iterator.hasNext()) {
                 int adID = (Integer)iterator.next();
                 activeAdsTableModel.addRow(new Object[]{adID, dbm.getAdBanner(adID), dbm.getTournamentDescription(dbm.getAdTournamentID(adID)), dbm.getAdDuration(adID)});
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void clearJTable(DefaultTableModel dtm) {
+        for (int i = dtm.getRowCount() - 1; i >= 0; i--) {
+            dtm.removeRow(i);
         }
     }
 
