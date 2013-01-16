@@ -5,6 +5,7 @@
 package GUI;
 
 import League.HandleGame;
+import League.HandleLeague;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -28,7 +29,8 @@ public class ArenaMainFrame extends JFrame {
     JMenuBar menuBar = new JMenuBar();
     JMenu fileMenu = new JMenu("File");
     JMenuItem newsItem = new JMenuItem("News");
-    JMenuItem handleItem = new JMenuItem("Handle Game");
+    JMenuItem handleGameItem = new JMenuItem("Handle Game");
+    JMenuItem handleLeagueItem = new JMenuItem("Handle league");
     JMenuItem adminItem = new JMenuItem("Admin panel");
     JMenuItem advItem = new JMenuItem("Adv. controlpanel");
     JMenuItem exitItem = new JMenuItem("Exit");
@@ -51,19 +53,21 @@ public class ArenaMainFrame extends JFrame {
         menuBar.add(fileMenu);
         fileMenu.add(newsItem);
         fileMenu.add(gameItem);
-        fileMenu.add(handleItem);
+        fileMenu.add(handleGameItem);
+        fileMenu.add(handleLeagueItem);
         fileMenu.add(adminItem);
         fileMenu.add(advItem);
         fileMenu.add(exitItem);
 
         MyListener myListener = new MyListener();
-        
+
         newsItem.addActionListener(myListener);
         gameItem.addActionListener(myListener);
-        handleItem.addActionListener(myListener);
+        handleGameItem.addActionListener(myListener);
         adminItem.addActionListener(myListener);
         advItem.addActionListener(myListener);
         exitItem.addActionListener(myListener);
+        handleLeagueItem.addActionListener(myListener);
 
         mainPanel.setLayout(new BorderLayout());
         add(mainPanel, BorderLayout.CENTER);
@@ -85,15 +89,17 @@ public class ArenaMainFrame extends JFrame {
         public void actionPerformed(ActionEvent e) {
             Object source = e.getSource();
 
-            if (source.equals(handleItem)) {
+            if (source.equals(handleGameItem)) {
                 HandleGame hg = new HandleGame();
             } else if (source.equals(adminItem)) {
                 AdministrationPanel ap = new AdministrationPanel();
             } else if (source.equals(advItem)) {
                 AdvertisementPanel ap = new AdvertisementPanel();
-            } else if(source.equals(gameItem)){
+            } else if (source.equals(gameItem)) {
                 setPage(new Games());
-            } else if(source.equals(newsItem)){
+            } else if (source.equals(handleLeagueItem)) {
+                setPage(new HandleLeague());
+            } else if (source.equals(newsItem)) {
                 setPage(new NewsPanel());
             } else {
                 System.exit(0);
