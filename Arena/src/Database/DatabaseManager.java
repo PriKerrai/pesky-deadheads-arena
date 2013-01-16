@@ -66,6 +66,10 @@ public class DatabaseManager implements iDatabaseManager {
     private static final String UPDATE_BALANCE = "UPDATE ArenaUsers SET AccountBalance = '";
 
     private static final String GET_ADVERTISEMENT = "SELECT * FROM Advertisement WHERE ";
+    private static final String GET_AD_LIST = "SELECT AdID FROM Advertisement WHERE AdvertiserID = '";
+    private static final String GET_AD_BANNER = "SELECT BannerPath FROM Advertisement WHERE AdID = '";
+    private static final String GET_AD_DURATION = "SELECT Duration FROM Advertisement WHERE AdID = '";
+    private static final String GET_AD_TOURNID = "SELECT TournamentID FROM Advertisement WHERE AdID = '";
     private static final String GET_BALANCE = "SELECT AccountBalance FROM ArenaUsers WHERE Nick = '";
     private static final String GET_HIGHEST_ADID = "SELECT TOP(1) AdID FROM Advertisement ORDER BY AdID DESC";
 
@@ -99,6 +103,7 @@ public class DatabaseManager implements iDatabaseManager {
                     + "TournamentID SMALLINT NOT NULL,"
                     + "AdvertiserID SMALLINT NOT NULL,"
                     + "BannerPath VARCHAR(50) NOT NULL,"
+                    + "BannerLink VARCHAR(250) NOT NULL"
                     + "TimeLeft SMALLINT NOT NULL,"
                     + "DisplayOnArena VARCHAR(5),"
                     + "PRIMARY KEY(AdID),"
@@ -122,7 +127,7 @@ public class DatabaseManager implements iDatabaseManager {
                     + "Description VARCHAR(100),"
                     + "MinPlayers SMALLINT NOT NULL,"
                     + "MaxPlayers SMALLINT NOT NULL,"
-                    + "Developer VARCHAR(30) NOT NULL"
+                    + "Developer VARCHAR(30) NOT NULL,"
                     + "JarPath VARCHAR(50) NOT NULL,"
                     + "PRIMARY KEY(GameID))";
 
@@ -402,6 +407,21 @@ public class DatabaseManager implements iDatabaseManager {
     // ADVERTISEMENT FUNCTIONS //
 
     @Override
+    public List<Integer> getAdList(int userID) {
+        List<Integer> adList = new ArrayList<Integer>();
+        try {
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(GET_AD_LIST + userID + "'");
+            while (resultSet.next()) {
+                adList.add(resultSet.getInt("AdID"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return adList;
+    }
+
+    @Override
     public void createAdvertisement(int tournamentID, int userID, String bannerPath, int duration, String displayOnArena) throws SQLException {
         try {
             statement = connection.createStatement();
@@ -412,12 +432,62 @@ public class DatabaseManager implements iDatabaseManager {
     }
 
     @Override
+    public String getAdBanner(int adID) {
+        String banner = "";
+        try {
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(GET_AD_BANNER + adID + "'");
+            while (resultSet.next()) {
+                banner = resultSet.getString("BannerPath");
+            }
+            banner = banner.substring(banner.length()-("pictures/".length()), banner.length());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return banner;
+    }
+
+    @Override
+    public int getAdDuration(int adID) {
+        int duration = -1;
+        try {
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(GET_AD_DURATION + adID + "'");
+            while (resultSet.next()) {
+                duration = resultSet.getInt("Duration");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return duration;
+    }
+
+    @Override
+    public int getAdTournamentID(int adID) {
+        int duration = -1;
+        try {
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(GET_AD_TOURNID + adID + "'");
+            while (resultSet.next()) {
+                duration = resultSet.getInt("TournamentID");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return duration;
+    }
+
+    @Override
     public int getAccountBalance(String nick) throws SQLException {
         int balance = -1;
-        statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery(GET_BALANCE + nick + "'");
-        while (resultSet.next()) {
-            balance = resultSet.getInt("AccountBalance");
+        try {
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(GET_BALANCE + nick + "'");
+            while (resultSet.next()) {
+                balance = resultSet.getInt("AccountBalance");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return balance;
     }

@@ -60,13 +60,15 @@ public interface iDatabaseManager {
      */
     public void createAdvertisement(int tournamentID, int userID, String bannerPath, int duration, String displayOnArena) throws SQLException;
 
-    //public int getBanner(int ID) throws SQLException;
+    public List<Integer> getAdList(int userID) throws SQLException;
 
-    //public int getDuration(int ID) throws SQLException;
+    public String getAdBanner(int adID) throws SQLException;
 
-    //public int getTournamentID(int ID) throws SQLException;
+    public int getAdDuration(int adID) throws SQLException;
 
-    //public boolean displaysOnArena(int ID) throws SQLException;
+    public int getAdTournamentID(int adID) throws SQLException;
+
+    //public String displaysOnArena(int adID) throws SQLException;
 
 
     // GAME FUNCTIONS //

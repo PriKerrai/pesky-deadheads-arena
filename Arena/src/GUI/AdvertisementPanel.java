@@ -38,7 +38,7 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
     private JButton clearBalanceButton = new JButton("Clear Balance");
 
     // Center area
-    private DefaultTableModel activeAdsTableModel = new DefaultTableModel(new String[] {"Banner", "League/Tourn.", "Time Left"}, 0) {
+    private DefaultTableModel activeAdsTableModel = new DefaultTableModel(new String[] {"Ad", "Banner", "League/Tourn.", "Time Left"}, 0) {
         @Override
         public boolean isCellEditable(int row, int column) {
             return false;
@@ -65,11 +65,20 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
     private JTable activeTournamentsTable = new JTable(activeTournamentsTableModel);
     private JScrollPane activeTournamentsScrollPane = new JScrollPane(activeTournamentsTable);
 
+    private JButton removeAdvertisementButton = new JButton("Remove Ad");
+
     //JPanel uploadPanel = new JPanel();
+    JLabel chosenFileLabel = new JLabel("Chosen File:");
     private JButton openButton = new JButton("Open"),
             uploadButton = new JButton("Upload");
     private JTextField filePathTextField = new JTextField(15);
     private JFileChooser fileChooser = new JFileChooser();
+
+    private JLabel bannerLinkLabel = new JLabel("Banner Link:");
+    private JTextField bannerLinkTextField = new JTextField(27);
+
+    private JLabel costPerClickLabel = new JLabel("Cost per click: $0");
+    private JButton createAdvertisementButton = new JButton("Create Advertisement");
 
     public AdvertisementPanel() {
         super("Advertisement Control Panel");
@@ -102,7 +111,6 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
     private void initializeNorthArea() {
         JPanel northPanel = new JPanel();
         mainPanel.add(northPanel, BorderLayout.NORTH);
-        //westPanel.setLayout(new GridLayout(2,1));
         northPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1), "Fill up balance"));
 
         balancePanel.add(balanceLabel);
@@ -131,6 +139,9 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
         centerPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1), "Active Advertisements"));
         centerPanel.add(advertisementTableScrollPane, BorderLayout.CENTER);
 
+        removeAdvertisementButton.addActionListener(this);
+        centerPanel.add(removeAdvertisementButton, BorderLayout.SOUTH);
+
         // Load currently active advertisements into the advertisementTable
         // --
     }
@@ -143,16 +154,19 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
         JPanel northPanel = new JPanel();
         northPanel.setLayout(new BorderLayout());
         northPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1), "Placement"));
-        try {
-            List<Integer> tournamentList = dbm.getTournamentList();
-            Iterator iterator = tournamentList.iterator();
-            while(iterator.hasNext()) {
-                int tournamentID = (Integer)iterator.next();
-                activeTournamentsTableModel.addRow(new Object[]{tournamentID, dbm.getTournamentDescription(tournamentID), dbm.getTournamentAdSpots(tournamentID)});
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
+        JPanel centerPanel = new JPanel();
+        centerPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1), "Duration"));
+
+        JPanel southPanel = new JPanel();
+        southPanel.setLayout(new BorderLayout());
+        advertisementSchemePanel.add(southPanel, BorderLayout.SOUTH);
+
+        JPanel bannerPanel = new JPanel();
+        bannerPanel.setLayout(new BorderLayout());
+        bannerPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1), "Banner File"));
+
+        updateActiveTournamentsList();
         advertisementSchemePanel.add(northPanel, BorderLayout.NORTH);
         northPanel.add(activeTournamentsScrollPane, BorderLayout.NORTH);
 
@@ -161,16 +175,12 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
         checkBoxPanel.add(showOnArenaLabel);
         checkBoxPanel.add(showOnArenaCheckBox);
 
-        JPanel centerPanel = new JPanel();
-        centerPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1), "Duration"));
         advertisementSchemePanel.add(centerPanel, BorderLayout.CENTER);
         centerPanel.add(durationLabel);
         centerPanel.add(durationTextField);
 
-        JPanel southPanel = new JPanel();
-        advertisementSchemePanel.add(southPanel, BorderLayout.SOUTH);
-        southPanel.setLayout(new FlowLayout());
-        southPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1), "Banner File"));
+        JPanel bannerFilePanel = new JPanel();
+        bannerFilePanel.setLayout(new FlowLayout());
 
         filePathTextField.setEditable(false);
         filePathTextField.setBorder(new LineBorder(Color.DARK_GRAY, 1));
@@ -178,9 +188,28 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
         openButton.addActionListener(this);
         uploadButton.addActionListener(this);
 
-        southPanel.add(filePathTextField);
-        southPanel.add(openButton);
-        southPanel.add(uploadButton);
+        bannerFilePanel.add(chosenFileLabel);
+        bannerFilePanel.add(filePathTextField);
+        bannerFilePanel.add(openButton);
+        bannerFilePanel.add(uploadButton);
+
+        JPanel bannerLinkPanel = new JPanel();
+        bannerLinkPanel.setLayout(new FlowLayout());
+
+        bannerLinkPanel.add(bannerLinkLabel);
+        bannerLinkPanel.add(bannerLinkTextField);
+
+        bannerPanel.add(bannerFilePanel, BorderLayout.NORTH);
+        bannerPanel.add(bannerLinkPanel, BorderLayout.SOUTH);
+
+        JPanel createAdPanel = new JPanel();
+        createAdPanel.setLayout(new FlowLayout());
+        createAdvertisementButton.addActionListener(this);
+        createAdPanel.add(costPerClickLabel);
+        createAdPanel.add(createAdvertisementButton);
+
+        southPanel.add(bannerPanel, BorderLayout.NORTH);
+        southPanel.add(createAdPanel, BorderLayout.SOUTH);
     }
 
     private void showOpenDialog() {
@@ -194,7 +223,20 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
         }
     }
 
-    public void updateBalance(int newBalance) {
+    private void updateActiveTournamentsList() {
+        try {
+            List<Integer> tournamentList = dbm.getTournamentList();
+            Iterator iterator = tournamentList.iterator();
+            while(iterator.hasNext()) {
+                int tournamentID = (Integer)iterator.next();
+                activeTournamentsTableModel.addRow(new Object[]{tournamentID, dbm.getTournamentDescription(tournamentID), dbm.getTournamentAdSpots(tournamentID)});
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void updateBalance(int newBalance) {
         currentBalanceLabel.setText("$"+newBalance);
     }
 
@@ -218,6 +260,39 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
         }
     }
 
+    private void createAdvertisement() {
+        String showOnArena = "false";
+        if (showOnArenaCheckBox.isSelected())
+            showOnArena = "true";
+        try {
+            dbm.createAdvertisement(Integer.parseInt((String)activeTournamentsTableModel.getValueAt(activeTournamentsTable.getSelectedRow(), 0)),
+                    SingletonUser.getInstance().getUserID(),
+                    "pictures/"+fileChooser.getSelectedFile().getName(),
+                    Integer.parseInt(durationTextField.getText()),
+                    showOnArena);
+        } catch (SQLException e1) {
+            e1.printStackTrace();
+        }
+        updateActiveAdsList();
+    }
+
+    private void removeAdvertisement() {
+
+    }
+
+    private void updateActiveAdsList() {
+        try {
+            List<Integer> adList = dbm.getAdList(SingletonUser.getInstance().getUserID());
+            Iterator iterator = adList.iterator();
+            while(iterator.hasNext()) {
+                int adID = (Integer)iterator.next();
+                activeAdsTableModel.addRow(new Object[]{adID, dbm.getAdBanner(adID), dbm.getTournamentDescription(dbm.getAdTournamentID(adID)), dbm.getAdDuration(adID)});
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         Object ob = e.getSource();
@@ -226,8 +301,11 @@ public class AdvertisementPanel extends JFrame implements ActionListener {
             if (tmp == openButton) {
                 showOpenDialog();
             }
-            else if (tmp == uploadButton) {
-                System.out.println("Functionality not yet implemented.");
+            else if (tmp == createAdvertisementButton) {
+                createAdvertisement();
+            }
+            else if (tmp == removeAdvertisementButton) {
+                removeAdvertisement();
             }
             else if (tmp == depositButton) {
                 updateBalance();

@@ -25,8 +25,8 @@ public class TestDatabase {
         //dbm.addComment("viktor", "För dålig för att kasta sten");
         //dbm.deleteTable();
         //dbm.createTable();
-        //dbm.createTournament("Tournament One", 64, 4, 0);
-        //dbm.createTournament("Tournament II", 64, 4, 0);
+        //dbm.createTournament("Tournament One", 64, 4, 1);
+        //dbm.createTournament("Tournament II", 64, 4, 2);
     }
     
 }
