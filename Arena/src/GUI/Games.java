@@ -18,13 +18,13 @@ public class Games extends JPanel
                             GAMES_BUTTON_SIZE_200_40 = new Dimension(200, 40);
     
     private int borderThickness = 1,
-                numberOfAds = 3;
+                numberOfAds = 4;
     
     JPanel  pnl_Games = new JPanel(),
             pnl_1 = new JPanel(), 
             pnl_Advertisements = new JPanel();
     JScrollPane tablePane = new JScrollPane();
-    String[] columnNames_tbl_1 = {"Tournament", "Ad1", "Ad2", "Ad3"};
+    String[] columnNames_tbl_1 = {"Tournament", "Ad1", "Ad2", "Ad3", "Ad4"};
     Object[][] data_tbl_1 = {};
     JTable  tbl_1 = new JTable(data_tbl_1, columnNames_tbl_1);
     
@@ -92,7 +92,7 @@ public class Games extends JPanel
     
     public void setAd(int adIndex){
         pnls_ads.get(adIndex);
-        pnls_ads.get(adIndex).add(new BannerPanel("pictures/ad_orange.png"));
+        pnls_ads.get(adIndex).add(new BannerPanel("pictures/orange.png"));
         // stuff happens
     }
 }

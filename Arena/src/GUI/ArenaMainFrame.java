@@ -22,8 +22,8 @@ public class ArenaMainFrame extends JFrame {
     private String title = "Arena";
     // Do a list containing all "pages"(jpanels - games, tournament etc)?
     ArrayList<JPanel> pages = new ArrayList();
-    Games games = new Games();
-    NewsPanel newsPanel = new NewsPanel();
+    //Games games = new Games();
+    //NewsPanel newsPanel = new NewsPanel();
     JPanel mainPanel = new JPanel();
     JMenuBar menuBar = new JMenuBar();
     JMenu fileMenu = new JMenu("File");
@@ -68,12 +68,7 @@ public class ArenaMainFrame extends JFrame {
         mainPanel.setLayout(new BorderLayout());
         add(mainPanel, BorderLayout.CENTER);
 
-        AdministrationPanel testAdministrationPanel = new AdministrationPanel(this.getWidth() + 2, this.getY());
-        AdvertisementPanel testAdvertisementPanel =
-                new AdvertisementPanel(this.getWidth() + 2, testAdministrationPanel.getHeight() + 5);
-
-        setPage(newsPanel);
-
+        setPage(new NewsPanel());
     }
 
     public void setPage(JPanel pnl) {
@@ -96,10 +91,10 @@ public class ArenaMainFrame extends JFrame {
                 AdministrationPanel ap = new AdministrationPanel();
             } else if (source.equals(advItem)) {
                 AdvertisementPanel ap = new AdvertisementPanel();
-            } else if(source.equals(games)){
-                setPage(games);
+            } else if(source.equals(gameItem)){
+                setPage(new Games());
             } else if(source.equals(newsItem)){
-                setPage(newsPanel);
+                setPage(new NewsPanel());
             } else {
                 System.exit(0);
             }
