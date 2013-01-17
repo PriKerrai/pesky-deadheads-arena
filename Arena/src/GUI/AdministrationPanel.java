@@ -49,6 +49,9 @@ public class AdministrationPanel extends JFrame {
     private void initialize() {
         initializeMainPanel();
         initializeBanArea();
+        initializeUnBanArea();
+        initializeUsertypeArea(); 
+        initializeListener();
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setSize(600, 200);
         setVisible(true);
@@ -62,22 +65,36 @@ public class AdministrationPanel extends JFrame {
 
     private void initializeBanArea() {
         mainPanel.add(banPlayerPanel);
-        mainPanel.add(unbanPlayerPanel);
-        mainPanel.add(userPanel);
         banPlayerPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1), "Ban Player"));
         banPlayerPanel.add(playerNameTextField);
         banPlayerPanel.add(commentTextField);
         banPlayerPanel.add(banButton);
+        banPlayerPanel.setVisible(true);
+        
+    }
+    
+    private void initializeUnBanArea(){
+        mainPanel.add(unbanPlayerPanel);
         unbanPlayerPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1), "Remove ban"));
         unbanPlayerPanel.add(playerNameUnbanTextField);
         unbanPlayerPanel.add(unbanButton);
-        banPlayerPanel.setVisible(true);
+    }
+    
+    private void initializeUsertypeArea(){
+        mainPanel.add(userPanel);
         userPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 1), "Set usertype"));
         userPanel.add(userNameTextField);
         userPanel.add(userTypesJCB);
         userPanel.add(usertypeButton);
-    }
+    } 
 
+    private void initializeListener(){
+        MyListener myListener = new MyListener();
+        banButton.addActionListener(myListener);
+        unbanButton.addActionListener(myListener);
+        usertypeButton.addActionListener(myListener);
+    }
+    
     public class MyListener implements ActionListener{
 
         @Override
@@ -89,16 +106,17 @@ public class AdministrationPanel extends JFrame {
                 try {
                     dbm.setActive(playerNameTextField.getText(), false);
                     dbm.addComment(playerNameTextField.getText(), commentTextField.getText());
+                    JOptionPane.showMessageDialog(null,playerNameTextField.getText() + " has been banned with reason " + commentTextField.getText());
                 } catch (SQLException ex) {
-                    System.out.println("DATABASE ERROR! Ban not performed");
+                    System.out.println("DATABASE ERROR! Ban not performed" + ex);
                 }
             } else if(source == unbanButton){
                 try {                
                     dbm.setActive(playerNameUnbanTextField.getText(), true);
                     dbm.addComment(playerNameTextField.getText(), "");
-                
+                    JOptionPane.showMessageDialog(null, "Ban removed on " + playerNameUnbanTextField.getText());
                 } catch (SQLException ex) {
-                    System.out.println("DATABASE ERROR! Unban not performed");
+                    System.out.println("DATABASE ERROR! Unban not performed" + ex);
                 }
                 
             } else if(source == usertypeButton){
@@ -107,12 +125,15 @@ public class AdministrationPanel extends JFrame {
                     switch(userType){
                         case 0:
                             dbm.makePlayer(userNameTextField.getText());
+                            JOptionPane.showMessageDialog(null, userNameTextField.getText() + " is now a Player");
                             break;
                         case 1:
                             dbm.makeAdvertiser(userNameTextField.getText());
+                            JOptionPane.showMessageDialog(null, userNameTextField.getText() + " is now an Advertiser");
                             break;
                         case 2:
                             dbm.makeAdmin(userNameTextField.getText());
+                            JOptionPane.showMessageDialog(null, userNameTextField.getText() + " is now an Operator");
                             break;
                         default:
                             System.out.println("Invalid usertype");
