@@ -32,6 +32,7 @@ public class ArenaMainFrame extends JFrame {
     JMenuItem adminItem = new JMenuItem("Admin panel");
     JMenuItem advItem = new JMenuItem("Adv. controlpanel");
     JMenuItem exitItem = new JMenuItem("Exit");
+    JMenuItem statisticsItem = new JMenuItem("Statistics");
     JMenuItem logOutItem = new JMenuItem("Log out");
     JMenuItem gameItem = new JMenuItem("Games");
 
@@ -55,6 +56,7 @@ public class ArenaMainFrame extends JFrame {
         fileMenu.add(handleItem);
         fileMenu.add(adminItem);
         fileMenu.add(advItem);
+        fileMenu.add(statisticsItem);
         fileMenu.add(logOutItem);
         fileMenu.add(exitItem);
 
@@ -67,6 +69,7 @@ public class ArenaMainFrame extends JFrame {
         advItem.addActionListener(myListener);
         exitItem.addActionListener(myListener);
         logOutItem.addActionListener(myListener);
+        statisticsItem.addActionListener(myListener);
         mainPanel.setLayout(new BorderLayout());
         add(mainPanel, BorderLayout.CENTER);
 
@@ -101,6 +104,8 @@ public class ArenaMainFrame extends JFrame {
                 dispose();
                 Login l = new Login();
                 l.show();
+            } else if (source.equals(statisticsItem)) {
+                //setPage();
             } else {
                 System.exit(0);
             }
