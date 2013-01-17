@@ -43,6 +43,8 @@ public interface iDatabaseManager {
     public void addComment(String nick, String comment) throws SQLException;
 
     public void makeAdvertiser(String nick) throws SQLException;
+    
+    public void makePlayer(String nick) throws SQLException;
 
     public void makeAdmin(String nick) throws SQLException;
 
