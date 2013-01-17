@@ -27,10 +27,11 @@ public class DatabaseManager implements iDatabaseManager {
     private static final String DRIVER_PATH = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
     private static final String DATABASE_PATH = "jdbc:sqlserver://idasql-db.hb.se:56077;"
             + "databaseName=dbtht1202;selectMethod=cursor";
-    private static final String USERNAME = "";
-    private static final String PASSWORD = "";
+    private static final String USERNAME = "dbtht1202";
+    private static final String PASSWORD = "plash9";
 
     // ARENAUSER
+    private static final String MAKE_PLAYER = "UPDATE ArenaUsers SET UserType ='Player'";
     private static final String MAKE_ADMIN = "UPDATE ArenaUsers SET UserType ='Admin'";
     private static final String MAKE_ADVERTISER = "UPDATE ArenaUsers SET UserType ='Advertiser'";
     private static final String UPDATE_ACTIVE = "UPDATE ArenaUsers SET Active ='";
@@ -145,10 +146,10 @@ public class DatabaseManager implements iDatabaseManager {
     public Connection connectDB() {
         try {
             Class.forName(DRIVER_PATH);
-            //Connection connection = DriverManager.getConnection(DATABASE_PATH,
-            //       USERNAME, PASSWORD);
+            Connection connection = DriverManager.getConnection(DATABASE_PATH,
+                   USERNAME, PASSWORD);
 
-
+            /*
             //under utveckling
             String usr;
             String pass;
@@ -159,7 +160,7 @@ public class DatabaseManager implements iDatabaseManager {
             Connection connection = DriverManager.getConnection(DATABASE_PATH,
                     usr, pass);
             //utvecklinskoden slutar här
-
+            */
             return connection;
         } catch (Exception e) {
             System.out.println(e);
@@ -184,6 +185,11 @@ public class DatabaseManager implements iDatabaseManager {
     public void makeAdmin(String nick) throws SQLException {
         statement = connection.createStatement();
         statement.executeUpdate(MAKE_ADMIN + "WHERE Nick = '" + nick + "'");
+    }
+    
+    public void makePlayer(String nick) throws SQLException {
+        statement = connection.createStatement();
+        statement.executeUpdate(MAKE_PLAYER + "WHERE Nick = '" + nick + "'");
     }
 
     public void makeAdvertiser(String nick) throws SQLException {
