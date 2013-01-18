@@ -5,6 +5,7 @@
 package GUI;
 
 import League.HandleGame;
+import League.HandleLeague;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -29,7 +30,8 @@ public class ArenaMainFrame extends JFrame {
     JMenu fileMenu = new JMenu("File");
     JMenuItem newsItem = new JMenuItem("News");
     JMenuItem applyItem = new JMenuItem("Apply for...");
-    JMenuItem handleItem = new JMenuItem("Handle Game");
+    JMenuItem handleGameItem = new JMenuItem("Handle Game");
+    JMenuItem handleLeagueItem = new JMenuItem("Handle League");
     JMenuItem adminItem = new JMenuItem("Admin panel");
     JMenuItem advItem = new JMenuItem("Adv. controlpanel");
     JMenuItem exitItem = new JMenuItem("Exit");
@@ -55,7 +57,8 @@ public class ArenaMainFrame extends JFrame {
         fileMenu.add(newsItem);
         fileMenu.add(gameItem);
         fileMenu.add(applyItem);
-        fileMenu.add(handleItem);
+        fileMenu.add(handleGameItem);
+        fileMenu.add(handleLeagueItem);
         fileMenu.add(adminItem);
         fileMenu.add(advItem);
         fileMenu.add(statisticsItem);
@@ -67,7 +70,8 @@ public class ArenaMainFrame extends JFrame {
         newsItem.addActionListener(myListener);
         gameItem.addActionListener(myListener);
         applyItem.addActionListener(myListener);
-        handleItem.addActionListener(myListener);
+        handleGameItem.addActionListener(myListener);
+        handleLeagueItem.addActionListener(myListener);
         adminItem.addActionListener(myListener);
         advItem.addActionListener(myListener);
         exitItem.addActionListener(myListener);
@@ -93,10 +97,12 @@ public class ArenaMainFrame extends JFrame {
         public void actionPerformed(ActionEvent e) {
             Object source = e.getSource();
             
-            if (source.equals(handleItem)) {
+            if (source.equals(handleGameItem)) {
                 HandleGame hg = new HandleGame();
             } else if (source.equals(adminItem)) {
                 AdministrationPanel ap = new AdministrationPanel();
+            } else if (source.equals(handleLeagueItem)) {
+               HandleLeague h = new HandleLeague();
             } else if (source.equals(advItem)) {
                 AdvertisementPanel ap = new AdvertisementPanel();
             } else if (source.equals(gameItem)) {
@@ -115,5 +121,9 @@ public class ArenaMainFrame extends JFrame {
                 System.exit(0);
             }
         }
+    }
+    
+    public static void main(String[] args){
+        ArenaMainFrame a = new ArenaMainFrame();
     }
 }
