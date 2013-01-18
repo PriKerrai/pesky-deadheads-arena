@@ -100,6 +100,6 @@ public interface iDatabaseManager {
     
     // Application methods //
     
-    public void addApplication(int userID, int appID, int tournamentID, int leagueID,
+    public void addApplication(int userID, int tournamentID, int leagueID,
             String applicationType, String reason, String isActive) throws SQLException;
 }
