@@ -114,7 +114,8 @@ public class ArenaMainFrame extends JFrame {
                 Login l = new Login();
                 l.show();
             } else if (source.equals(applyItem)) {
-                setPage(new ApplyForDiffUsertype());
+                //new Applications();
+                setPage(new Applications());
             } else if (source.equals(statisticsItem)) {
                 //setPage();
             } else {
