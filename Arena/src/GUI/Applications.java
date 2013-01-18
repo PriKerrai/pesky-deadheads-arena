@@ -4,6 +4,8 @@
  */
 package GUI;
 
+import Database.DatabaseManager;
+import Database.iDatabaseManager;
 import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,6 +24,8 @@ import org.omg.CosNaming.NamingContextExtPackage.AddressHelper;
  * @author Johan
  */
 public class Applications extends JPanel{
+    
+    iDatabaseManager dbm = new DatabaseManager();
     
     private final String[] userTypes = {"Advertiser", "Operator"};
     private JTextField reasonTextField = new JTextField("Reason: ", 35);
@@ -61,7 +65,7 @@ public class Applications extends JPanel{
         
         JList leagueList = new JList();
         JScrollPane scrollList = new JScrollPane(leagueList);
-                
+        leagueOwnerPanel.setBorder(BorderFactory.createTitledBorder("Select league"));
         leagueOwnerPanel.add(scrollList);
         leagueOwnerPanel.add(applyLOButton);
         return leagueOwnerPanel;
@@ -71,7 +75,7 @@ public class Applications extends JPanel{
     public JPanel tournament(){
         JList tournamentList = new JList();
         JScrollPane scrollList = new JScrollPane(tournamentList);
-                
+        tournamentPanel.setBorder(BorderFactory.createTitledBorder("Select tournament"));
         tournamentPanel.add(scrollList);
         tournamentPanel.add(applyTButton);
         return tournamentPanel;
@@ -81,7 +85,7 @@ public class Applications extends JPanel{
        
         JList leagueList = new JList();
         JScrollPane scrollList = new JScrollPane(leagueList);
-                
+        leaguePanel.setBorder(BorderFactory.createTitledBorder("Select league"));
         leaguePanel.add(scrollList);
         leaguePanel.add(applyLButton);
         return leaguePanel;
@@ -105,29 +109,21 @@ public class Applications extends JPanel{
             Object source = ae.getSource();
             
             if(source == applyUsrButton ){
-                /*
-                 * get username
-                 * get selected type
-                 * call DB
-                 */
+                
+                //Hänta ut userID
+                //dbm.addApplication(userID, null, null,
+                        //userTypesCB.getSelectedItem().toString(), reasonTextField.getText(), "true");
+                
             }else if(source == applyLOButton){
-                 /*
-                 * get username
-                 * get selected type
-                 * call DB
-                 */
+                 
+                //Hämta userID och league
+                //dbm.addApplication(userID, null, här , "LeagueOwner", null, "true");
             }else if(source == applyLButton ){
-                 /*
-                 * get username
-                 * get selected type
-                 * call DB
-                 */;
+                 //hämta userID och League
+                //dbm.addApplication(userID, null, här, "League", null, "true");
+                
             }else if(source == applyTButton ){
-                 /*
-                 * get username
-                 * get selected type
-                 * call DB
-                 */
+                 //dbm.addApplication(userID, här, null, "Tournament", null, "true");
             }else{
                 System.out.println("Invalid button! How did you end up here?" + ae);
             }
