@@ -74,6 +74,7 @@ public class DatabaseManager implements iDatabaseManager {
     private static final String GET_HIGHEST_TOURNID = "SELECT TOP(1) TournamentID FROM Tournament ORDER BY TournamentID DESC";
     //Applications
     private static final String INSERT_APP = "INSERT INTO Applications VALUES(";
+    private static final String GET_HIGHEST_APPID = "SELECT TOP(1) AppID FROM Applications ORDER BY AppID DESC";
     
     private Connection connection;
     private Statement statement;
@@ -225,7 +226,7 @@ public class DatabaseManager implements iDatabaseManager {
             String applicationType, String reason, String isActive) throws SQLException {
         try {
             statement = connection.createStatement();
-            statement.executeUpdate(INSERT_APP + "'" + userID + "','" + tournamentID
+            statement.executeUpdate(INSERT_APP + "'" + userID + "','" + getNewAppID() +"','" + tournamentID
                     + "','" + leagueID + "','" + applicationType + "','" + reason + "','" + isActive + "');");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -425,6 +426,21 @@ public class DatabaseManager implements iDatabaseManager {
         return count + 1;
     }
 
+    private int getNewAppID() {
+        int count = 0;
+        try {
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(GET_HIGHEST_APPID);
+            while (resultSet.next()) {
+                count = resultSet.getInt("AppID");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count + 1;
+    }
+    
+    
     // ADVERTISEMENT FUNCTIONS //
     @Override
     public List<Integer> getAdList(int userID) {
