@@ -23,22 +23,19 @@ public class DatabaseManager implements iDatabaseManager {
 
     // Usefull datatype list:
     // http://publib.boulder.ibm.com/infocenter/idshelp/v111/index.jsp?topic=/com.ibm.jccids.doc/com.ibm.db2.luw.apdv.java.doc/doc/rjvjdata.htm
-
     private static final String DRIVER_PATH = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
     private static final String DATABASE_PATH = "jdbc:sqlserver://idasql-db.hb.se:56077;"
             + "databaseName=dbtht1202;selectMethod=cursor";
     private static final String USERNAME = "dbtht1202";
     private static final String PASSWORD = "plash9";
-
     // ARENAUSER
     private static final String MAKE_PLAYER = "UPDATE ArenaUsers SET UserType ='Player'";
     private static final String MAKE_ADMIN = "UPDATE ArenaUsers SET UserType ='Admin'";
     private static final String MAKE_ADVERTISER = "UPDATE ArenaUsers SET UserType ='Advertiser'";
-    private static final String UPDATE_ACTIVE = "UPDATE ArenaUsers SET Active ='";
+    private static final String UPDATE_ACTIVE = "UPDATE ArenaUsers SET IsActive ='";
     private static final String INSERT_USER = "INSERT INTO ArenaUsers VALUES(";
     private static final String ADD_COMMENT = "UPDATE ArenaUsers SET Comment ='";
     private static final String DROP_TABLE = "DROP TABLE ";
-
     private static final String GET_ACTIVE = "SELECT * FROM ArenaUsers WHERE Nick = '";
     private static final String GET_NICK = "SELECT * FROM ArenaUsers WHERE Email = '";
     private static final String GET_EMAIL = "SELECT * FROM ArenaUsers WHERE Nick = '";
@@ -47,25 +44,20 @@ public class DatabaseManager implements iDatabaseManager {
     private static final String GET_COMMENT = "SELECT * FROM ArenaUsers WHERE Nick = '";
     private static final String GET_USER_ID = "SELECT UserID FROM ArenaUsers WHERE Nick = '";
     private static final String GET_USER_TYPE = "SELECT UserType FROM ArenaUsers WHERE Nick = '";
-
-    private static final String GET_HIGHEST_ID = "SELECT TOP(1) UserID " +
-            "FROM ArenaUsers " +
-            "ORDER BY UserID DESC";
-
-
+    private static final String GET_HIGHEST_ID = "SELECT TOP(1) UserID "
+            + "FROM ArenaUsers "
+            + "ORDER BY UserID DESC";
     // GAME
     private static final String INSERT_GAME = "INSERT INTO Game VALUES(";
-    private static final String GET_HIGHEST_GAMEID = "SELECT TOP(1) GameID " +
-            "FROM Game " +
-            "ORDER BY GameID DESC";
+    private static final String GET_HIGHEST_GAMEID = "SELECT TOP(1) GameID "
+            + "FROM Game "
+            + "ORDER BY GameID DESC";
     private static final String GET_GAMENAME = "SELECT * FROM Game ORDER BY GameID ASC";
     private static final String REMOVE_GAME = "DELETE  FROM Game WHERE Name ='";
-
     // ADVERTISEMENT
     private static final String INSERT_ADVERTISEMENT = "INSERT INTO Advertisement VALUES('";
     private static final String UPDATE_ADVERTISEMENT = "UPDATE Advertisement SET ";
     private static final String UPDATE_BALANCE = "UPDATE ArenaUsers SET AccountBalance = '";
-
     private static final String REMOVE_ADVERTISEMENT = "DELETE FROM Advertisement WHERE AdID = '";
     private static final String GET_ADVERTISEMENT = "SELECT * FROM Advertisement WHERE ";
     private static final String GET_AD_LIST = "SELECT AdID FROM Advertisement WHERE AdvertiserID = '";
@@ -74,64 +66,73 @@ public class DatabaseManager implements iDatabaseManager {
     private static final String GET_AD_TOURNID = "SELECT TournamentID FROM Advertisement WHERE AdID = '";
     private static final String GET_BALANCE = "SELECT AccountBalance FROM ArenaUsers WHERE Nick = '";
     private static final String GET_HIGHEST_ADID = "SELECT TOP(1) AdID FROM Advertisement ORDER BY AdID DESC";
-
     // TOURNAMENT
     private static final String INSERT_TOURNAMENT = "INSERT INTO Tournament VALUES('";
     private static final String GET_TOURNAMENT = "SELECT * FROM Tournament WHERE TournamentID = '";
     private static final String GET_ALL_TOURNAMENTID = "SELECT TournamentID FROM Tournament";
     private static final String REMOVE_TOURNAMENT = "DELETE FROM Tournament WHERE TournamentID = '";
     private static final String GET_HIGHEST_TOURNID = "SELECT TOP(1) TournamentID FROM Tournament ORDER BY TournamentID DESC";
-
+    //Applications
+    private static final String INSERT_APP = "INSERT INTO Applications VALUES(";
+    
     private Connection connection;
     private Statement statement;
-
     // ArenaUsers Table
     private static final String CREATE_TABLE_AU =
             "CREATE TABLE ArenaUsers("
-                    + "UserID SMALLINT NOT NULL,"
-                    + "Nick VARCHAR(30) NOT NULL,"
-                    + "Name VARCHAR(30)NOT NULL,"
-                    + "Email VARCHAR(30)NOT NULL,"
-                    + "Password VARCHAR(30)NOT NULL,"
-                    + "UserType VARCHAR(30),"
-                    + "IsActive VARCHAR(5),"
-                    + "Comment VARCHAR(50),"
-                    + "AccountBalance SMALLINT,"
-                    + "PRIMARY KEY(UserID))";
-
+            + "UserID SMALLINT NOT NULL,"
+            + "Nick VARCHAR(30) NOT NULL,"
+            + "Name VARCHAR(30)NOT NULL,"
+            + "Email VARCHAR(30)NOT NULL,"
+            + "Password VARCHAR(30)NOT NULL,"
+            + "UserType VARCHAR(30),"
+            + "IsActive VARCHAR(5),"
+            + "Comment VARCHAR(50),"
+            + "AccountBalance SMALLINT,"
+            + "PRIMARY KEY(UserID))";
     private static final String CREATE_TABLE_ADV =
             "CREATE TABLE Advertisement("
-                    + "AdID SMALLINT NOT NULL,"
-                    + "TournamentID SMALLINT NOT NULL,"
-                    + "AdvertiserID SMALLINT NOT NULL,"
-                    + "BannerPath VARCHAR(50) NOT NULL,"
-                    + "BannerLink VARCHAR(250) NOT NULL,"
-                    + "TimeLeft SMALLINT NOT NULL,"
-                    + "DisplayOnArena VARCHAR(5),"
-                    + "PRIMARY KEY(AdID),"
-                    + "FOREIGN KEY(AdvertiserID) references ArenaUsers(UserID),"
-                    + "FOREIGN KEY(TournamentID) references Tournament(TournamentID))";
-
+            + "AdID SMALLINT NOT NULL,"
+            + "TournamentID SMALLINT NOT NULL,"
+            + "AdvertiserID SMALLINT NOT NULL,"
+            + "BannerPath VARCHAR(50) NOT NULL,"
+            + "BannerLink VARCHAR(250) NOT NULL,"
+            + "TimeLeft SMALLINT NOT NULL,"
+            + "DisplayOnArena VARCHAR(5),"
+            + "PRIMARY KEY(AdID),"
+            + "FOREIGN KEY(AdvertiserID) references ArenaUsers(UserID),"
+            + "FOREIGN KEY(TournamentID) references Tournament(TournamentID))";
     private static final String CREATE_TABLE_TOURN =
             "CREATE TABLE Tournament("
-                    + "TournamentID SMALLINT NOT NULL,"
-                    + "Description VARCHAR(50) NOT NULL,"
-                    + "FreePlayerSpots SMALLINT NOT NULL,"
-                    + "FreeAdSpots SMALLINT NOT NULL,"
-                    + "GameID SMALLINT NOT NULL,"
-                    + "PRIMARY KEY(TournamentID),"
-                    + "FOREIGN KEY(GameID) references Game(GameID))";
-
+            + "TournamentID SMALLINT NOT NULL,"
+            + "Description VARCHAR(50) NOT NULL,"
+            + "FreePlayerSpots SMALLINT NOT NULL,"
+            + "FreeAdSpots SMALLINT NOT NULL,"
+            + "GameID SMALLINT NOT NULL,"
+            + "PRIMARY KEY(TournamentID),"
+            + "FOREIGN KEY(GameID) references Game(GameID))";
     private static final String CREATE_TABLE_GAME =
             "CREATE TABLE Game("
-                    + "GameID SMALLINT NOT NULL,"
-                    + "Name VARCHAR(30) NOT NULL,"
-                    + "Description VARCHAR(100),"
-                    + "MinPlayers SMALLINT NOT NULL,"
-                    + "MaxPlayers SMALLINT NOT NULL,"
-                    + "Developer VARCHAR(30) NOT NULL,"
-                    + "JarPath VARCHAR(50) NOT NULL,"
-                    + "PRIMARY KEY(GameID))";
+            + "GameID SMALLINT NOT NULL,"
+            + "Name VARCHAR(30) NOT NULL,"
+            + "Description VARCHAR(100),"
+            + "MinPlayers SMALLINT NOT NULL,"
+            + "MaxPlayers SMALLINT NOT NULL,"
+            + "Developer VARCHAR(30) NOT NULL,"
+            + "JarPath VARCHAR(50) NOT NULL,"
+            + "PRIMARY KEY(GameID))";
+    
+    private static final String CREATE_TABLE_APP =
+            "CREATE TABLE Applications("
+            + "UserID SMALLINT NOT NULL,"
+            + "AppID SMALLINT NOT NULL,"
+            + "TournamentID SMALLINT ,"
+            + "LeagueID SMALLINT ,"
+            + "ApplicationType VARCHAR(30) NOT NULL,"
+            + "Reason VARCHAR(50),"
+            + "IsActive VARCHAR(5),"
+            + "PRIMARY KEY(UserID, AppID),"
+            + "FOREIGN KEY(UserID) references ArenaUsers(UserID))";
 
     /**
      * Creates a new DatabaseManager and connects to it.
@@ -147,20 +148,20 @@ public class DatabaseManager implements iDatabaseManager {
         try {
             Class.forName(DRIVER_PATH);
             Connection connection = DriverManager.getConnection(DATABASE_PATH,
-                   USERNAME, PASSWORD);
+                    USERNAME, PASSWORD);
 
             /*
-            //under utveckling
-            String usr;
-            String pass;
+             //under utveckling
+             String usr;
+             String pass;
 
-            usr = JOptionPane.showInputDialog("Användarnamn");
-            pass = JOptionPane.showInputDialog("Lösenord");
+             usr = JOptionPane.showInputDialog("Användarnamn");
+             pass = JOptionPane.showInputDialog("Lösenord");
 
-            Connection connection = DriverManager.getConnection(DATABASE_PATH,
-                    usr, pass);
-            //utvecklinskoden slutar här
-            */
+             Connection connection = DriverManager.getConnection(DATABASE_PATH,
+             usr, pass);
+             //utvecklinskoden slutar här
+             */
             return connection;
         } catch (Exception e) {
             System.out.println(e);
@@ -186,7 +187,7 @@ public class DatabaseManager implements iDatabaseManager {
         statement = connection.createStatement();
         statement.executeUpdate(MAKE_ADMIN + "WHERE Nick = '" + nick + "'");
     }
-    
+
     public void makePlayer(String nick) throws SQLException {
         statement = connection.createStatement();
         statement.executeUpdate(MAKE_PLAYER + "WHERE Nick = '" + nick + "'");
@@ -197,12 +198,11 @@ public class DatabaseManager implements iDatabaseManager {
         statement.executeUpdate(MAKE_ADVERTISER + "WHERE Nick = '" + nick + "'");
     }
 
-
     public void createUser(String nick, String name, String email, String password,
-                           String userType, boolean isActive, String comment) throws SQLException {
+            String userType, boolean isActive, String comment) throws SQLException {
         try {
             statement = connection.createStatement();
-            statement.executeUpdate(INSERT_USER + "'" +getNewUserID()+ "','" + nick + "','" + name
+            statement.executeUpdate(INSERT_USER + "'" + getNewUserID() + "','" + nick + "','" + name
                     + "','" + email + "','" + password + "','" + userType + "','"
                     + isActive + "','" + comment + "','" + 0 + "');");
         } catch (SQLException e) {
@@ -211,17 +211,28 @@ public class DatabaseManager implements iDatabaseManager {
     }
 
     public void addGame(String gameName, String devName, String desc, int minPlayer,
-                        int maxPlayer, String jarPath) throws SQLException {
+            int maxPlayer, String jarPath) throws SQLException {
         try {
             statement = connection.createStatement();
-            statement.executeUpdate(INSERT_GAME +"'" +getNewGameID()+ "','" + gameName + "','" + desc
+            statement.executeUpdate(INSERT_GAME + "'" + getNewGameID() + "','" + gameName + "','" + desc
                     + "','" + minPlayer + "','" + maxPlayer + "','" + devName + "','" + jarPath + "');");
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-
+    public void addApplication(int userID, int appID, int tournamentID, int leagueID,
+            String applicationType, String reason, String isActive) throws SQLException {
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate(INSERT_APP + "'" + userID + "','" + appID + "','" + tournamentID
+                    + "','" + leagueID + "','" + applicationType + "','" + reason + "','" + isActive + "');");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    
     public void setActive(String nick, boolean active) throws SQLException {
         statement = connection.createStatement();
         statement.executeUpdate(UPDATE_ACTIVE + active + "' WHERE Nick = '" + nick + "'");
@@ -279,7 +290,7 @@ public class DatabaseManager implements iDatabaseManager {
         statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(GET_USER_TYPE + nick + "'");
         while (resultSet.next()) {
-               userType = resultSet.getString("UserType");
+            userType = resultSet.getString("UserType");
         }
         return userType;
     }
@@ -310,7 +321,7 @@ public class DatabaseManager implements iDatabaseManager {
         statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(GET_ACTIVE + nick + "'");
         while (resultSet.next()) {
-            activeString = resultSet.getString("IsActive"); 
+            activeString = resultSet.getString("IsActive");
         }
         return activeString.equals(TRUE);
     }
@@ -341,14 +352,13 @@ public class DatabaseManager implements iDatabaseManager {
         return false;
     }
 
-     public void removeGame(String gameName) throws SQLException {
+    public void removeGame(String gameName) throws SQLException {
         statement = connection.createStatement();
-        statement.executeUpdate(REMOVE_GAME + gameName + "'"); 
+        statement.executeUpdate(REMOVE_GAME + gameName + "'");
     }
-    
-    
+
     public ArrayList getGameName() throws SQLException {
-        ArrayList <String> nameList = new ArrayList();
+        ArrayList<String> nameList = new ArrayList();
         String name = "";
         statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(GET_GAMENAME);
@@ -358,61 +368,64 @@ public class DatabaseManager implements iDatabaseManager {
         }
         return nameList;
     }
-    
+
     private int getNewUserID() {
-        int count=0;
+        int count = 0;
         try {
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(GET_HIGHEST_ID);
-            while(resultSet.next())
+            while (resultSet.next()) {
                 count = resultSet.getInt("UserID");
+            }
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return count+1;
+        return count + 1;
     }
 
     private int getNewGameID() {
-        int count=0;
+        int count = 0;
         try {
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(GET_HIGHEST_GAMEID);
-            while(resultSet.next())
+            while (resultSet.next()) {
                 count = resultSet.getInt("GameID");
+            }
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return count+1;
+        return count + 1;
     }
 
     private int getNewAdID() {
-        int count=0;
+        int count = 0;
         try {
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(GET_HIGHEST_ADID);
-            while(resultSet.next())
+            while (resultSet.next()) {
                 count = resultSet.getInt("AdID");
+            }
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return count+1;
+        return count + 1;
     }
 
     private int getNewTournID() {
-        int count=0;
+        int count = 0;
         try {
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(GET_HIGHEST_TOURNID);
-            while(resultSet.next())
+            while (resultSet.next()) {
                 count = resultSet.getInt("TournamentID");
+            }
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return count+1;
+        return count + 1;
     }
 
     // ADVERTISEMENT FUNCTIONS //
-
     @Override
     public List<Integer> getAdList(int userID) {
         List<Integer> adList = new ArrayList<Integer>();
@@ -432,8 +445,8 @@ public class DatabaseManager implements iDatabaseManager {
     public void createAdvertisement(int tournamentID, int userID, String bannerPath, String bannerLink, int duration, String displayOnArena) throws SQLException {
         try {
             statement = connection.createStatement();
-            statement.executeUpdate(INSERT_ADVERTISEMENT + getNewAdID() + "','" + tournamentID + "','" + userID + "','pictures/" +
-                                                           bannerPath + "','" + bannerLink + "','" + duration + "','" + displayOnArena + "');");
+            statement.executeUpdate(INSERT_ADVERTISEMENT + getNewAdID() + "','" + tournamentID + "','" + userID + "','pictures/"
+                    + bannerPath + "','" + bannerLink + "','" + duration + "','" + displayOnArena + "');");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -522,13 +535,8 @@ public class DatabaseManager implements iDatabaseManager {
         }
     }
 
-
     // GAME FUNCTIONS
-
-
-
     // TOURNAMENT FUNCTIONS
-
     @Override
     public void createTournament(String description, int freePlayerSpots, int freeAdSpots, int gameID) {
         try {
@@ -589,7 +597,6 @@ public class DatabaseManager implements iDatabaseManager {
                 adSpots = resultSet.getInt("FreeAdSpots");
             }
         } catch (SQLException e) {
-
         }
         return adSpots;
     }
