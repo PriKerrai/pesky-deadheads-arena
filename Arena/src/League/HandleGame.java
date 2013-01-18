@@ -6,6 +6,7 @@ package League;
 
 import Database.DatabaseManager;
 import Database.iDatabaseManager;
+import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,6 +18,7 @@ import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -36,7 +38,8 @@ public class HandleGame extends JFrame{
             buttonPanel = new JPanel(),
             descPanel = new JPanel(),
             minPlayersPanel = new JPanel(),
-            maxPlayersPanel = new JPanel();
+            maxPlayersPanel = new JPanel(),
+            panelHolder = new JPanel();
     
     private JLabel gNameLabel = new JLabel("Game Name:"),
             devNameLabel = new JLabel("Developer Name:"),
@@ -105,13 +108,15 @@ public class HandleGame extends JFrame{
         maxPlayersPanel.add(maxPlayerText);
         buttonPanel.add(addButton);
         
-        addPanel.add(gNamePanel);
-        addPanel.add(devNamePanel);
-        addPanel.add(gamePanel);
-        addPanel.add(descPanel);
-        addPanel.add(minPlayersPanel);
-        addPanel.add(maxPlayersPanel);
-        addPanel.add(buttonPanel);
+        addPanel.add(panelHolder);
+        panelHolder.setLayout(new GridLayout(6,1));
+        panelHolder.add(gNamePanel);
+        panelHolder.add(devNamePanel);
+        panelHolder.add(gamePanel);
+        panelHolder.add(descPanel);
+        panelHolder.add(minPlayersPanel);
+        panelHolder.add(maxPlayersPanel);
+        addPanel.add(buttonPanel, BorderLayout.SOUTH);
         
         removePanel.add(scrollList);
         removePanel.add(removeGameText);
@@ -167,4 +172,5 @@ public class HandleGame extends JFrame{
         });
         
     }
+  
 }

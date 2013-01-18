@@ -111,8 +111,4 @@ public class HandleLeague extends JFrame {
         return removePanel;
     }
 
-    
-    public static void main(String[] args){
-        HandleLeague h = new HandleLeague();
-    }
 }
