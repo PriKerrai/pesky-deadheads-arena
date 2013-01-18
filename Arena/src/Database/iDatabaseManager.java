@@ -96,4 +96,10 @@ public interface iDatabaseManager {
     public String getTournamentDescription(int tournamentID) throws SQLException;
 
     public int getTournamentAdSpots(int tournamentID) throws SQLException;
+    
+    
+    // Application methods //
+    
+    public void addApplication(int userID, int appID, int tournamentID, int leagueID,
+            String applicationType, String reason, String isActive) throws SQLException;
 }
