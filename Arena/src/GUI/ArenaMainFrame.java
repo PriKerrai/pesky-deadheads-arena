@@ -17,7 +17,7 @@ import javax.swing.*;
  * @author Karl
  */
 public class ArenaMainFrame extends JFrame {
-
+    
     private Dimension frameSize = new Dimension(1020, 800);
     private String title = "Arena";
     // Do a list containing all "pages"(jpanels - games, tournament etc)?
@@ -28,6 +28,7 @@ public class ArenaMainFrame extends JFrame {
     JMenuBar menuBar = new JMenuBar();
     JMenu fileMenu = new JMenu("File");
     JMenuItem newsItem = new JMenuItem("News");
+    JMenuItem applyItem = new JMenuItem("Apply for...");
     JMenuItem handleItem = new JMenuItem("Handle Game");
     JMenuItem adminItem = new JMenuItem("Admin panel");
     JMenuItem advItem = new JMenuItem("Adv. controlpanel");
@@ -35,35 +36,37 @@ public class ArenaMainFrame extends JFrame {
     JMenuItem statisticsItem = new JMenuItem("Statistics");
     JMenuItem logOutItem = new JMenuItem("Log out");
     JMenuItem gameItem = new JMenuItem("Games");
-
+    
     public ArenaMainFrame() {
         setLayout(new BorderLayout());
         init();
     }
-
+    
     private void init() {
-
+        
         setTitle(title);
         setMinimumSize(frameSize);
         setResizable(false);
         setVisible(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setJMenuBar(menuBar);
-
+        
         menuBar.add(fileMenu);
         fileMenu.add(newsItem);
         fileMenu.add(gameItem);
+        fileMenu.add(applyItem);
         fileMenu.add(handleItem);
         fileMenu.add(adminItem);
         fileMenu.add(advItem);
         fileMenu.add(statisticsItem);
         fileMenu.add(logOutItem);
         fileMenu.add(exitItem);
-
+        
         MyListener myListener = new MyListener();
-
+        
         newsItem.addActionListener(myListener);
         gameItem.addActionListener(myListener);
+        applyItem.addActionListener(myListener);
         handleItem.addActionListener(myListener);
         adminItem.addActionListener(myListener);
         advItem.addActionListener(myListener);
@@ -72,24 +75,24 @@ public class ArenaMainFrame extends JFrame {
         statisticsItem.addActionListener(myListener);
         mainPanel.setLayout(new BorderLayout());
         add(mainPanel, BorderLayout.CENTER);
-
+        
         setPage(new NewsPanel());
     }
-
+    
     public void setPage(JPanel pnl) {
         mainPanel.removeAll();
         mainPanel.add(pnl, BorderLayout.CENTER);
         mainPanel.revalidate();
     }
-
+    
     private class MyListener implements ActionListener {
-
+        
         public MyListener() {
         }
-
+        
         public void actionPerformed(ActionEvent e) {
             Object source = e.getSource();
-
+            
             if (source.equals(handleItem)) {
                 HandleGame hg = new HandleGame();
             } else if (source.equals(adminItem)) {
@@ -104,6 +107,8 @@ public class ArenaMainFrame extends JFrame {
                 dispose();
                 Login l = new Login();
                 l.show();
+            } else if (source.equals(applyItem)) {
+                setPage(new ApplyForDiffUsertype());
             } else if (source.equals(statisticsItem)) {
                 //setPage();
             } else {
