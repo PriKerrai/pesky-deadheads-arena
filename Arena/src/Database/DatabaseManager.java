@@ -221,11 +221,11 @@ public class DatabaseManager implements iDatabaseManager {
         }
     }
 
-    public void addApplication(int userID, int appID, int tournamentID, int leagueID,
+    public void addApplication(int userID, int tournamentID, int leagueID,
             String applicationType, String reason, String isActive) throws SQLException {
         try {
             statement = connection.createStatement();
-            statement.executeUpdate(INSERT_APP + "'" + userID + "','" + appID + "','" + tournamentID
+            statement.executeUpdate(INSERT_APP + "'" + userID + "','" + tournamentID
                     + "','" + leagueID + "','" + applicationType + "','" + reason + "','" + isActive + "');");
         } catch (SQLException e) {
             e.printStackTrace();
