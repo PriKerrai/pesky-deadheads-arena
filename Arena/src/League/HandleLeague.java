@@ -4,34 +4,67 @@
  */
 package League;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
+import Database.DatabaseManager;
+import Database.iDatabaseManager;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JLabel;
+import javax.swing.JFrame;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 
 /**
  *
  * @author Johan
  */
-public class HandleLeague extends JPanel{
+public class HandleLeague extends JFrame{
     
-    private JPanel holder = new JPanel();
+    private JPanel addPanel = new JPanel(), removePanel = new JPanel(),
+            addHolder = new JPanel(), removeHolder = new JPanel();
     private JButton addButton = new JButton("Add"), removeButton = new JButton("Remove");
+    
     //private 
+    iDatabaseManager dbm = new DatabaseManager();
     
     public HandleLeague(){
+
+        setTitle("Handle game");
+        setVisible(true);
+        setSize(500, 550);
+        setResizable(false);
+        JTabbedPane tabbedPane = new JTabbedPane();
+        tabbedPane.addTab("Add League", null, addPanel);
+        tabbedPane.addTab("Remove League", null, removePanel);
+        add(tabbedPane);
+        
          try {
-            BufferedImage m = ImageIO.read(new File("pictures/question_mark.png"));
-            JLabel jl = new JLabel(new ImageIcon(m));
-            add(jl);
-        } catch (IOException ex) {
-            System.out.println(ex);
+            ArrayList games = dbm.getGameName();
+            String[] gameListString = new String[games.size()]; 
+            
+            Iterator iter = games.iterator();
+            for(int i = 0; i<games.size(); i++){
+                gameListString[i] = iter.next().toString();
+            }
+            
+            JList gameList = new JList(gameListString);
+
+            JScrollPane scrollList = new JScrollPane(gameList);
+            addPanel.add(addHolder);
+            addHolder.add(scrollList);
+            addHolder.add(addButton);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(HandleGame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    
+    public static void main(String[] args){
+        HandleLeague h = new HandleLeague();
+    }
 }
