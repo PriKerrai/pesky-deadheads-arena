@@ -53,7 +53,7 @@ public class AdministrationPanel extends JFrame {
         initializeUsertypeArea(); 
         initializeListener();
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        setSize(600, 200);
+        setSize(800, 200);
         setVisible(true);
     }
 
